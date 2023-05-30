@@ -1,29 +1,28 @@
 package fr.eni.projetencheres.dal;
-
-import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projet.bo.Utilisateur;
 
 public interface UtilisateurDAO {
-    // Methode pour créer un utilisateur
-    void createUtilisateur(Utilisateur utilisateur) throws DALException;
+    //methode pour cr�ation d'utlisateur
+    public void newUtilisateur(Utilisateur utilisateur) throws DALException;
 
-    // Methode de sélection par pseudo
-    Utilisateur selectByPseudo(String pseudo) throws DALException;
+    // methode de selection par pseudo
+    public abstract Utilisateur selectByPseudo(String pseudo) throws DALException;
 
-    // Methode de sélection par identifiant
-    Utilisateur selectById(int id) throws DALException;
+    // methode de selection par pseudo
+    public Utilisateur selectById(int id) throws DALException;
 
-    // Methode de modification du profile
-    void updateUtilisateur(Utilisateur utilisateur) throws DALException;
+    // methode de modification du profil
+    public void updateUtilisateur(Utilisateur utilisateur) throws DALException;
 
-    // Methode de connexion
-    Utilisateur selectConnexion(String identifiant, String password) throws DALException, Exception;
+    // methode de connection
+    public Utilisateur selectConnexion(String identifiant, String password) throws DALException, Exception;
 
-    // Méthode de vérification de pseudo unique
-    boolean checkUniquePseudo(String pseudo) throws DALException;
+    // methode de verification de pseudo unique
+    public boolean selectUniquePseudo(String pseudo) throws DALException;
 
-    // Méthode de vérification d'email unique
-    boolean checkUniqueMail(String mail) throws DALException;
+    // methode de verification d'email unique
+    public boolean selectUniqueMail(String mail) throws DALException;
 
-    // Méthode de suppression d'un utilisateur
-    void deleteUtilisateur(Utilisateur utilisateur) throws DALException;
+    // methode de anonymiser  d'utilisateur
+    public void deleteUtilisateur(Utilisateur utilisateur) throws DALException;
 }
