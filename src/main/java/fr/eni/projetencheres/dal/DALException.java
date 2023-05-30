@@ -18,6 +18,6 @@ public class DALException extends Exception {
     // Methods
     @Override
     public String getMessage() {
-        return "Couches DAL - " + super.getMessage();
+        return "DAL Error - " + super.getMessage();
     }
 }
