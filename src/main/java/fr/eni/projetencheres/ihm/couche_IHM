@@ -1,0 +1,4 @@
+Ici nous créérons les servlets permettant de naviguer sur le site, d'executer les différentes actions des utilisateurs
+(se connecter, créer un compte etc)
+Nous placerons aussi tout ce qui permettra de gérer les mots de passe, les sessions pour que l'utilisateur reste connecté
+

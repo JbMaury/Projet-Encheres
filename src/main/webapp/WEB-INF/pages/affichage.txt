@@ -1,0 +1,3 @@
+Ici seront placées les pages .jsp qui afficheront du html avec des balises dynamiques
+Ces pages seront accessibles par l'intermédiaire des servlet et seront construites sur les modèles
+présentées dans les maquettes du module

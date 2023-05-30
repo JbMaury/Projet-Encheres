@@ -1,0 +1,29 @@
+Ici nous créérons toutes les classes nécessaires à la Connexion à la base de donnée
+
+La  classe principale de connexion:
+ConnexionProvider (pour créer un Pool de connexion, spécifier l'adresse de la base de donnée, le nom d'utilisateur, le mot de passe)
+(de préférence en lien avec un fichier externe settings.properties ou context.xml pour ne pas écrire le mot de passe
+directement)
+
+La gestion des erreurs DAL : (lorsque un problème survient lors de la connexion)
+DALException
+DALErrorCode
+
+Les différentes interfaces permettant les actions possibles sur la base de donnée (modèle C.R.U.D) pour chaque objet
+DAO/DAOUtilisateur
+DAO/DAOEncheres
+DAO/DAOCategorie
+DAO/DAOArticleVendu
+DAO/DAORetrait
+
+Et le design pattern pour attribuer une instance de jdbc à chacun :
+DAOFactory
+
+Et enfin l'implémentation concrètes des actions :
+JDBC/UtilisateurDAOJdbcImpl
+JDBC/EncheresDAOJdbcImpl
+JDBC/CategorieDAOJdbcImpl
+JDBC/ArticleVenduDAOJdbcImpl
+JDBC/RetraitDAOJdbcImpl
+
+

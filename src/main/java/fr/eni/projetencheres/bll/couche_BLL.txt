@@ -1,0 +1,11 @@
+Ici nous créérons les classes de contrôle (du modèle Modèle-Vue-Contrôleur)
+UtilisateurManager
+EncheresManager
+ArticleVenduManager
+CategorieManager
+RetraitManager
+
+ainsi que les contrôles d'erreurs :
+
+BLLException
+BLLErrorCode
