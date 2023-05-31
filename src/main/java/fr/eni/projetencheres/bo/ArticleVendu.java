@@ -1,13 +1,14 @@
 package fr.eni.projetencheres.bo;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class ArticleVendu {
+public class ArticleVendu extends GregorianCalendar{
     private int noArticle;
     private String nomArticle;
-    private String Description;
-    private int dateDebutEncheres extends GregorianCalendar;
-    private int dateFinEncheres extends GregorianCalendar;
+    private String description;
+    private Date dateDebutEncheres;
+    private Date dateFinEncheres;
 
     private int miseAPrix;
     private String etatVente;
@@ -17,7 +18,7 @@ public class ArticleVendu {
     public ArticleVendu(int noArticle, String nomArticle, String description, int dateDebutEncheres, int dateFinEncheres, int miseAPrix, String etatVente, int prixVente) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
-        Description = description;
+        this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
@@ -42,11 +43,11 @@ public class ArticleVendu {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        description = description;
     }
 
     public int getDateDebutEncheres() {
