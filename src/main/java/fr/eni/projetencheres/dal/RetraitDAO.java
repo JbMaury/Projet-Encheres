@@ -7,6 +7,10 @@ import fr.eni.projetencheres.bo.Retrait;
 
 public interface RetraitDAO {
 
+    default void insertRetrait() throws DALException {
+        insertRetrait(null);
+    }
+
     void insertRetrait(Retrait retrait) throws DALException;
 
     Retrait selectByNoArticle(ArticleVendu art) throws DALException;

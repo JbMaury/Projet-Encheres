@@ -22,7 +22,7 @@ public class DAOFactory {
     }
 
     // méthode de création d'un enchereDAO
-    public static EnchereDAO getEnchereDAO() {
+    public static EncheresDAO getEnchereDAO() {
 
         EncheresDAO enchereDAO = new EncheresDaoImpl();
         return EncheresDAO;

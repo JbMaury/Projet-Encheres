@@ -7,7 +7,7 @@ import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Encheres;
 
-interface EncheresDAO {
+public interface EncheresDAO {
 
     public void deleteEncheres(int numUtil) throws DALException;
     public void insertEncheres(Encheres enchere) throws DALException;

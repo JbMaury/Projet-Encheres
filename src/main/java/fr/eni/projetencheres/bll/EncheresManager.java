@@ -12,7 +12,7 @@ import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.dal.ArticleVenduDAO;
 import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
-import fr.eni.projetencheres.dal.EnchereDAO;
+import fr.eni.projetencheres.dal.EncheresDAO;
 import fr.eni.projetencheres.dal.RetraitDAO;
 
 public class EncheresManager {
@@ -126,7 +126,7 @@ public class EncheresManager {
 
         ArticleVendu article;
         ArticleVenduDAO adao;
-        EnchereDAO edao;
+        EncheresDAO edao;
         List<Encheres> encheres;
         Encheres meilleurOffre = null;
 
@@ -162,8 +162,8 @@ public class EncheresManager {
     public void encherir(Utilisateur user, ArticleVendu art, int montantEnchere) throws DALException {
         Encheres enchere = new Encheres(LocalDate.now(), montantEnchere, user, art);
         art.ajouterEncheres(user, enchere);
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
-        edao.insertEnchere(enchere);
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
+        edao.insertEncheres(enchere);
     }
 
     public boolean verifEnchereNombre(String str) {
