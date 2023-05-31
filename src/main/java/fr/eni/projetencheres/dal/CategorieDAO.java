@@ -1,7 +1,7 @@
 package fr.eni.projetencheres.dal;
 import java.util.ArrayList;
 
-import fr.eni.projet.bo.Categorie;
+import fr.eni.projetencheres.bo.Categorie;
 
 public interface CategorieDAO {
 
