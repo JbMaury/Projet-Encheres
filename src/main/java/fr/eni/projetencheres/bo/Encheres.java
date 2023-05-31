@@ -5,11 +5,11 @@ import java.util.GregorianCalendar;
 
 public class Encheres extends GregorianCalendar {
     private Date dateEnchere;
-    private int montantEnchère;
+    private int montantEnchere;
 
-    public Encheres(Date dateEnchere, int montantEnchère) {
+    public Encheres(Date dateEnchere, int montantEnchere) {
         this.dateEnchere = dateEnchere;
-        this.montantEnchère = montantEnchère;
+        this.montantEnchere = montantEnchere;
     }
 
     public Date getDateEnchere() {
@@ -20,11 +20,11 @@ public class Encheres extends GregorianCalendar {
         this.dateEnchere = dateEnchere;
     }
 
-    public int getMontantEnchère() {
-        return montantEnchère;
+    public int getMontantEnchere() {
+        return montantEnchere;
     }
 
-    public void setMontantEnchère(int montantEnchère) {
-        this.montantEnchère = montantEnchère;
+    public void setMontantEnchere(int montantEnchere) {
+        this.montantEnchere = montantEnchere;
     }
 }
