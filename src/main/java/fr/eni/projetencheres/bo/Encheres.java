@@ -10,4 +10,20 @@ public class Encheres {
         this.dateEnchere = dateEnchere;
         this.montantEnchère = montantEnchère;
     }
+
+    public int getDateEnchere() {
+        return dateEnchere;
+    }
+
+    public void setDateEnchere(int dateEnchere) {
+        this.dateEnchere = dateEnchere;
+    }
+
+    public int getMontantEnchère() {
+        return montantEnchère;
+    }
+
+    public void setMontantEnchère(int montantEnchère) {
+        this.montantEnchère = montantEnchère;
+    }
 }
