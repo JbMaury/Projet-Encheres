@@ -15,7 +15,7 @@ public class ArticleVendu extends GregorianCalendar{
     private int prixVente;
 
 
-    public ArticleVendu(int noArticle, String nomArticle, String description, int dateDebutEncheres, int dateFinEncheres, int miseAPrix, String etatVente, int prixVente) {
+    public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, int miseAPrix, String etatVente, int prixVente) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
