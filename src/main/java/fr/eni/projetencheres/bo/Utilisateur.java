@@ -10,7 +10,7 @@ public class Utilisateur {
     private int numTel; //Check si numTel = int.int.int.int.int pour être valide
     private String rue;
     private String ville;
-    private String motDePasse;
+    private final String motDePasse;
     private String administrateur;
     private int credit;
 
