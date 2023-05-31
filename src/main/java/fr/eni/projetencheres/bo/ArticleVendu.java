@@ -50,19 +50,19 @@ public class ArticleVendu extends GregorianCalendar{
         description = description;
     }
 
-    public int getDateDebutEncheres() {
+    public Date getDateDebutEncheres() {
         return dateDebutEncheres;
     }
 
-    public void setDateDebutEncheres(int dateDebutEncheres) {
+    public void setDateDebutEncheres(Date dateDebutEncheres) {
         this.dateDebutEncheres = dateDebutEncheres;
     }
 
-    public int getDateFinEncheres() {
+    public Date getDateFinEncheres() {
         return dateFinEncheres;
     }
 
-    public void setDateFinEncheres(int dateFinEncheres) {
+    public void setDateFinEncheres(Date dateFinEncheres) {
         this.dateFinEncheres = dateFinEncheres;
     }
 
