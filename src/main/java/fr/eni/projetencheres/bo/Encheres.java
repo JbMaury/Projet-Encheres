@@ -1,21 +1,22 @@
 package fr.eni.projetencheres.bo;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Encheres {
-    private int dateEnchere extends GregorianCalendar;
+public class Encheres extends GregorianCalendar {
+    private Date dateEnchere;
     private int montantEnchère;
 
-    public Encheres(int dateEnchere, int montantEnchère) {
+    public Encheres(Date dateEnchere, int montantEnchère) {
         this.dateEnchere = dateEnchere;
         this.montantEnchère = montantEnchère;
     }
 
-    public int getDateEnchere() {
+    public Date getDateEnchere() {
         return dateEnchere;
     }
 
-    public void setDateEnchere(int dateEnchere) {
+    public void setDateEnchere(Date dateEnchere) {
         this.dateEnchere = dateEnchere;
     }
 
