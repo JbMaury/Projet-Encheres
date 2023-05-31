@@ -5,7 +5,6 @@ import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.dal.*;
 
 import java.util.List;
-import java.util.regex.*;
 
 public class UtilisateurManager {
 
@@ -160,7 +159,7 @@ public class UtilisateurManager {
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
         udao.deleteUtilisateur(utilisateur);
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         articles =adao.selectByNoUtilisateur(utilisateur);
         for (ArticleVendu article : articles) {
 

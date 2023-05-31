@@ -109,4 +109,7 @@ public class ArticleVendu extends GregorianCalendar{
 
     public int getPrixVentes() {
     }
+
+    public void setRetrait(Retrait retrait) {
+    }
 }

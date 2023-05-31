@@ -15,7 +15,7 @@ public class Utilisateur {
     private int credit;
 
 
-    public Utilisateur(String pseudo, int noUtilisateur, String nom, String prenom, int codePostal, String email, int numTel, String rue, String ville, String motDePasse, String administrateur, int credit) {
+    public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String ville, String motDePasse, String administrateur) {
         this.pseudo = pseudo;
         this.noUtilisateur = noUtilisateur;
         this.nom = nom;
@@ -132,5 +132,11 @@ public class Utilisateur {
     }
 
     public void setTelephone(String telephone) {
+    }
+
+    public String getTelephone() {
+    }
+
+    public boolean isAdministrateur() {
     }
 }

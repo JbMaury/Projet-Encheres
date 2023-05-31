@@ -1,5 +1,10 @@
 package fr.eni.projetencheres.dal;
 
+import fr.eni.projetencheres.bo.ArticleVendu;
+import fr.eni.projetencheres.bo.Utilisateur;
+
+import java.util.List;
+
 public class DAOFactory {
 
     // methode de création d'un utilisateur
@@ -19,14 +24,74 @@ public class DAOFactory {
     // méthode de création d'un enchereDAO
     public static EnchereDAO getEnchereDAO() {
 
-        EnchereDAO enchereDAO = new EnchereDaoImpl();
-        return enchereDAO;
+        EncheresDAO enchereDAO = new EncheresDaoImpl();
+        return EncheresDAO;
     }
 
     // méthode de création d'un articleDAO
-    public static ArticleDAO getArticleDAO() {
+    public static ArticleVenduDAO getArticleDAO() {
 
-        ArticleDAO art = new ArticleDaoImpl();
+        ArticleVenduDAO art = new ArticleVenduDAO() {
+            @Override
+            public void insertArticle(ArticleVendu article) throws DALException {
+
+            }
+
+            @Override
+            public ArticleVendu selectById(int id) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectByCat(int id) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectByNoUtilisateur(Utilisateur user) throws DALException {
+                return null;
+            }
+
+            @Override
+            public void deleteArticle(ArticleVendu article) throws DALException {
+
+            }
+
+            @Override
+            public List<ArticleVendu> selectByMotsCles(String motsCles) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectEncheresOuvertes(Utilisateur user1) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectMesEncheresEnCours(Utilisateur user1) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectMesEncheresremportees(Utilisateur user1) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectVentesNonDebutees(Utilisateur user1) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectVentesTerminees(Utilisateur user1) throws DALException {
+                return null;
+            }
+
+            @Override
+            public List<ArticleVendu> selectDebutToday() throws DALException {
+                return null;
+            }
+        }DaoImpl();
         return art;
     }
 

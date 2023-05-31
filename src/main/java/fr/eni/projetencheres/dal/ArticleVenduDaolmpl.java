@@ -15,7 +15,7 @@ import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.util.ConnectionProvider;
 
-public class ArticleVenduDaoImpl implements ArticleDAO {
+public class ArticleVenduDaoImpl implements ArticleVenduDAO {
 
     // insertion des requettes SQL
     private static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -75,7 +75,7 @@ public class ArticleVenduDaoImpl implements ArticleDAO {
         List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {

@@ -1,7 +1,6 @@
 package fr.eni.projetencheres.bll;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +9,7 @@ import fr.eni.projetencheres.bo.Categorie;
 import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Retrait;
 import fr.eni.projetencheres.bo.Utilisateur;
-import fr.eni.projetencheres.dal.ArticleDAO;
+import fr.eni.projetencheres.dal.ArticleVenduDAO;
 import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
 import fr.eni.projetencheres.dal.EnchereDAO;
@@ -33,7 +32,7 @@ public class EncheresManager {
 
     public List<ArticleVendu> listerArticles() throws DALException {
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         // insertion d'une liste d'article
         List<ArticleVendu> liste = adao.selectDebutToday();
 
@@ -44,7 +43,7 @@ public class EncheresManager {
     public List<ArticleVendu> triByCategorie(int id) throws DALException {
 
         List<ArticleVendu> selection = null;
-        ArticleDAO adao = null;
+        ArticleVenduDAO adao = null;
 
         adao = DAOFactory.getArticleDAO();
         selection = adao.selectByCat(id);
@@ -54,7 +53,7 @@ public class EncheresManager {
 
     public List<ArticleVendu> triByEncheresOuvertes(Utilisateur user) throws DALException {
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         List<ArticleVendu> selection = adao.selectEncheresOuvertes(user);
 
         return selection;
@@ -62,7 +61,7 @@ public class EncheresManager {
 
     public List<ArticleVendu> triByEncheresEnCours(Utilisateur user) throws DALException {
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         List<ArticleVendu> selection = adao.selectMesEncheresEnCours(user);
 
         return selection;
@@ -70,7 +69,7 @@ public class EncheresManager {
 
     public List<ArticleVendu> triByEncheresRemportees(Utilisateur user) throws DALException {
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         List<ArticleVendu> selection = adao.selectMesEncheresremportees(user);
 
         return selection;
@@ -78,7 +77,7 @@ public class EncheresManager {
 
     public List<ArticleVendu> triByVenteEnCours(Utilisateur user) throws DALException {
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         List<ArticleVendu> selection = adao.selectByNoUtilisateur(user);
 
         return selection;
@@ -86,7 +85,7 @@ public class EncheresManager {
 
     public List<ArticleVendu> triByVentesNonDebutees(Utilisateur user) throws DALException {
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         List<ArticleVendu> selection = adao.selectVentesNonDebutees(user);
 
         return selection;
@@ -94,7 +93,7 @@ public class EncheresManager {
 
     public List<ArticleVendu> triByVentesTerminees(Utilisateur user) throws DALException {
 
-        ArticleDAO adao = DAOFactory.getArticleDAO();
+        ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         List<ArticleVendu> selection = adao.selectVentesTerminees(user);
 
         return selection;
@@ -103,7 +102,7 @@ public class EncheresManager {
     public List<ArticleVendu> triByMotsCles(String motsCles) throws DALException {
 
         List<ArticleVendu> selection = null;
-        ArticleDAO adao = null;
+        ArticleVenduDAO adao = null;
 
         adao = DAOFactory.getArticleDAO();
         selection = adao.selectByMotsCles(motsCles);
@@ -116,7 +115,7 @@ public class EncheresManager {
                               Utilisateur utilisateur, Categorie categorie, String rue, String cp, String ville) throws DALException {
 
         ArticleVendu article = new ArticleVendu(nom, description, debut, fin, prixInitial, utilisateur, categorie);
-        ArticleDAO aDAO = DAOFactory.getArticleDAO();
+        ArticleVenduDAO aDAO = DAOFactory.getArticleDAO();
         aDAO.insertArticle(article);
         Retrait retrait = new Retrait(rue, cp, ville, article);
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
@@ -126,7 +125,7 @@ public class EncheresManager {
     public ArticleVendu obtenirArticle(int id) throws DALException {
 
         ArticleVendu article;
-        ArticleDAO adao;
+        ArticleVenduDAO adao;
         EnchereDAO edao;
         List<Encheres> encheres;
         Encheres meilleurOffre = null;

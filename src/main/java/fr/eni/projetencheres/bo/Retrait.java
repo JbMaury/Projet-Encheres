@@ -37,4 +37,10 @@ public class Retrait {
     public void setVille(String ville) {
         this.ville = ville;
     }
+
+    public ArticleVendu getArticle() {
+    }
+
+    public String getCodePostal() {
+    }
 }

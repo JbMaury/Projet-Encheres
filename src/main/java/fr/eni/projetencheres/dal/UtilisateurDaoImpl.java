@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.eni.projet.bo.Password;
-import fr.eni.projet.bo.Utilisateur;
-import fr.eni.projet.util.ConnexionProvider;
+import fr.eni.projetencheres.bo.Password;
+import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.util.ConnexionProvider;
 import fr.eni.projetencheres.bo.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDAO {
@@ -36,7 +36,7 @@ public class UtilisateurDaoImpl implements UtilisateurDAO {
             pstmt.setString(4, utilisateur.getEmail());
             pstmt.setString(5, utilisateur.getTelephone());
             pstmt.setString(6, utilisateur.getRue());
-            pstmt.setString(7, utilisateur.getCodePostal());
+            pstmt.setString(7, String.valueOf(utilisateur.getCodePostal()));
             pstmt.setString(8, utilisateur.getVille());
             pstmt.setString(9, utilisateur.getMotDePasse());
             pstmt.setInt(10, utilisateur.getCredit());
@@ -134,7 +134,7 @@ public class UtilisateurDaoImpl implements UtilisateurDAO {
             pstmt.setString(4, utilisateur.getEmail());
             pstmt.setString(5, utilisateur.getTelephone());
             pstmt.setString(6, utilisateur.getRue());
-            pstmt.setString(7, utilisateur.getCodePostal());
+            pstmt.setString(7, String.valueOf(utilisateur.getCodePostal()));
             pstmt.setString(8, utilisateur.getVille());
             pstmt.setInt(9, utilisateur.getNoUtilisateur());
             pstmt.executeUpdate();

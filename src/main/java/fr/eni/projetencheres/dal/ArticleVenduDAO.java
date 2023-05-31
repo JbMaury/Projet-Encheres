@@ -6,7 +6,7 @@ import java.util.List;
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Utilisateur;
 
-public interface ArticleDAO {
+public interface ArticleVenduDAO {
 
     public void insertArticle(ArticleVendu article) throws DALException;
 

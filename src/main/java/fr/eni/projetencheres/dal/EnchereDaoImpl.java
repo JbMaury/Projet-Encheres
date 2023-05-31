@@ -8,14 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projet.bo.Article;
-import fr.eni.projet.bo.Enchere;
-import fr.eni.projet.bo.Utilisateur;
-import fr.eni.projet.util.ConnexionProvider;
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Encheres;
+import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.util.ConnexionProvider;
 
-public class EnchereDaoImpl implements EnchereDAO {
+public class EncheresDaoImpl implements EncheresDAO {
 
     private static final String DELETE_ENCHERE = "DELETE FROM ENCHERES where no_utilisateur = ?;";
     private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?);";
@@ -43,7 +41,7 @@ public class EnchereDaoImpl implements EnchereDAO {
 
     @Override
     // creer une enchere
-    public void insertEnchere(Enchere enchere) throws DALException {
+    public void insertEnchere(Encheres enchere) throws DALException {
 
         Connection cnx;
         PreparedStatement pstmt;
@@ -84,8 +82,8 @@ public class EnchereDaoImpl implements EnchereDAO {
     @Override
     public List<Encheres> selectByNoArticle(ArticleVendu art) throws DALException {
 
-        Enchere enchere;
-        List<Enchere> encheres = new ArrayList<Enchere>();
+        Encheres enchere;
+        List<Encheres> encheres = new ArrayList<Encheres>();
         Connection cnx;
         PreparedStatement stmt;
         ResultSet rs;
@@ -101,7 +99,7 @@ public class EnchereDaoImpl implements EnchereDAO {
             while (rs.next()) {
                 // recuperation des informations de l'utilisateur grace a son numero("no_utilisateur")
                 user = udao.selectById(rs.getInt("no_utilisateur"));
-                enchere = new Enchere(rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"), user,
+                enchere = new Encheres(rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"), user,
                         art);
                 // ajout de l'enchere
                 encheres.add(enchere);
@@ -116,6 +114,11 @@ public class EnchereDaoImpl implements EnchereDAO {
         }
 
         return encheres;
+    }
+
+    @Override
+    public void insertEnchere(Encheres enchere) {
+
     }
 
 }
