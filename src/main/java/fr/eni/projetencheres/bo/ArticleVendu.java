@@ -1,7 +1,9 @@
 package fr.eni.projetencheres.bo;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class ArticleVendu extends GregorianCalendar{
     private int noArticle;
@@ -24,6 +26,9 @@ public class ArticleVendu extends GregorianCalendar{
         this.miseAPrix = miseAPrix;
         this.etatVente = etatVente;
         this.prixVente = prixVente;
+    }
+
+    public ArticleVendu(String nom, String description, LocalDate debut, LocalDate fin, int prixInitial, Utilisateur utilisateur, Categorie categorie) {
     }
 
     public int getNoArticle() {
@@ -88,5 +93,20 @@ public class ArticleVendu extends GregorianCalendar{
 
     public void setPrixVente(int prixVente) {
         this.prixVente = prixVente;
+    }
+
+    public void setEncheres(List<Encheres> encheres) {
+    }
+
+    public void setPrixVentes(int montantEnchere) {
+    }
+
+    public int getPrixInitial() {
+    }
+
+    public void ajouterEncheres(Utilisateur user, Encheres enchere) {
+    }
+
+    public int getPrixVentes() {
     }
 }

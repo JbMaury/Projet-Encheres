@@ -11,6 +11,9 @@ public class Retrait {
         this.ville = ville;
     }
 
+    public Retrait(String rue, String cp, String ville, ArticleVendu article) {
+    }
+
     public String getRue() {
         return rue;
     }

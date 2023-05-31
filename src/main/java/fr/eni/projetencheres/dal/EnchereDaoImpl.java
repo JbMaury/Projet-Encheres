@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +12,8 @@ import fr.eni.projet.bo.Article;
 import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.util.ConnexionProvider;
+import fr.eni.projetencheres.bo.ArticleVendu;
+import fr.eni.projetencheres.bo.Encheres;
 
 public class EnchereDaoImpl implements EnchereDAO {
 
@@ -81,7 +82,7 @@ public class EnchereDaoImpl implements EnchereDAO {
     }
 
     @Override
-    public List<Enchere> selectByNoArticle(Article art) throws DALException {
+    public List<Encheres> selectByNoArticle(ArticleVendu art) throws DALException {
 
         Enchere enchere;
         List<Enchere> encheres = new ArrayList<Enchere>();

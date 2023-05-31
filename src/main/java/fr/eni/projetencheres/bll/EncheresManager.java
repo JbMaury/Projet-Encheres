@@ -1,0 +1,209 @@
+package fr.eni.projetencheres.bll;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import fr.eni.projetencheres.bo.ArticleVendu;
+import fr.eni.projetencheres.bo.Categorie;
+import fr.eni.projetencheres.bo.Encheres;
+import fr.eni.projetencheres.bo.Retrait;
+import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.dal.ArticleDAO;
+import fr.eni.projetencheres.dal.DALException;
+import fr.eni.projetencheres.dal.DAOFactory;
+import fr.eni.projetencheres.dal.EnchereDAO;
+import fr.eni.projetencheres.dal.RetraitDAO;
+
+public class EncheresManager {
+
+    private static EncheresManager instance;
+
+    private EncheresManager() {
+
+    }
+
+    public static EncheresManager getInstance() {
+        if (instance == null) {
+            instance = new EncheresManager();
+        }
+        return instance;
+    }
+
+    public List<ArticleVendu> listerArticles() throws DALException {
+
+        ArticleDAO adao = DAOFactory.getArticleDAO();
+        // insertion d'une liste d'article
+        List<ArticleVendu> liste = adao.selectDebutToday();
+
+        return liste;
+    }
+
+    // methode de listage d'article en fonction de la categorie
+    public List<ArticleVendu> triByCategorie(int id) throws DALException {
+
+        List<ArticleVendu> selection = null;
+        ArticleDAO adao = null;
+
+        adao = DAOFactory.getArticleDAO();
+        selection = adao.selectByCat(id);
+
+        return selection;
+    }
+
+    public List<ArticleVendu> triByEncheresOuvertes(Utilisateur user) throws DALException {
+
+        ArticleDAO adao = DAOFactory.getArticleDAO();
+        List<ArticleVendu> selection = adao.selectEncheresOuvertes(user);
+
+        return selection;
+    }
+
+    public List<ArticleVendu> triByEncheresEnCours(Utilisateur user) throws DALException {
+
+        ArticleDAO adao = DAOFactory.getArticleDAO();
+        List<ArticleVendu> selection = adao.selectMesEncheresEnCours(user);
+
+        return selection;
+    }
+
+    public List<ArticleVendu> triByEncheresRemportees(Utilisateur user) throws DALException {
+
+        ArticleDAO adao = DAOFactory.getArticleDAO();
+        List<ArticleVendu> selection = adao.selectMesEncheresremportees(user);
+
+        return selection;
+    }
+
+    public List<ArticleVendu> triByVenteEnCours(Utilisateur user) throws DALException {
+
+        ArticleDAO adao = DAOFactory.getArticleDAO();
+        List<ArticleVendu> selection = adao.selectByNoUtilisateur(user);
+
+        return selection;
+    }
+
+    public List<ArticleVendu> triByVentesNonDebutees(Utilisateur user) throws DALException {
+
+        ArticleDAO adao = DAOFactory.getArticleDAO();
+        List<ArticleVendu> selection = adao.selectVentesNonDebutees(user);
+
+        return selection;
+    }
+
+    public List<ArticleVendu> triByVentesTerminees(Utilisateur user) throws DALException {
+
+        ArticleDAO adao = DAOFactory.getArticleDAO();
+        List<ArticleVendu> selection = adao.selectVentesTerminees(user);
+
+        return selection;
+    }
+
+    public List<ArticleVendu> triByMotsCles(String motsCles) throws DALException {
+
+        List<ArticleVendu> selection = null;
+        ArticleDAO adao = null;
+
+        adao = DAOFactory.getArticleDAO();
+        selection = adao.selectByMotsCles(motsCles);
+
+        return selection;
+    }
+
+    // methode pour creer une nouvelle vente
+    public void nouvelleVente(String nom, String description, LocalDate debut, LocalDate fin, int prixInitial,
+                              Utilisateur utilisateur, Categorie categorie, String rue, String cp, String ville) throws DALException {
+
+        ArticleVendu article = new ArticleVendu(nom, description, debut, fin, prixInitial, utilisateur, categorie);
+        ArticleDAO aDAO = DAOFactory.getArticleDAO();
+        aDAO.insertArticle(article);
+        Retrait retrait = new Retrait(rue, cp, ville, article);
+        RetraitDAO rdao = DAOFactory.getRetraitDAO();
+        rdao.insertRetrait(retrait);
+    }
+
+    public ArticleVendu obtenirArticle(int id) throws DALException {
+
+        ArticleVendu article;
+        ArticleDAO adao;
+        EnchereDAO edao;
+        List<Encheres> encheres;
+        Encheres meilleurOffre = null;
+
+        // recuperation de l'article en BDD
+        adao = DAOFactory.getArticleDAO();
+        article = adao.selectById(id);
+
+        // recuperation des encheres sur cet article en BDD
+        edao = DAOFactory.getEnchereDAO();
+        encheres = edao.selectByNoArticle(article);
+
+        // ajout de la liste d'encheres � l'instance d'article
+        article.setEncheres(encheres);
+
+        // recherche de la meilleure offre et modification des parametres de l'article
+        for (Encheres enchere : encheres) {
+            if (meilleurOffre == null) {
+                meilleurOffre = enchere;
+            } else if (enchere.getMontantEnchere() > meilleurOffre.getMontantEnchere()) {
+                meilleurOffre = enchere;
+            }
+        }
+        if (meilleurOffre != null) {
+            article.setEncheres(meilleurOffre.getUtilisateur());
+            article.setPrixVentes(meilleurOffre.getMontantEnchere());
+        } else {
+            article.setPrixVentes(article.getPrixInitial());
+        }
+
+        return article;
+    }
+
+    public void encherir(Utilisateur user, ArticleVendu art, int montantEnchere) throws DALException {
+        Encheres enchere = new Encheres(LocalDate.now(), montantEnchere, user, art);
+        art.ajouterEncheres(user, enchere);
+        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        edao.insertEnchere(enchere);
+    }
+
+    public boolean verifEnchereNombre(String str) {
+        boolean ok;
+        char[] c = str.toCharArray();
+
+        for (int i=0; i<c.length; i++) {
+            ok = Character.isDigit(c[i]);
+            if (!ok) {
+                return ok;
+            }
+        }
+        ok = true;
+        return ok;
+    }
+
+    public boolean verifEnchere(ArticleVendu art, int enchere) {
+
+        boolean ok;
+
+        if (enchere <= art.getPrixVentes()) {
+            ok = false;
+        } else {
+            ok = true;
+        }
+
+        return ok;
+    }
+
+    public boolean verifBudget(Utilisateur user, int enchere) {
+
+        boolean ok;
+
+        if(enchere > user.getCredit()) {
+            ok = false;
+        } else {
+            ok = true;
+        }
+        return ok;
+    }
+
+}

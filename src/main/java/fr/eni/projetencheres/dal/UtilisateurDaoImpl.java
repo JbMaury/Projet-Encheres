@@ -3,14 +3,12 @@ package fr.eni.projetencheres.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import fr.eni.projet.bo.Password;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.util.ConnexionProvider;
+import fr.eni.projetencheres.bo.Utilisateur;
 
 public class UtilisateurDaoImpl implements UtilisateurDAO {
 

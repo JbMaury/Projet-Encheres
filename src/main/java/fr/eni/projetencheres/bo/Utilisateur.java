@@ -30,6 +30,9 @@ public class Utilisateur {
         this.credit = credit;
     }
 
+    public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+    }
+
     public String getPseudo() {
         return pseudo;
     }
@@ -120,5 +123,14 @@ public class Utilisateur {
 
     public void setCredit(int credit) {
         this.credit = credit;
+    }
+
+    public void setCodePostal(String codePostal) {
+    }
+
+    public void setTelephone(String telephone) {
+    }
+
+    public void setTelephone(String telephone) {
     }
 }

@@ -1,5 +1,6 @@
 package fr.eni.projetencheres.dal;
 import fr.eni.projet.bo.Utilisateur;
+import fr.eni.projetencheres.bo.Utilisateur;
 
 public interface UtilisateurDAO {
     //methode pour cr�ation d'utlisateur
