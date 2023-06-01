@@ -39,8 +39,10 @@ public class Retrait {
     }
 
     public ArticleVendu getArticle() {
+        return null;
     }
 
     public String getCodePostal() {
+        return null;
     }
 }
