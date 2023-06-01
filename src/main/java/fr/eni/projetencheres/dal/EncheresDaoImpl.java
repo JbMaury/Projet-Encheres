@@ -1,20 +1,15 @@
 package fr.eni.projetencheres.dal;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.util.ConnexionProvider;
 
-public class EncheresDaoImpl implements EncheresDAO {
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+public class EncheresDaoImpl implements EncheresDAO{
     private static final String DELETE_ENCHERE = "DELETE FROM ENCHERES where no_utilisateur = ?;";
     private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?);";
     private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article=?";
@@ -28,7 +23,7 @@ public class EncheresDaoImpl implements EncheresDAO {
         PreparedStatement pstmt = null;
 
         try {
-            cnx = ConnexionProvider.getConnection();
+            cnx = fr.eni.projetencheres.util.ConnexionProvider.getConnection();
             pstmt.setInt(1, numUtil);
             pstmt.executeUpdate();
 
@@ -49,7 +44,7 @@ public class EncheresDaoImpl implements EncheresDAO {
 
         try {
             // preparer les parametres
-            cnx = ConnexionProvider.getConnection();
+            cnx = fr.eni.projetencheres.util.ConnexionProvider.getConnection();
             pstmt = cnx.prepareStatement(SELECT_BY_ARTICLE_USER);
             pstmt.setInt(1, enchere.getArt().getNoArticle());
             pstmt.setInt(2, enchere.getUtilisateur().getNoUtilisateur());
