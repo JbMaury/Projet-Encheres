@@ -123,8 +123,8 @@ public class EncheresManager {
         ArticleVendu article;
         ArticleVenduDAO adao;
         EncheresDAO edao;
-        List<Encheres> encheres;
-        Encheres meilleurOffre = null;
+        List<Enchere> encheres;
+        Enchere meilleurOffre = null;
 
         // recuperation de l'article en BDD
         adao = DAOFactory.getArticleDAO();
@@ -138,7 +138,7 @@ public class EncheresManager {
         article.setEncheres(encheres);
 
         // recherche de la meilleure offre et modification des parametres de l'article
-        for (Encheres enchere : encheres) {
+        for (Enchere enchere : encheres) {
             if (meilleurOffre == null) {
                 meilleurOffre = enchere;
             } else if (enchere.getMontantEnchere() > meilleurOffre.getMontantEnchere()) {
@@ -156,7 +156,7 @@ public class EncheresManager {
     }
 
     public void encherir(Utilisateur user, ArticleVendu art, int montantEnchere) throws DALException {
-        Encheres enchere = new Encheres(LocalDate.now(), montantEnchere, user, art);
+        Enchere enchere = new Enchere(LocalDate.now(), montantEnchere, user, art);
         art.ajouterEncheres(user, enchere);
         EncheresDAO edao = DAOFactory.getEnchereDAO();
         edao.insertEncheres(enchere);

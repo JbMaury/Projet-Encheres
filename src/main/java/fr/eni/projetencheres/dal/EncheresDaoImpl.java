@@ -1,7 +1,7 @@
 package fr.eni.projetencheres.dal;
 
 import fr.eni.projetencheres.bo.ArticleVendu;
-import fr.eni.projetencheres.bo.Encheres;
+import fr.eni.projetencheres.bo.Enchere;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.util.ConnexionProvider;
 
@@ -36,7 +36,7 @@ public class EncheresDaoImpl implements EncheresDAO{
 
     @Override
     // creer une enchere
-    public void insertEncheres(Encheres enchere) throws DALException {
+    public void insertEncheres(Enchere enchere) throws DALException {
 
         Connection cnx;
         PreparedStatement pstmt;
@@ -80,10 +80,10 @@ public class EncheresDaoImpl implements EncheresDAO{
 
 
     @Override
-    public List<Encheres> selectByNoArticle(ArticleVendu art) throws DALException {
+    public List<Enchere> selectByNoArticle(ArticleVendu art) throws DALException {
 
-        Encheres enchere;
-        List<Encheres> encheres = new ArrayList<Encheres>();
+        Enchere enchere;
+        List<Enchere> encheres = new ArrayList<Enchere>();
         Connection cnx;
         PreparedStatement stmt;
         ResultSet rs;
@@ -99,7 +99,7 @@ public class EncheresDaoImpl implements EncheresDAO{
             while (rs.next()) {
                 // recuperation des informations de l'utilisateur grace a son numero("no_utilisateur")
                 user = udao.selectById(rs.getInt("no_utilisateur"));
-                enchere = new Encheres(rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"), user,
+                enchere = new Enchere(rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"), user,
                         art);
                 // ajout de l'enchere
                 encheres.add(enchere);

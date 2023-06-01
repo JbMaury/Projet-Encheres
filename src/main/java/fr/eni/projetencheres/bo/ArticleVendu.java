@@ -1,9 +1,6 @@
 package fr.eni.projetencheres.bo;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class ArticleVendu {
     private int noArticle;
@@ -11,14 +8,66 @@ public class ArticleVendu {
     private String description;
     private LocalDate dateDebutEncheres;
     private LocalDate dateFinEncheres;
-    private Utilisateur utilisateur;
-    private Categorie categorie;
+    private int noUtilisateur;
+    private int noCategorie;
     private int miseAPrix;
     private String etatVente;
     private int prixVente;
 
 
-    public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, String etatVente, int prixVente, Categorie categorie) {
+    /*
+    *   EMPTY CONSTRUCTOR
+    */
+
+    public ArticleVendu() {
+        super();
+    }
+    /*
+    *   CONSTRUCTEUR WITHOUT noArticle (Before DB insert)
+    * @param nomArticle String
+    * @param description String
+    * @param dateDebutEncheres LocalDate
+    * @param dateFinEncheres LocalDate
+    * @param miseAPrix int
+    * @param etatVente String
+    * @param noUtilisateur int (BO Association between ArticleVendu -> Utilisateur // DB Foreign Key -> Utilisateur)
+    * @param noCategorie int (BO Association between ArticleVendu -> Categorie // DB Foreign Key -> Categorie)
+    */
+
+    public ArticleVendu(String nomArticle,
+                        String description,
+                        LocalDate dateDebutEncheres,
+                        LocalDate dateFinEncheres,
+                        int miseAPrix,
+                        String etatVente,
+                        int prixVente,
+                        int noUtilisateur,
+                        int noCategorie) {
+        this.nomArticle = nomArticle;
+        this.description = description;
+        this.dateDebutEncheres = dateDebutEncheres;
+        this.dateFinEncheres = dateFinEncheres;
+        this.miseAPrix = miseAPrix;
+        this.etatVente = etatVente;
+        this.prixVente = prixVente;
+        this.noUtilisateur = noUtilisateur;
+        this.noCategorie = noCategorie;
+    }
+    /*
+    *   CONSTRUCTEUR COMPLET
+    * @param noArticle int (Id Primary Key in DB (Auto-increment))
+    */
+
+    public ArticleVendu(int noArticle,
+                        String nomArticle,
+                        String description,
+                        LocalDate dateDebutEncheres,
+                        LocalDate dateFinEncheres,
+                        int miseAPrix,
+                        String etatVente,
+                        int prixVente,
+                        int noUtilisateur,
+                        int noCategorie) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -27,12 +76,14 @@ public class ArticleVendu {
         this.miseAPrix = miseAPrix;
         this.etatVente = etatVente;
         this.prixVente = prixVente;
+        this.noUtilisateur = noUtilisateur;
+        this.noCategorie = noCategorie;
     }
 
-
-    public ArticleVendu(int noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, Utilisateur utilisateur, Categorie categorie) {
-
-    }
+    /*
+    * GETTER / SETTER ######################################
+    * */
+//      Getter et Setter noArticle
 
     public int getNoArticle() {
         return noArticle;
@@ -42,6 +93,8 @@ public class ArticleVendu {
         this.noArticle = noArticle;
     }
 
+//    Getter et Setter nomArticle
+
     public String getNomArticle() {
         return nomArticle;
     }
@@ -50,13 +103,17 @@ public class ArticleVendu {
         this.nomArticle = nomArticle;
     }
 
+//    Getter et Setter description
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
-        description = description;
+        this.description = description;
     }
+
+//    Getter et Setter dateDebutEncheres
 
     public LocalDate getDateDebutEncheres() {
         return dateDebutEncheres;
@@ -66,6 +123,8 @@ public class ArticleVendu {
         this.dateDebutEncheres = dateDebutEncheres;
     }
 
+//    Getter et Setter dateFinEncheres
+
     public LocalDate getDateFinEncheres() {
         return dateFinEncheres;
     }
@@ -73,6 +132,8 @@ public class ArticleVendu {
     public void setDateFinEncheres(LocalDate dateFinEncheres) {
         this.dateFinEncheres = dateFinEncheres;
     }
+
+//    Getter et Setter miseAPrix
 
     public int getMiseAPrix() {
         return miseAPrix;
@@ -82,6 +143,8 @@ public class ArticleVendu {
         this.miseAPrix = miseAPrix;
     }
 
+//    Getter et Setter etatVente
+
     public String getEtatVente() {
         return etatVente;
     }
@@ -89,6 +152,8 @@ public class ArticleVendu {
     public void setEtatVente(String etatVente) {
         this.etatVente = etatVente;
     }
+
+//    Getter et Setter prixVente
 
     public int getPrixVente() {
         return prixVente;
@@ -98,23 +163,4 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
-    public void setEncheres(List<Encheres> encheres) {
-    }
-    public void ajouterEncheres(Utilisateur user, Encheres enchere) {
-    }
-    public void setRetrait(Retrait retrait) {
-    }
-
-    public void setAcheteur(List<Encheres> utilisateur) {
-    }
-
-    public Utilisateur getVendeur() {
-        Utilisateur user = new Utilisateur();
-        return user;
-    }
-
-    public Categorie getCategorie() {
-        Categorie cat = new Categorie();
-        return cat;
-    }
 }
