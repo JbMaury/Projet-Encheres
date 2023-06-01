@@ -25,73 +25,13 @@ public class DAOFactory {
     public static EncheresDAO getEnchereDAO() {
 
         EncheresDAO enchereDAO = new EncheresDaoImpl();
-        return EncheresDAO;
+        return enchereDAO;
     }
 
     // méthode de création d'un articleDAO
     public static ArticleVenduDAO getArticleDAO() {
 
-        ArticleVenduDAO art = new ArticleVenduDAO() {
-            @Override
-            public void insertArticle(ArticleVendu article) throws DALException {
-
-            }
-
-            @Override
-            public ArticleVendu selectById(int id) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectByCat(int id) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectByNoUtilisateur(Utilisateur user) throws DALException {
-                return null;
-            }
-
-            @Override
-            public void deleteArticle(ArticleVendu article) throws DALException {
-
-            }
-
-            @Override
-            public List<ArticleVendu> selectByMotsCles(String motsCles) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectEncheresOuvertes(Utilisateur user1) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectMesEncheresEnCours(Utilisateur user1) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectMesEncheresremportees(Utilisateur user1) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectVentesNonDebutees(Utilisateur user1) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectVentesTerminees(Utilisateur user1) throws DALException {
-                return null;
-            }
-
-            @Override
-            public List<ArticleVendu> selectDebutToday() throws DALException {
-                return null;
-            }
-        }DaoImpl();
+        ArticleVenduDAO art = new ArticleVenduDAOImpl();
         return art;
     }
 

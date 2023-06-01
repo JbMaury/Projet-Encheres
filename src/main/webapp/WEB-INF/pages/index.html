@@ -18,10 +18,10 @@
 </header>
 <main>
     <h2>Liste des enchères</h2>
-        <form class="boxflex_row">
+        <form class="boxflex_row" action="/ServletAccueil" method="POST">
             <fieldset>
                 <legend>Filtres</legend>
-                <input class="search" type="text" placeholder="Le nom de l'article contient">
+                <input class="search" type="text" name="rechercheArticle" placeholder="Le nom de l'article contient">
                 <label for="Categories">Catégories : </label>
                 <select id="Categories">
                     <option value="Tout" selected="selected">Tout</option>

@@ -13,7 +13,7 @@ import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Categorie;
 import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Utilisateur;
-import fr.eni.projetencheres.util.ConnectionProvider;
+import fr.eni.projetencheres.util.ConnexionProvider;
 
 public class ArticleVenduDaoImpl implements ArticleVenduDAO {
 

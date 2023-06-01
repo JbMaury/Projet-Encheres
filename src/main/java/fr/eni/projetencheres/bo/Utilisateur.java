@@ -10,12 +10,12 @@ public class Utilisateur {
     private int numTel; //Check si numTel = int.int.int.int.int pour être valide
     private String rue;
     private String ville;
-    private final String motDePasse;
-    private String administrateur;
+    private String motDePasse;
+    private boolean administrateur;
     private int credit;
 
 
-    public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String ville, String motDePasse, String administrateur) {
+    public Utilisateur(String pseudo,int noUtilisateur, String nom, String prenom, int codePostal, String email, int numTel, String rue, String ville, String motDePasse, boolean administrateur, int credit) {
         this.pseudo = pseudo;
         this.noUtilisateur = noUtilisateur;
         this.nom = nom;
@@ -28,9 +28,6 @@ public class Utilisateur {
         this.motDePasse = motDePasse;
         this.administrateur = administrateur;
         this.credit = credit;
-    }
-
-    public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
     }
 
     public String getPseudo() {
@@ -109,11 +106,11 @@ public class Utilisateur {
         return motDePasse;
     }
 
-    public String getAdministrateur() {
+    public boolean getAdministrateur() {
         return administrateur;
     }
 
-    public void setAdministrateur(String administrateur) {
+    public void setAdministrateur(boolean administrateur) {
         this.administrateur = administrateur;
     }
 
@@ -128,15 +125,15 @@ public class Utilisateur {
     public void setCodePostal(String codePostal) {
     }
 
-    public void setTelephone(String telephone) {
+    public void setTelephone(int numTel) {
+        this.numTel = numTel;
     }
 
-    public void setTelephone(String telephone) {
-    }
-
-    public String getTelephone() {
+    public int getTelephone() {
+        return this.numTel;
     }
 
     public boolean isAdministrateur() {
+        return this.administrateur;
     }
 }

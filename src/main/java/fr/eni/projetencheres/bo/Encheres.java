@@ -1,6 +1,7 @@
 package fr.eni.projetencheres.bo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public class Encheres extends GregorianCalendar {
     private Date dateEnchere;
     private int montantEnchere;
+
 
     public Encheres(Date dateEnchere, int montantEnchere) {
         this.dateEnchere = dateEnchere;
@@ -33,6 +35,8 @@ public class Encheres extends GregorianCalendar {
         this.montantEnchere = montantEnchere;
     }
 
-    public List<Encheres> getUtilisateur() {
+    public List<Utilisateur> getUtilisateur() {
+        List<Utilisateur> listeUtilisateur = new ArrayList<>();
+        return listeUtilisateur;
     }
 }

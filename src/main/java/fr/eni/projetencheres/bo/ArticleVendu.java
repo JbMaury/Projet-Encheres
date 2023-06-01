@@ -28,7 +28,9 @@ public class ArticleVendu extends GregorianCalendar{
         this.prixVente = prixVente;
     }
 
+
     public ArticleVendu(String nom, String description, LocalDate debut, LocalDate fin, int prixInitial, Utilisateur utilisateur, Categorie categorie) {
+
     }
 
     public int getNoArticle() {
@@ -97,19 +99,8 @@ public class ArticleVendu extends GregorianCalendar{
 
     public void setEncheres(List<Encheres> encheres) {
     }
-
-    public void setPrixVentes(int montantEnchere) {
-    }
-
-    public int getPrixInitial() {
-    }
-
     public void ajouterEncheres(Utilisateur user, Encheres enchere) {
     }
-
-    public int getPrixVentes() {
-    }
-
     public void setRetrait(Retrait retrait) {
     }
 }
