@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+}
+h1{
+    margin: 0;
+    padding: 0;
+}
+
+.recherche {
+    border: 1px solid black;
+
+}
+.encheres{
+    border: 1px solid red;
+}
+#menu{
+
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 15px 50px 15px 50px;
+    align-items: center;
+
+}
+main{
+    display: flex;
+    flex-direction: column;
+    border: 3px solid orange;
+    align-items: center;
+}
+legend{
+    font-size: 2em ;
+}
+input{
+    border-radius: 5px;
+}
+.filtre{
+    display: flex;
+    flex-direction: row;
+}
+fieldset{
+    display: flex;
+    flex-direction: column;
+}
