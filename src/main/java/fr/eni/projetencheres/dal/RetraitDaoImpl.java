@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.Retrait;
 import fr.eni.projetencheres.util.ConnexionProvider;
 

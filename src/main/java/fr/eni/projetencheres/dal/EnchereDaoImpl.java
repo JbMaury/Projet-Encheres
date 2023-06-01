@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.util.ConnexionProvider;

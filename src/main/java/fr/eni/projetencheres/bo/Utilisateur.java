@@ -14,6 +14,9 @@ public class Utilisateur {
     private boolean administrateur;
     private int credit;
 
+    public Utilisateur(){
+
+    }
 
     public Utilisateur(String pseudo,int noUtilisateur, String nom, String prenom, int codePostal, String email, int numTel, String rue, String ville, String motDePasse, boolean administrateur, int credit) {
         this.pseudo = pseudo;

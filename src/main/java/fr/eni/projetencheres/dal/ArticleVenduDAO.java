@@ -3,7 +3,6 @@ package fr.eni.projetencheres.dal;
 
 import java.util.List;
 
-import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Utilisateur;
 

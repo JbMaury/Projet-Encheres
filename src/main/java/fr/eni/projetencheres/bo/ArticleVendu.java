@@ -5,19 +5,20 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ArticleVendu extends GregorianCalendar{
+public class ArticleVendu {
     private int noArticle;
     private String nomArticle;
     private String description;
-    private Date dateDebutEncheres;
-    private Date dateFinEncheres;
-
+    private LocalDate dateDebutEncheres;
+    private LocalDate dateFinEncheres;
+    private Utilisateur utilisateur;
+    private Categorie categorie;
     private int miseAPrix;
     private String etatVente;
     private int prixVente;
 
 
-    public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, int miseAPrix, String etatVente, int prixVente) {
+    public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, String etatVente, int prixVente) {
         this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
@@ -29,7 +30,7 @@ public class ArticleVendu extends GregorianCalendar{
     }
 
 
-    public ArticleVendu(String nom, String description, LocalDate debut, LocalDate fin, int prixInitial, Utilisateur utilisateur, Categorie categorie) {
+    public ArticleVendu(int noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, Utilisateur utilisateur, Categorie categorie) {
 
     }
 
@@ -57,19 +58,19 @@ public class ArticleVendu extends GregorianCalendar{
         description = description;
     }
 
-    public Date getDateDebutEncheres() {
+    public LocalDate getDateDebutEncheres() {
         return dateDebutEncheres;
     }
 
-    public void setDateDebutEncheres(Date dateDebutEncheres) {
+    public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
         this.dateDebutEncheres = dateDebutEncheres;
     }
 
-    public Date getDateFinEncheres() {
+    public LocalDate getDateFinEncheres() {
         return dateFinEncheres;
     }
 
-    public void setDateFinEncheres(Date dateFinEncheres) {
+    public void setDateFinEncheres(LocalDate dateFinEncheres) {
         this.dateFinEncheres = dateFinEncheres;
     }
 
@@ -108,8 +109,12 @@ public class ArticleVendu extends GregorianCalendar{
     }
 
     public Utilisateur getVendeur() {
+        Utilisateur user = new Utilisateur();
+        return user;
     }
 
     public Categorie getCategorie() {
+        Categorie cat = new Categorie();
+        return cat;
     }
 }

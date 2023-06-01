@@ -7,24 +7,23 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Encheres extends GregorianCalendar {
-    private Date dateEnchere;
+    private LocalDate dateEnchere;
     private int montantEnchere;
+    private Utilisateur user;
+    private ArticleVendu art;
 
-    public Encheres(Utilisateur user, Date dateEnchere, int montantEnchere) {
+    public Encheres(LocalDate dateEnchere, int montantEnchere, Utilisateur user, ArticleVendu art) {
         this.user = user;
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
+        this.art = art;
     }
 
-    public Encheres(LocalDate now, int montantEnchere, Utilisateur user, ArticleVendu art) {
-        this.user = user;
-    }
-
-    public Date getDateEnchere() {
+    public LocalDate getDateEnchere() {
         return dateEnchere;
     }
 
-    public void setDateEnchere(Date dateEnchere) {
+    public void setDateEnchere(LocalDate dateEnchere) {
         this.dateEnchere = dateEnchere;
     }
 
