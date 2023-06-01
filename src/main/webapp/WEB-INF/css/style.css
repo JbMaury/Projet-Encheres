@@ -13,10 +13,6 @@ h1{
 .encheres{
     border: 1px solid red;
 }
-#menu{
-
-}
-
 header{
     display: flex;
     flex-direction: row;
@@ -33,10 +29,21 @@ main{
     align-items: center;
 }
 legend{
-    font-size: 2em ;
+    font-size: 1.4em ;
 }
-input{
+input.search{
     border-radius: 5px;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg");
+    background-size: 13px;
+    background-repeat: no-repeat;
+    background-position: 2px center;
+    padding: 0 0 0 20px;
+}
+input.button{
+    width: 30vh;
+    height: 15vh;
+    padding: 0;
+    margin: 0 15px;
 }
 .filtre{
     display: flex;
@@ -45,4 +52,9 @@ input{
 fieldset{
     display: flex;
     flex-direction: column;
+}
+.boxflex_row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 }

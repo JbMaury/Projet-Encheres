@@ -1,7 +1,6 @@
 
 <!--<%&#45;&#45;<%@ page contentType="text/html;charset=UTF-8" language="java" %>&#45;&#45;%>-->
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -16,40 +15,24 @@
         <a href="#">S'inscrire</a>
         <a href="#">Se connecter</a>
     </div>
-
-
 </header>
 <main>
     <h2>Liste des enchères</h2>
     <div class="filtre">
-
-        <form>
-
+        <form class="boxflex_row">
             <fieldset>
-            <legend>Filtres</legend>
-
-
-                <input type="text" placeholder="Le nom de l'article contient">
-                    <div>
-               <label for="Categories">Catégories : </label>
+                <legend>Filtres</legend>
+                <input class="search" type="text" placeholder="Le nom de l'article contient">
+                <label for="Categories">Catégories : </label>
                 <select id="Categories">
-
                     <option value="Tout" selected="selected">Tout</option>
                     <option value="Informatique">Informatique</option>
                     <option value="Ameublement">Ameublement</option>
                     <option value="Vetements">Vêtements</option>
                     <option value="SportsEtLoisirs">Sports & Loisirs</option>
-
-
                 </select>
-                </div>
-
-
-
-
-
-        </fieldset>
-            <input type="button" value="Rechercher">
+            </fieldset>
+            <input class="button" type="button" value="Rechercher">
         </form>
 
 
