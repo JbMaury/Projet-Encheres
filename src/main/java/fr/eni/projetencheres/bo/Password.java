@@ -17,7 +17,7 @@ public class Password {
 
     public static String getSaltedHash(String password) throws Exception {
         byte[] salt = SecureRandom.getInstance("SHA1PRNG").generateSeed(saltLen);
-        return Base64.encodeBase64String(salt) + "$" + hash(password, salt);
+        return Base64.getEncoder().encodeToString(salt) + "$" + hash(password, salt);
 
     }
 
@@ -27,7 +27,7 @@ public class Password {
             throw new IllegalStateException(
                     "le password stocké est mainetenat sous format 'salt$hash'");
         }
-        String hashOfInput = hash(password, Base64.decodeBase64(saltAndHash[0]));
+        String hashOfInput = hash(password, Base64.getDecoder().decode(saltAndHash[0]));
 
         return hashOfInput.equals(saltAndHash[1]);
 
@@ -39,6 +39,6 @@ public class Password {
         SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         SecretKey key = f.generateSecret(new PBEKeySpec(password.toCharArray(),salt,iterations,desiredKeyLen));
 
-        return Base64.encodeBase64String(key.getEncoded());
+        return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 }
