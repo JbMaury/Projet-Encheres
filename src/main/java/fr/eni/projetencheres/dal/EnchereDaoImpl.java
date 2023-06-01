@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projetencheres.bo.ArticleVendu;
+import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.util.ConnexionProvider;
@@ -61,15 +61,14 @@ public class EncheresDaoImpl implements EncheresDAO {
                 pstmt.setDate(2, Date.valueOf(enchere.getDateEnchere()));
                 pstmt.setInt(3, enchere.getArticle().getNoArticle());
                 pstmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
-                pstmt.executeUpdate();
             } else {
                 pstmt = cnx.prepareStatement(INSERT_ENCHERE);
                 pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
                 pstmt.setInt(2, enchere.getArticle().getNoArticle());
                 pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
                 pstmt.setInt(4, enchere.getMontantEnchere());
-                pstmt.executeUpdate();
             }
+            pstmt.executeUpdate();
             rs.close();
             pstmt.close();
             cnx.close();
@@ -80,7 +79,17 @@ public class EncheresDaoImpl implements EncheresDAO {
     }
 
     @Override
-    public List<Encheres> selectByNoArticle(ArticleVendu art) throws DALException {
+    public void deleteEncheres(int numUtil) throws DALException {
+
+    }
+
+    @Override
+    public void insertEncheres(Encheres enchere) throws DALException {
+
+    }
+
+    @Override
+    public List<Encheres> selectByNoArticle(Article art) throws DALException {
 
         Encheres enchere;
         List<Encheres> encheres = new ArrayList<Encheres>();

@@ -103,4 +103,13 @@ public class ArticleVendu extends GregorianCalendar{
     }
     public void setRetrait(Retrait retrait) {
     }
+
+    public void setAcheteur(List<Encheres> utilisateur) {
+    }
+
+    public Utilisateur getVendeur() {
+    }
+
+    public Categorie getCategorie() {
+    }
 }

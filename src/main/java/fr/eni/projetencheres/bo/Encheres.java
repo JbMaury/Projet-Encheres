@@ -10,13 +10,14 @@ public class Encheres extends GregorianCalendar {
     private Date dateEnchere;
     private int montantEnchere;
 
-
-    public Encheres(Date dateEnchere, int montantEnchere) {
+    public Encheres(Utilisateur user, Date dateEnchere, int montantEnchere) {
+        this.user = user;
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
     }
 
     public Encheres(LocalDate now, int montantEnchere, Utilisateur user, ArticleVendu art) {
+        this.user = user;
     }
 
     public Date getDateEnchere() {

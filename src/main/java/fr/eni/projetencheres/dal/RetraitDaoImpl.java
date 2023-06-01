@@ -4,11 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.eni.projetencheres.bo.ArticleVendu;
+import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.Retrait;
 import fr.eni.projetencheres.util.ConnexionProvider;
 
-public abstract class RetraitDaoImpl implements RetraitDAO {
+public class RetraitDaoImpl implements RetraitDAO {
 
     private final static String INSERT_RETRAIT = "INSERT INTO RETRAITS (no_article, rue, code_posta, ville) VALUES (?, ?, ?, ?);";
     private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM RETRAITS WHERE no_article=?;";
@@ -35,7 +35,7 @@ public abstract class RetraitDaoImpl implements RetraitDAO {
     }
 
     @Override
-    public Retrait selectByNoArticle(ArticleVendu art) throws DALException {
+    public Retrait selectByNoArticle(Article art) throws DALException {
 
         Connection cnx;
         PreparedStatement stmt;
