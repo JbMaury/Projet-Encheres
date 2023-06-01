@@ -5,13 +5,14 @@ h1{
     margin: 0;
     padding: 0;
 }
-
-.recherche {
-    border: 1px solid black;
-
-}
 .encheres{
+    margin-top: 50px;
     border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
 }
 header{
     display: flex;
@@ -45,10 +46,6 @@ input.button{
     padding: 0;
     margin: 0 15px;
 }
-.filtre{
-    display: flex;
-    flex-direction: row;
-}
 fieldset{
     display: flex;
     flex-direction: column;
@@ -57,4 +54,27 @@ fieldset{
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+}
+.card_text {
+    display:flex;
+    flex-direction: column;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    border: 1px solid green;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+article {
+    width: 40vh;
+    height: 30vh;
+    margin: 10px 10px;
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: row;
 }
