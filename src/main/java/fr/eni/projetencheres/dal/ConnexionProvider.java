@@ -9,12 +9,12 @@ import java.sql.SQLException;
 
 public class ConnexionProvider {
 
-    private static DataSource datasource;
+    private static DataSource dataSource;
 
     static {
         try {
             Context context = new InitialContext();
-            datasource = (DataSource) context.lookup("java:comp/env/jdbc/EncheresCNXPool");
+            ConnexionProvider.dataSource = (DataSource) context.lookup("java:comp/env/jdbc/EncheresCNXPool");
         } catch (NamingException e) {
             System.err.println(e.getMessage());
         }
@@ -22,6 +22,6 @@ public class ConnexionProvider {
 
     public static Connection getConnection() throws SQLException {
 
-        return datasource.getConnection();
+        return ConnexionProvider.dataSource.getConnection();
     }
 }

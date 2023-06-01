@@ -1,4 +1,4 @@
-package fr.eni.projetencheres.dal;
+package fr.eni.projetencheres.dal.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,10 +7,11 @@ import java.sql.SQLException;
 
 import fr.eni.projetencheres.bo.Password;
 import fr.eni.projetencheres.bo.Utilisateur;
-import fr.eni.projetencheres.util.ConnexionProvider;
-import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.dal.ConnexionProvider;
+import fr.eni.projetencheres.dal.DALException;
+import fr.eni.projetencheres.dal.dao.UtilisateurDAO;
 
-public class UtilisateurDaoImpl implements UtilisateurDAO {
+public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
     // requete SQL Insert
     private final static String SQL_INSERT = "INSERT INTO UTILISATEURS (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
@@ -34,13 +35,13 @@ public class UtilisateurDaoImpl implements UtilisateurDAO {
             pstmt.setString(2, utilisateur.getNom());
             pstmt.setString(3, utilisateur.getPrenom());
             pstmt.setString(4, utilisateur.getEmail());
-            pstmt.setInt(5, utilisateur.getNumTel());
+            pstmt.setString(5, utilisateur.getNumTel());
             pstmt.setString(6, utilisateur.getRue());
-            pstmt.setString(7, String.valueOf(utilisateur.getCodePostal()));
+            pstmt.setString(7, utilisateur.getCodePostal());
             pstmt.setString(8, utilisateur.getVille());
             pstmt.setString(9, utilisateur.getMotDePasse());
             pstmt.setInt(10, utilisateur.getCredit());
-            pstmt.setBoolean(11, utilisateur.isAdministrateur());
+            pstmt.setBoolean(11, utilisateur.getAdministrateur());
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
             if (rs.next()) {

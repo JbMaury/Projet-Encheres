@@ -1,43 +1,28 @@
 package fr.eni.projetencheres.dal;
 
-import fr.eni.projetencheres.bo.ArticleVendu;
-import fr.eni.projetencheres.bo.Utilisateur;
 
-import java.util.List;
+import fr.eni.projetencheres.dal.dao.*;
+import fr.eni.projetencheres.dal.jdbc.*;
 
 public class DAOFactory {
 
     // methode de création d'un utilisateur
     public static UtilisateurDAO getUtilisateurDAO() {
-
-        UtilisateurDAO utilisateurDAo = new UtilisateurDaoImpl();
-        return utilisateurDAo;
+        return new UtilisateurDAOJdbcImpl();
     }
-
     // méthode de création d'un catégorie DAO
     public static CategorieDAO getCategorieDAO() {
-
-        CategorieDAO categorieDAO = new CategorieDaoImpl();
-        return categorieDAO;
+        return new CategorieDAOJdbcImpl();
     }
-
     // méthode de création d'un enchereDAO
-    public static EncheresDAO getEnchereDAO() {
-
-        EncheresDAO enchereDAO = new EncheresDaoImpl();
-        return enchereDAO;
+    public static EnchereDAO getEnchereDAO() {
+        return new EncheresDAOJdbcImpl();
     }
-
     // méthode de création d'un articleDAO
     public static ArticleVenduDAO getArticleDAO() {
-
-        ArticleVenduDAO art = new ArticleVenduDaoImpl();
-        return art;
+        return new ArticleVenduDAOJdbcImpl();
     }
-
     public static RetraitDAO getRetraitDAO() {
-        RetraitDAO rdao = new RetraitDaoImpl();
-        return rdao;
+        return new RetraitDAOJdbcImpl();
     }
-
 }

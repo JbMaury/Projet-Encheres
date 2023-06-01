@@ -1,15 +1,18 @@
-package fr.eni.projetencheres.dal;
+package fr.eni.projetencheres.dal.jdbc;
 
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Enchere;
 import fr.eni.projetencheres.bo.Utilisateur;
-import fr.eni.projetencheres.util.ConnexionProvider;
+import fr.eni.projetencheres.dal.DALException;
+import fr.eni.projetencheres.dal.DAOFactory;
+import fr.eni.projetencheres.dal.dao.EnchereDAO;
+import fr.eni.projetencheres.dal.dao.UtilisateurDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EncheresDaoImpl implements EncheresDAO{
+public class EncheresDAOJdbcImpl implements EnchereDAO {
     private static final String DELETE_ENCHERE = "DELETE FROM ENCHERES where no_utilisateur = ?;";
     private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?);";
     private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article=?";

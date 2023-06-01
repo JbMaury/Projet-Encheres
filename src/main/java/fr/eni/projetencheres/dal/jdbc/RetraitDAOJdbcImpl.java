@@ -1,4 +1,4 @@
-package fr.eni.projetencheres.dal;
+package fr.eni.projetencheres.dal.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,9 +6,10 @@ import java.sql.SQLException;
 
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Retrait;
-import fr.eni.projetencheres.util.ConnexionProvider;
+import fr.eni.projetencheres.dal.DALException;
+import fr.eni.projetencheres.dal.dao.RetraitDAO;
 
-public class RetraitDaoImpl implements RetraitDAO {
+public class RetraitDAOJdbcImpl implements RetraitDAO {
 
     private final static String INSERT_RETRAIT = "INSERT INTO RETRAITS (no_article, rue, code_posta, ville) VALUES (?, ?, ?, ?);";
     private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM RETRAITS WHERE no_article=?;";

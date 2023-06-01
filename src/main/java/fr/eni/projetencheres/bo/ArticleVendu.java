@@ -163,4 +163,18 @@ public class ArticleVendu {
         this.prixVente = prixVente;
     }
 
+//    Getter et Setter noUtilisateur
+    public int getNoUtilisateur() {
+        return noUtilisateur;
+    }
+    public void setNoUtilisateur(int noUtilisateur) {
+        this.noUtilisateur = noUtilisateur;
+    }
+    //    Getter et Setter noCategorie
+    public int getNoCategorie() {
+        return noCategorie;
+    }
+    public void setNoCategorie(int noCategorie) {
+        this.noCategorie = noCategorie;
+    }
 }

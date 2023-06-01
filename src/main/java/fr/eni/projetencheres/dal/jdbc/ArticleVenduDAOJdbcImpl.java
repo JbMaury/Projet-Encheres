@@ -1,4 +1,4 @@
-package fr.eni.projetencheres.dal;
+package fr.eni.projetencheres.dal.jdbc;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,9 +13,12 @@ import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Categorie;
 import fr.eni.projetencheres.bo.Enchere;
 import fr.eni.projetencheres.bo.Utilisateur;
-import fr.eni.projetencheres.util.ConnexionProvider;
+import fr.eni.projetencheres.dal.ConnexionProvider;
+import fr.eni.projetencheres.dal.DALException;
+import fr.eni.projetencheres.dal.DAOFactory;
+import fr.eni.projetencheres.dal.dao.*;
 
-public class ArticleVenduDaoImpl implements ArticleVenduDAO {
+public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
     // insertion des requettes SQL
     private static final String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -46,8 +49,8 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
             stmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
             stmt.setDate(4, Date.valueOf(article.getDateFinEncheres()));
             stmt.setInt(5, article.getMiseAPrix());
-            stmt.setInt(6, article.getVendeur().getNoUtilisateur());
-            stmt.setInt(7, article.getCategorie().getNoCategorie());
+            stmt.setInt(6, article.getNoUtilisateur());
+            stmt.setInt(7, article.getNoCategorie());
             stmt.executeQuery();
             ResultSet rs = stmt.getGeneratedKeys();
             article.setNoArticle(rs.getInt(1));
@@ -74,7 +77,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         List<Enchere> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EncheresDAO edao = DAOFactory.getEnchereDAO();
+        EnchereDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -103,6 +106,11 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
             throw new DALException("probleme avec la methode selectById d'article", e);
         }
         return article;
+    }
+
+    @Override
+    public List<ArticleVendu> selectAll() throws DALException {
+        return null;
     }
 
     @Override
@@ -307,6 +315,11 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         }
 
         return selection;
+    }
+
+    @Override
+    public void update(int id) throws DALException {
+
     }
 
     @Override

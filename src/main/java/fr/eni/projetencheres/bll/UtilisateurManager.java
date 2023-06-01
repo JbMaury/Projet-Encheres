@@ -3,6 +3,8 @@ package fr.eni.projetencheres.bll;
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.dal.*;
+import fr.eni.projetencheres.dal.dao.ArticleVenduDAO;
+import fr.eni.projetencheres.dal.dao.UtilisateurDAO;
 
 import java.util.List;
 

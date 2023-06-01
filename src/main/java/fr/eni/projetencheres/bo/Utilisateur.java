@@ -58,7 +58,7 @@ public class Utilisateur {
         this.administrateur = administrateur;
     }
     /*
-     *   CONSTRUCTEUR WITHOUT noUtilisateur (Before DB insert)
+     *   CONSTRUCTEUR WITH noUtilisateur (From DB : Utilisateur Primary Key)
      * @param pseudo String
      * @param nom String
      * @param prenom String

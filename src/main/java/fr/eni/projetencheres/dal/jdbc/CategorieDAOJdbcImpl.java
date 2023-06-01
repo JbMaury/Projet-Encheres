@@ -1,4 +1,4 @@
-package fr.eni.projetencheres.dal;
+package fr.eni.projetencheres.dal.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,10 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import fr.eni.projetencheres.bo.Categorie;
-import fr.eni.projetencheres.bo.Utilisateur;
-import fr.eni.projetencheres.util.ConnexionProvider;
+import fr.eni.projetencheres.dal.DALException;
+import fr.eni.projetencheres.dal.dao.CategorieDAO;
 
-public class CategorieDaoImpl implements CategorieDAO {
+public class CategorieDAOJdbcImpl implements CategorieDAO {
 
     // insertion methodes SQL
     private final static String SELECT_ALL = "SELECT * FROM CATEGORIES;";

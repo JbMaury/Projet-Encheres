@@ -1,5 +1,6 @@
 package fr.eni.projetencheres.ihm;
 
+import fr.eni.projetencheres.bll.EncheresManager;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
