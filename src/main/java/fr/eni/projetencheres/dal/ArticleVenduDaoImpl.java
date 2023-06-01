@@ -9,11 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projetencheres.bo.ArticleVendu;
-import fr.eni.projetencheres.bo.Categorie;
-import fr.eni.projetencheres.bo.Encheres;
-import fr.eni.projetencheres.bo.Utilisateur;
-import fr.eni.projetencheres.util.ConnectionProvider;
+import fr.eni.projetencheres.bo.*;
+import fr.eni.projetencheres.util.ConnexionProvider;
 
 public class ArticleVenduDaoImpl implements ArticleVenduDAO {
 
@@ -38,7 +35,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
     public void insertArticle(ArticleVendu article) throws DALException {
 
         try {
-            ConnectionProvider ConnexionProvider = null;
+            ConnexionProvider ConnexionProvider = null;
             Connection cnx = ConnexionProvider.getConnection();
             PreparedStatement stmt = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 
@@ -68,7 +65,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         Connection cnx;
         PreparedStatement stmt;
         ResultSet rs;
-        ArticleVendu article = null;
+        Article article = null;
         Categorie cat;
         Utilisateur user;
         Encheres meilleureOffre = null;
@@ -87,7 +84,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
             if (rs.next()) {
                 user = udao.selectById(rs.getInt("no_utilisateur"));
                 cat = cdao.selectById(rs.getInt("no_categorie"));
-                article = new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
+                article = new Article(rs.getString("nom_article"), rs.getString("description"),
                         rs.getDate("date_debut_encheres").toLocalDate(),
                         rs.getDate("date_fin_encheres").toLocalDate(),
                         rs.getInt("prix_initial"), user, cat);
@@ -130,14 +127,14 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<ArticleVendu> selection = new ArrayList<>();
-        ArticleVendu article = null;
+        Article article = null;
         Utilisateur user = null;
         Categorie cat = null;
         Encheres meilleureOffre = null;
         List<Encheres> encheres;
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -150,7 +147,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 user = udao.selectById(rs.getInt("no_utilisateur"));
                 cat = cdao.selectById(rs.getInt("no_categorie"));
 
-                article = new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
+                article = (Article) new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
                         rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(),
                         rs.getInt("prix_initial"), user, cat);
 
@@ -201,7 +198,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -215,14 +212,14 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 user = udao.selectById(rs.getInt("no_utilisateur"));
                 cat = cdao.selectById(rs.getInt("no_categorie"));
 
-                article = new Article(rs.getString("nom_article"), rs.getString("description"),
+                article = new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
                         rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(),
                         rs.getInt("prix_initial"), user, cat);
 
                 article.setNoArticle(rs.getInt("no_article"));
                 article.setRetrait(rdao.selectByNoArticle(article));
 
-                encheres = edao.selectByNoArticle(article);
+                encheres = edao.selectByNoArticle((Article) article);
                 article.setEncheres(encheres);
                 if (encheres != null) {
                     for (Encheres enchere : encheres) {
@@ -279,7 +276,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -300,7 +297,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 art.setNoArticle(rs.getInt("no_article"));
                 art.setRetrait(rdao.selectByNoArticle(art));
 
-                encheres = edao.selectByNoArticle(art);
+                encheres = edao.selectByNoArticle((Article) art);
                 art.setEncheres(encheres);
                 if (encheres != null) {
                     for (Encheres enchere : encheres) {
@@ -340,7 +337,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -361,7 +358,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 art.setNoArticle(rs.getInt("no_article"));
                 art.setRetrait(rdao.selectByNoArticle(art));
 
-                encheres = edao.selectByNoArticle(art);
+                encheres = edao.selectByNoArticle((Article) art);
                 art.setEncheres(encheres);
                 if (encheres != null) {
                     for (Encheres enchere : encheres) {
@@ -388,20 +385,20 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
     }
 
     @Override
-    public List<Article> selectMesEncheresEnCours(Utilisateur user1) throws DALException {
+    public List<ArticleVendu> selectMesEncheresEnCours(Utilisateur user1) throws DALException {
 
         Connection cnx;
         PreparedStatement stmt;
         ResultSet rs;
-        List<Article> selection = new ArrayList<Article>();
-        Article art = null;
+        List<ArticleVendu> selection = new ArrayList<ArticleVendu>();
+        ArticleVendu art = null;
         Categorie cat;
         Utilisateur user;
-        Enchere meilleureOffre = null;
-        List<Enchere> encheres;
+        Encheres meilleureOffre = null;
+        List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -422,11 +419,11 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 art.setNoArticle(rs.getInt("no_article"));
                 art.setRetrait(rdao.selectByNoArticle(art));
 
-                encheres = edao.selectByNoArticle(art);
+                encheres = edao.selectByNoArticle((Article) art);
                 art.setEncheres(encheres);
 
                 if (encheres != null) {
-                    for (Enchere enchere : encheres) {
+                    for (Encheres enchere : encheres) {
                         if (meilleureOffre == null) {
                             meilleureOffre = enchere;
                         } else if (enchere.getMontantEnchere() > meilleureOffre.getMontantEnchere()) {
@@ -459,11 +456,11 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         Article art = null;
         Categorie cat;
         Utilisateur user;
-        Enchere meilleureOffre = null;
-        List<Enchere> encheres;
+        Encheres meilleureOffre = null;
+        List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -487,7 +484,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 art.setEncheres(encheres);
 
                 if (encheres != null) {
-                    for (Enchere enchere : encheres) {
+                    for (Encheres enchere : encheres) {
                         if (meilleureOffre == null) {
                             meilleureOffre = enchere;
                         } else if (enchere.getMontantEnchere() > meilleureOffre.getMontantEnchere()) {
@@ -520,11 +517,11 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         Article art = null;
         Categorie cat;
         Utilisateur user;
-        Enchere meilleureOffre = null;
-        List<Enchere> encheres;
+        Encheres meilleureOffre = null;
+        List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -548,7 +545,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 art.setEncheres(encheres);
 
                 if (encheres != null) {
-                    for (Enchere enchere : encheres) {
+                    for (Encheres enchere : encheres) {
                         if (meilleureOffre == null) {
                             meilleureOffre = enchere;
                         } else if (enchere.getMontantEnchere() > meilleureOffre.getMontantEnchere()) {
@@ -572,20 +569,20 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
     }
 
     @Override
-    public List<Article> selectVentesTerminees(Utilisateur user1) throws DALException {
+    public List<ArticleVendu> selectVentesTerminees(Utilisateur user1) throws DALException {
 
         Connection cnx;
         PreparedStatement stmt;
         ResultSet rs;
-        List<Article> selection = new ArrayList<Article>();
-        Article art = null;
+        List<ArticleVendu> selection = new ArrayList<ArticleVendu>();
+        ArticleVendu art = null;
         Categorie cat;
         Utilisateur user;
-        Enchere meilleureOffre = null;
-        List<Enchere> encheres;
+        Encheres meilleureOffre = null;
+        List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -599,17 +596,17 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 user = udao.selectById(rs.getInt("no_utilisateur"));
                 cat = cdao.selectById(rs.getInt("no_categorie"));
 
-                art = new Article(rs.getString("nom_article"), rs.getString("description"),
+                art = new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
                         rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(),
                         rs.getInt("prix_initial"), user, cat);
                 art.setNoArticle(rs.getInt("no_article"));
                 art.setRetrait(rdao.selectByNoArticle(art));
 
-                encheres = edao.selectByNoArticle(art);
+                encheres = edao.selectByNoArticle((Article) art);
                 art.setEncheres(encheres);
 
                 if (encheres != null) {
-                    for (Enchere enchere : encheres) {
+                    for (Encheres enchere : encheres) {
                         if (meilleureOffre == null) {
                             meilleureOffre = enchere;
                         } else if (enchere.getMontantEnchere() > meilleureOffre.getMontantEnchere()) {
@@ -642,11 +639,11 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
         Article art = null;
         Categorie cat;
         Utilisateur user;
-        Enchere meilleureOffre = null;
-        List<Enchere> encheres;
+        Encheres meilleureOffre = null;
+        List<Encheres> encheres;
         CategorieDAO cdao = DAOFactory.getCategorieDAO();
         UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
-        EnchereDAO edao = DAOFactory.getEnchereDAO();
+        EncheresDAO edao = DAOFactory.getEnchereDAO();
         RetraitDAO rdao = DAOFactory.getRetraitDAO();
 
         try {
@@ -669,7 +666,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
                 art.setEncheres(encheres);
 
                 if (encheres != null) {
-                    for (Enchere enchere : encheres) {
+                    for (Encheres enchere : encheres) {
                         if (meilleureOffre == null) {
                             meilleureOffre = enchere;
                         } else if (enchere.getMontantEnchere() > meilleureOffre.getMontantEnchere()) {

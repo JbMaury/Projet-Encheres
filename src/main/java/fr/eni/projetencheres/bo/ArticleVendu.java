@@ -55,7 +55,7 @@ public class ArticleVendu extends GregorianCalendar{
         description = description;
     }
 
-    public Date getDateDebutEncheres() {
+    public String getDateDebutEncheres() {
         return dateDebutEncheres;
     }
 
@@ -63,7 +63,7 @@ public class ArticleVendu extends GregorianCalendar{
         this.dateDebutEncheres = dateDebutEncheres;
     }
 
-    public Date getDateFinEncheres() {
+    public String getDateFinEncheres() {
         return dateFinEncheres;
     }
 
@@ -102,14 +102,25 @@ public class ArticleVendu extends GregorianCalendar{
     }
 
     public int getPrixInitial() {
+        return 0;
     }
 
     public void ajouterEncheres(Utilisateur user, Encheres enchere) {
     }
 
     public int getPrixVentes() {
+        return 0;
     }
 
     public void setRetrait(Retrait retrait) {
+    }
+
+    public void setAcheteur(List<Encheres> utilisateur) {
+    }
+
+    public Utilisateur getVendeur() {
+    }
+
+    public Categorie getCategorie() {
     }
 }

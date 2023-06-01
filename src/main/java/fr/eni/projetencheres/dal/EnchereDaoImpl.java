@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projetencheres.bo.ArticleVendu;
+import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.util.ConnexionProvider;
@@ -80,7 +80,7 @@ public class EncheresDaoImpl implements EncheresDAO {
     }
 
     @Override
-    public List<Encheres> selectByNoArticle(ArticleVendu art) throws DALException {
+    public List<Encheres> selectByNoArticle(Article art) throws DALException {
 
         Encheres enchere;
         List<Encheres> encheres = new ArrayList<Encheres>();

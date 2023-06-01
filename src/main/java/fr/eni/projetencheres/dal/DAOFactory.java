@@ -1,5 +1,6 @@
 package fr.eni.projetencheres.dal;
 
+import fr.eni.projetencheres.bo.Article;
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Utilisateur;
 
@@ -73,12 +74,12 @@ public class DAOFactory {
             }
 
             @Override
-            public List<ArticleVendu> selectMesEncheresremportees(Utilisateur user1) throws DALException {
+            public List<Article> selectMesEncheresremportees(Utilisateur user1) throws DALException {
                 return null;
             }
 
             @Override
-            public List<ArticleVendu> selectVentesNonDebutees(Utilisateur user1) throws DALException {
+            public List<Article> selectVentesNonDebutees(Utilisateur user1) throws DALException {
                 return null;
             }
 
@@ -88,11 +89,14 @@ public class DAOFactory {
             }
 
             @Override
-            public List<ArticleVendu> selectDebutToday() throws DALException {
+            public List<Article> selectDebutToday() throws DALException {
                 return null;
             }
         }DaoImpl();
         return art;
+    }
+
+    private static void DaoImpl() {
     }
 
     public static RetraitDAO getRetraitDAO() {
