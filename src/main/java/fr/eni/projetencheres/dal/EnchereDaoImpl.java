@@ -61,15 +61,14 @@ public class EncheresDaoImpl implements EncheresDAO {
                 pstmt.setDate(2, Date.valueOf(enchere.getDateEnchere()));
                 pstmt.setInt(3, enchere.getArticle().getNoArticle());
                 pstmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
-                pstmt.executeUpdate();
             } else {
                 pstmt = cnx.prepareStatement(INSERT_ENCHERE);
                 pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
                 pstmt.setInt(2, enchere.getArticle().getNoArticle());
                 pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
                 pstmt.setInt(4, enchere.getMontantEnchere());
-                pstmt.executeUpdate();
             }
+            pstmt.executeUpdate();
             rs.close();
             pstmt.close();
             cnx.close();
@@ -77,6 +76,16 @@ public class EncheresDaoImpl implements EncheresDAO {
         } catch (SQLException e) {
             throw new DALException("problème avec la méthode insertEnchere", e);
         }
+    }
+
+    @Override
+    public void deleteEncheres(int numUtil) throws DALException {
+
+    }
+
+    @Override
+    public void insertEncheres(Encheres enchere) throws DALException {
+
     }
 
     @Override

@@ -4,11 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-import fr.eni.projetencheres.bo.ArticleVendu;
-import fr.eni.projetencheres.bo.Categorie;
-import fr.eni.projetencheres.bo.Encheres;
-import fr.eni.projetencheres.bo.Retrait;
-import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.bo.*;
 import fr.eni.projetencheres.dal.ArticleVenduDAO;
 import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
@@ -30,11 +26,11 @@ public class EncheresManager {
         return instance;
     }
 
-    public List<ArticleVendu> listerArticles() throws DALException {
+    public List<Article> listerArticles() throws DALException {
 
         ArticleVenduDAO adao = DAOFactory.getArticleDAO();
         // insertion d'une liste d'article
-        List<ArticleVendu> liste = adao.selectDebutToday();
+        List<Article> liste = adao.selectDebutToday();
 
         return liste;
     }
@@ -67,10 +63,10 @@ public class EncheresManager {
         return selection;
     }
 
-    public List<ArticleVendu> triByEncheresRemportees(Utilisateur user) throws DALException {
+    public List<Article> triByEncheresRemportees(Utilisateur user) throws DALException {
 
         ArticleVenduDAO adao = DAOFactory.getArticleDAO();
-        List<ArticleVendu> selection = adao.selectMesEncheresremportees(user);
+        List<Article> selection = adao.selectMesEncheresremportees(user);
 
         return selection;
     }
@@ -136,7 +132,7 @@ public class EncheresManager {
 
         // recuperation des encheres sur cet article en BDD
         edao = DAOFactory.getEnchereDAO();
-        encheres = edao.selectByNoArticle(article);
+        encheres = edao.selectByNoArticle((Article) article);
 
         // ajout de la liste d'encheres � l'instance d'article
         article.setEncheres(encheres);

@@ -10,7 +10,9 @@ public interface RetraitDAO {
         insertRetrait(null);
     }
 
-    void insertRetrait(Retrait retrait) throws DALException;
+    default void insertRetrait(Retrait retrait) throws DALException {
+
+    }
 
     Retrait selectByNoArticle(Article art) throws DALException;
 

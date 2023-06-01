@@ -26,6 +26,7 @@ public class DAOFactory {
     public static EncheresDAO getEnchereDAO() {
 
         EncheresDAO enchereDAO = new EncheresDaoImpl();
+        EncheresDAO EncheresDAO = null;
         return EncheresDAO;
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Article extends ArticleVendu {
     public Article(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int prixInitial, Utilisateur user, Categorie cat) {
+        super();
     }
 
     public void setNoArticle(int noArticle) {
@@ -23,5 +24,6 @@ public class Article extends ArticleVendu {
     }
 
     public int getPrixInitial() {
+        return 0;
     }
 }
