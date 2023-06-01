@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Retrait;
 import fr.eni.projetencheres.util.ConnexionProvider;
 
@@ -34,7 +35,7 @@ public class RetraitDaoImpl implements RetraitDAO {
     }
 
     @Override
-    public Retrait selectByNoArticle(Article art) throws DALException {
+    public Retrait selectByNoArticle(ArticleVendu art) throws DALException {
 
         Connection cnx;
         PreparedStatement stmt;

@@ -24,11 +24,11 @@ public interface ArticleVenduDAO {
 
     public List<ArticleVendu> selectMesEncheresEnCours(Utilisateur user1) throws DALException;
 
-    public List<Article> selectMesEncheresremportees(Utilisateur user1) throws DALException;
+    public List<ArticleVendu> selectMesEncheresremportees(Utilisateur user1) throws DALException;
 
-    public List<Article> selectVentesNonDebutees(Utilisateur user1) throws DALException;
+    public List<ArticleVendu> selectVentesNonDebutees(Utilisateur user1) throws DALException;
 
     public List<ArticleVendu> selectVentesTerminees(Utilisateur user1) throws DALException;
 
-    public List<Article> selectDebutToday() throws DALException;
+    public List<ArticleVendu> selectDebutToday() throws DALException;
 }

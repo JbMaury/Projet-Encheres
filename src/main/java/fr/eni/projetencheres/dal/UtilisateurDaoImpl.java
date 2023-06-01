@@ -34,7 +34,7 @@ public class UtilisateurDaoImpl implements UtilisateurDAO {
             pstmt.setString(2, utilisateur.getNom());
             pstmt.setString(3, utilisateur.getPrenom());
             pstmt.setString(4, utilisateur.getEmail());
-            pstmt.setString(5, utilisateur.getTelephone());
+            pstmt.setInt(5, utilisateur.getNumTel());
             pstmt.setString(6, utilisateur.getRue());
             pstmt.setString(7, String.valueOf(utilisateur.getCodePostal()));
             pstmt.setString(8, utilisateur.getVille());
@@ -132,7 +132,7 @@ public class UtilisateurDaoImpl implements UtilisateurDAO {
             pstmt.setString(2, utilisateur.getNom());
             pstmt.setString(3, utilisateur.getPrenom());
             pstmt.setString(4, utilisateur.getEmail());
-            pstmt.setString(5, utilisateur.getTelephone());
+            pstmt.setInt(5, utilisateur.getNumTel());
             pstmt.setString(6, utilisateur.getRue());
             pstmt.setString(7, String.valueOf(utilisateur.getCodePostal()));
             pstmt.setString(8, utilisateur.getVille());

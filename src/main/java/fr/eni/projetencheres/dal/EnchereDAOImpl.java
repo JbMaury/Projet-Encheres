@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Encheres;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.util.ConnexionProvider;
@@ -40,7 +41,7 @@ public class EncheresDaoImpl implements EncheresDAO {
 
     @Override
     // creer une enchere
-    public void insertEnchere(Encheres enchere) throws DALException {
+    public void insertEncheres(Encheres enchere) throws DALException {
 
         Connection cnx;
         PreparedStatement pstmt;
@@ -50,7 +51,7 @@ public class EncheresDaoImpl implements EncheresDAO {
             // preparer les parametres
             cnx = ConnexionProvider.getConnection();
             pstmt = cnx.prepareStatement(SELECT_BY_ARTICLE_USER);
-            pstmt.setInt(1, enchere.getArticle().getNoArticle());
+            pstmt.setInt(1, enchere.getArt().getNoArticle());
             pstmt.setInt(2, enchere.getUtilisateur().getNoUtilisateur());
             rs = pstmt.executeQuery();
 
@@ -58,12 +59,12 @@ public class EncheresDaoImpl implements EncheresDAO {
                 pstmt = cnx.prepareStatement(UPDATE_ENCHERE);
                 pstmt.setInt(1, enchere.getMontantEnchere());
                 pstmt.setDate(2, Date.valueOf(enchere.getDateEnchere()));
-                pstmt.setInt(3, enchere.getArticle().getNoArticle());
+                pstmt.setInt(3, enchere.getArt().getNoArticle());
                 pstmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
             } else {
                 pstmt = cnx.prepareStatement(INSERT_ENCHERE);
                 pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
-                pstmt.setInt(2, enchere.getArticle().getNoArticle());
+                pstmt.setInt(2, enchere.getArt().getNoArticle());
                 pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
                 pstmt.setInt(4, enchere.getMontantEnchere());
             }
@@ -82,13 +83,9 @@ public class EncheresDaoImpl implements EncheresDAO {
 
     }
 
-    @Override
-    public void insertEncheres(Encheres enchere) throws DALException {
-
-    }
 
     @Override
-    public List<Encheres> selectByNoArticle(Article art) throws DALException {
+    public List<Encheres> selectByNoArticle(ArticleVendu art) throws DALException {
 
         Encheres enchere;
         List<Encheres> encheres = new ArrayList<Encheres>();
@@ -122,11 +119,6 @@ public class EncheresDaoImpl implements EncheresDAO {
         }
 
         return encheres;
-    }
-
-    @Override
-    public void insertEnchere(Encheres enchere) {
-
     }
 
 }

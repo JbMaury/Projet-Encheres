@@ -35,8 +35,15 @@ public class Encheres extends GregorianCalendar {
         this.montantEnchere = montantEnchere;
     }
 
-    public List<Utilisateur> getUtilisateur() {
-        List<Utilisateur> listeUtilisateur = new ArrayList<>();
-        return listeUtilisateur;
+    public Utilisateur getUtilisateur() {
+        return this.user;
+    }
+
+    public ArticleVendu getArt() {
+        return art;
+    }
+
+    public void setArt(ArticleVendu art) {
+        this.art = art;
     }
 }

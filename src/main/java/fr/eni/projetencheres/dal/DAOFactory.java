@@ -31,7 +31,7 @@ public class DAOFactory {
     // méthode de création d'un articleDAO
     public static ArticleVenduDAO getArticleDAO() {
 
-        ArticleVenduDAO art = new ArticleVenduDAOImpl();
+        ArticleVenduDAO art = new ArticleVenduDaoImpl();
         return art;
     }
 

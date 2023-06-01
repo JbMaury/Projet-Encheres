@@ -38,7 +38,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
     public void insertArticle(ArticleVendu article) throws DALException {
 
         try {
-            ConnectionProvider ConnexionProvider = null;
+            ConnexionProvider ConnexionProvider = null;
             Connection cnx = ConnexionProvider.getConnection();
             PreparedStatement stmt = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 
@@ -46,7 +46,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
             stmt.setString(2, article.getDescription());
             stmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
             stmt.setDate(4, Date.valueOf(article.getDateFinEncheres()));
-            stmt.setInt(5, article.getPrixInitial());
+            stmt.setInt(5, article.getMiseAPrix());
             stmt.setInt(6, article.getVendeur().getNoUtilisateur());
             stmt.setInt(7, article.getCategorie().getNoCategorie());
             stmt.executeQuery();
@@ -85,12 +85,15 @@ public class ArticleVenduDaoImpl implements ArticleVenduDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                user = udao.selectById(rs.getInt("no_utilisateur"));
-                cat = cdao.selectById(rs.getInt("no_categorie"));
-                article = new ArticleVendu(rs.getString("nom_article"), rs.getString("description"),
+                article = new ArticleVendu(rs.getInt("noArticle"),
+                        rs.getString("nom_article"),
+                        rs.getString("description"),
                         rs.getDate("date_debut_encheres").toLocalDate(),
                         rs.getDate("date_fin_encheres").toLocalDate(),
-                        rs.getInt("prix_initial"), user, cat);
+                        rs.getInt("miseAPrix"),
+                        rs.getString("etat_vente"),
+                        rs.getInt("prix_vente"),
+                        rs.getObject("categorie"));
                 article.setNoArticle(id);
                 article.setRetrait(rdao.selectByNoArticle(article));
                 encheres = edao.selectByNoArticle(article);
