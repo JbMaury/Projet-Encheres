@@ -6,12 +6,12 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet("/Home")
+@WebServlet("/")
 public class ServletAccueil extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("do get ServletAccueil");
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.html");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
         rd.forward(request,response);
     }
 
