@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +17,7 @@
 <section class="container">
   <h1 class="mt-5 text-center">Mon profil</h1>
 
-  <form action="<%=request.getContextPath()%>/signup"
+  <form action="<%=request.getContextPath()%>/Inscription"
         method="post" class="mt-5">
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="pseudo" class="col-4 col-md-3 col-lg-2 col-form-label ">Pseudo :</label>
@@ -70,7 +72,7 @@
     </div>
     <div class="row justify-content-center mt-5">
       <button type="submit" class="btn btn-outline-success col-4 col-md-2 p-3">Créer</button>
-      <a href="<%=request.getContextPath()%>/accueil" class="col-4 col-md-2 offset-1 btn btn-outline-danger p-3" role="button">Annuler</a>
+      <a href="<%=request.getContextPath()%>/" class="col-4 col-md-2 offset-1 btn btn-outline-danger p-3" role="button">Annuler</a>
     </div>
   </form>
 </section>

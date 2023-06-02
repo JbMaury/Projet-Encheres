@@ -12,7 +12,7 @@
 <header>
     <h1>ENI - Enchères</h1>
     <div>
-        <a href="<%=request.getContextPath()%>/pages/CreationCompte.html">S'inscrire</a>
+        <a href="<%=request.getContextPath()%>/Inscription">S'inscrire</a>
         <a href="<%=request.getContextPath()%>/Connexion">Se connecter</a>
     </div>
 </header>

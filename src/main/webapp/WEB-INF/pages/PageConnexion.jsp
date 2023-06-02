@@ -27,7 +27,7 @@
 </form>
 
 
-<a href="CreationCompte.html">Créer un compte</a>
+<a href="<%=request.getContextPath()%>/Inscription">Créer un compte</a>
 
 <footer>
     Il y a rien encore ici
