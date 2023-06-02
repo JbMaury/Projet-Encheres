@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +15,7 @@
 <h1>ENI - Enchères</h1>
 
 </header>
-<form action="/Connexion" method="POST">
+<form action="<%request.getContextPath();%>/Connexion" method="POST">
 
 
 <label>Identifiant</label>
