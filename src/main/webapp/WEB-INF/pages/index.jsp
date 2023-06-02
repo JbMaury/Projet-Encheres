@@ -15,6 +15,8 @@
         <a href="<%=request.getContextPath()%>/Inscription">S'inscrire</a>
         <a href="<%=request.getContextPath()%>/Connexion">Se connecter</a>
     </div>
+
+
 </header>
 <main>
     <h2>Liste des enchères</h2>
