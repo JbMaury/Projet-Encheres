@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Indentification</title>
-    <link rel="stylesheet" href="../css/StylePageConnexion.css">
+    <link rel="stylesheet" href="<%request.getContextPath();%>/css/StylePageConnexion.css">
 
 </head>
 

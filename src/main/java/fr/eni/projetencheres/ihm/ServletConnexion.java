@@ -10,7 +10,10 @@ import java.io.IOException;
 public class ServletConnexion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/PageConnexion.html");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        System.out.println("doGet Connexion");
+    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/PageConnexion.jsp");
     rd.forward(request,response);
     }
 
