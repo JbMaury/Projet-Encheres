@@ -71,29 +71,37 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             cnx = ConnexionProvider.getConnection();
             PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
             pstmt.setString(1, pseudo);
-
             // recupere les valeurs de bdd
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 // creation d'un nouvel utilisateur
-                utilisateur = new Utilisateur(pseudo, rs.getString("nom"), rs.getString("prenom"),
-                        rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-                        rs.getString("code_postal"), rs.getString("ville"));
+                utilisateur = new Utilisateur(
+                        rs.getInt("no_utilisateur"),
+                        rs.getString("pseudo"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("telephone"),
+                        rs.getString("rue"),
+                        rs.getString("code_postal"),
+                        rs.getString("ville"),
+                        rs.getString("mot_de_passe"),
+                        rs.getInt("credit"),
+                        rs.getBoolean("administrateur")
+                );
             }
-
             rs.close();
             pstmt.close();
 
         } catch (SQLException e) {
             throw new DALException("probleme de methode selectByPseudo()", e);
         }
-
         return utilisateur;
     }
 
     @Override
-    public Utilisateur selectById(int id) throws DALException {
+    public Utilisateur selectById(int idUtilisateur) throws DALException {
         // creation de mes varibales
         Utilisateur utilisateur = null;
         Connection cnx;
@@ -103,14 +111,24 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             // recuperation de la connexion
             cnx = ConnexionProvider.getConnection();
             PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, idUtilisateur);
             rs = pstmt.executeQuery();
             // creation du nouveau utilisateur
             if (rs.next()) {
-                utilisateur = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
-                        rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-                        rs.getString("code_postal"), rs.getString("ville"));
-                utilisateur.setNoUtilisateur(id);
+                utilisateur = new Utilisateur(
+                        idUtilisateur,
+                        rs.getString("pseudo"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("telephone"),
+                        rs.getString("rue"),
+                        rs.getString("code_postal"),
+                        rs.getString("ville"),
+                        rs.getString("mot_de_passe"),
+                        rs.getInt("credit"),
+                        rs.getBoolean("administrateur")
+                );
             }
 
             rs.close();
@@ -133,9 +151,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             pstmt.setString(2, utilisateur.getNom());
             pstmt.setString(3, utilisateur.getPrenom());
             pstmt.setString(4, utilisateur.getEmail());
-            pstmt.setInt(5, utilisateur.getNumTel());
+            pstmt.setString(5, utilisateur.getNumTel());
             pstmt.setString(6, utilisateur.getRue());
-            pstmt.setString(7, String.valueOf(utilisateur.getCodePostal()));
+            pstmt.setString(7, utilisateur.getCodePostal());
             pstmt.setString(8, utilisateur.getVille());
             pstmt.setInt(9, utilisateur.getNoUtilisateur());
             pstmt.executeUpdate();
@@ -247,7 +265,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
         return ok;
     }
 
-    public void deleteUtilisateur(Utilisateur utilisateur) throws DALException {
+    public void deleteUtilisateur(int idUtilisateur) throws DALException {
         Connection cnx = null;
         PreparedStatement pstmt = null;
         String anonyme = "anonyme";
@@ -263,7 +281,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             pstmt.setString(7, anonyme);
             pstmt.setString(8, anonyme);
             pstmt.setInt(9, 0);
-            pstmt.setInt(10, utilisateur.getNoUtilisateur());
+            pstmt.setInt(10, idUtilisateur);
             pstmt.executeUpdate();
             pstmt.close();
             cnx.close();

@@ -2,6 +2,7 @@ package fr.eni.projetencheres.bll;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 import fr.eni.projetencheres.bo.Categorie;
@@ -10,38 +11,24 @@ import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
 
 public class CategorieManager {
+    private static CategorieDAO categorieDAO;
 
-    private static CategorieManager instance;
-    private static ArrayList<Categorie> categories = new ArrayList<>();
-    private static CategorieDAO cDAO;
+   static {
+       categorieDAO = DAOFactory.getCategorieDAO();
+   }
 
-    private CategorieManager() {
-
+    // C reate
+    public void createCategorie(Categorie categorie) throws DALException, BLLException {
+       // A faire : Check de la taille du nouveau libelle
+       // A faire : Check de l'unicité dans la DB
+       categorieDAO.insert(categorie);
     }
-
-    public static CategorieManager getInstance() throws DALException {
-        cDAO = DAOFactory.getCategorieDAO();
-        categories = cDAO.selectAll();
-        // parametrage de l'instance
-        if (instance == null) {
-            instance = new CategorieManager();
-        }
-        // renvoie de l'instance
-        return instance;
+    // R ead
+    public Categorie getCategorieById(int idCategorie) throws DALException {
+       return categorieDAO.selectById(idCategorie);
     }
-
-    // methode pour choisir une categorie
-    public Categorie chercherCategorie(String libelle) {
-        // initialisattion de categorie a null
-        Categorie categorie = null;
-
-        for (Categorie cat : categories) {
-            if (cat.getLibelle().equals(libelle)) {
-                categorie = cat;
-                break;
-            }
-        }
-        return categorie;
+    public List<Categorie> getAllCategories() throws DALException {
+       return categorieDAO.selectAll();
     }
 
 }

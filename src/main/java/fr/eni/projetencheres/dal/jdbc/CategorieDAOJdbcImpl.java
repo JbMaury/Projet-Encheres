@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.projetencheres.bo.Categorie;
+import fr.eni.projetencheres.dal.ConnexionProvider;
 import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.dao.CategorieDAO;
 
@@ -18,10 +20,10 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
     private final static String SELECT_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = ?;";
 
     @Override
-    public ArrayList<Categorie> selectAll() throws DALException {
+    public List<Categorie> selectAll() throws DALException {
 
         Categorie categorie;
-        ArrayList<Categorie> categories = new ArrayList<>();
+        List<Categorie> categories = new ArrayList<>();
 
         try {
             Connection cnx = ConnexionProvider.getConnection();
@@ -29,7 +31,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
             ResultSet rs = stmt.executeQuery(SELECT_ALL);
             while (rs.next()) {
                 // creation du numero de categorie et du libelle
-                categorie = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+                categorie = new Categorie(
+                        rs.getInt("no_categorie"),
+                        rs.getString("libelle"));
                 // ajout de la categorie
                 categories.add(categorie);
             }
@@ -45,7 +49,17 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
     }
 
     @Override
-    public Categorie selectById(int id) throws DALException {
+    public void delete(int idCategorie) throws DALException {
+
+    }
+
+    @Override
+    public void insert(Categorie categorie) throws DALException {
+
+    }
+
+    @Override
+    public Categorie selectById(int idCategorie) throws DALException {
         //declaration de mes variables
         Categorie categorie = null;
         Connection cnx;
@@ -57,10 +71,13 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
             //hydratation de mes variables
             cnx = ConnexionProvider.getConnection();
             pstmt = cnx.prepareStatement(SELECT_BY_ID);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, idCategorie);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                categorie = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+                categorie = new Categorie(
+                        rs.getInt("no_categorie"),
+                        rs.getString("libelle")
+                );
             }
             // fermeture de connection...
             rs.close();
@@ -68,7 +85,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
             cnx.close();
 
         } catch (SQLException e) {
-            throw new DALException("probl�me avec la m�thode selectById de cat�gorie", e);
+            throw new DALException("problème avec la méthode selectById de catégorie", e);
         }
 
         return categorie;

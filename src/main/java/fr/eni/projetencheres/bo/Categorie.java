@@ -12,6 +12,12 @@ public class Categorie {
     }
 
     /*
+    * CONSTRUCTOR WITHOUT noCategorie
+    */
+    public Categorie(String libelle){
+
+    }
+    /*
      * FULL CONSTRUCTOR
      * @param noCategorie int
      * @param libelle

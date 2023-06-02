@@ -3,6 +3,7 @@ package fr.eni.projetencheres.dal.jdbc;
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Enchere;
 import fr.eni.projetencheres.bo.Utilisateur;
+import fr.eni.projetencheres.dal.ConnexionProvider;
 import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
 import fr.eni.projetencheres.dal.dao.EnchereDAO;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EncheresDAOJdbcImpl implements EnchereDAO {
-    private static final String DELETE_ENCHERE = "DELETE FROM ENCHERES where no_utilisateur = ?;";
+    private static final String DELETE_ENCHERE = "DELETE FROM ENCHERES where no_enchere = ?;";
     private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?);";
     private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article=?";
     private final static String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere=?, date_enchere=? WHERE no_article=? and no_utilisateur=?;";
@@ -21,13 +22,14 @@ public class EncheresDAOJdbcImpl implements EnchereDAO {
 
     @Override
     // supprimer une enchere
-    public void deleteEnchere(int numUtil) throws DALException {
+    public void deleteEnchere(int idEnchere) throws DALException {
         Connection cnx = null;
         PreparedStatement pstmt = null;
 
         try {
-            cnx = fr.eni.projetencheres.util.ConnexionProvider.getConnection();
-            pstmt.setInt(1, numUtil);
+            cnx = ConnexionProvider.getConnection();
+            pstmt = cnx.prepareStatement(DELETE_ENCHERE);
+            pstmt.setInt(1, idEnchere);
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -47,22 +49,22 @@ public class EncheresDAOJdbcImpl implements EnchereDAO {
 
         try {
             // preparer les parametres
-            cnx = fr.eni.projetencheres.util.ConnexionProvider.getConnection();
+            cnx = ConnexionProvider.getConnection();
             pstmt = cnx.prepareStatement(SELECT_BY_ARTICLE_USER);
-            pstmt.setInt(1, enchere.getArt().getNoArticle());
-            pstmt.setInt(2, enchere.getUtilisateur().getNoUtilisateur());
+            pstmt.setInt(1, enchere.getNoArticle());
+            pstmt.setInt(2, enchere.getNoUtilisateur());
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 pstmt = cnx.prepareStatement(UPDATE_ENCHERE);
                 pstmt.setInt(1, enchere.getMontantEnchere());
                 pstmt.setDate(2, Date.valueOf(enchere.getDateEnchere()));
-                pstmt.setInt(3, enchere.getArt().getNoArticle());
-                pstmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
+                pstmt.setInt(3, enchere.getNoArticle());
+                pstmt.setInt(4, enchere.getNoUtilisateur());
             } else {
                 pstmt = cnx.prepareStatement(INSERT_ENCHERE);
-                pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
-                pstmt.setInt(2, enchere.getArt().getNoArticle());
+                pstmt.setInt(1, enchere.getNoUtilisateur());
+                pstmt.setInt(2, enchere.getNoArticle());
                 pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
                 pstmt.setInt(4, enchere.getMontantEnchere());
             }
@@ -76,34 +78,31 @@ public class EncheresDAOJdbcImpl implements EnchereDAO {
         }
     }
 
-    @Override
-    public void deleteEncheres(int numUtil) throws DALException {
-
-    }
-
-
-    @Override
-    public List<Enchere> selectByNoArticle(ArticleVendu art) throws DALException {
+   @Override
+    public List<Enchere> selectByNoArticle(int idArticle) throws DALException {
 
         Enchere enchere;
         List<Enchere> encheres = new ArrayList<Enchere>();
         Connection cnx;
         PreparedStatement stmt;
         ResultSet rs;
-        UtilisateurDAO udao = DAOFactory.getUtilisateurDAO();
         Utilisateur user;
 
         try {
             cnx = ConnexionProvider.getConnection();
             stmt = cnx.prepareStatement(SELECT_BY_NO_ARTICLE);
-            stmt.setInt(1, art.getNoArticle());
+            stmt.setInt(1, idArticle);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 // recuperation des informations de l'utilisateur grace a son numero("no_utilisateur")
-                user = udao.selectById(rs.getInt("no_utilisateur"));
-                enchere = new Enchere(rs.getDate("date_enchere").toLocalDate(), rs.getInt("montant_enchere"), user,
-                        art);
+                enchere = new Enchere(
+                        rs.getInt("no_enchere"),
+                        rs.getInt("no_utilisateur"),
+                        rs.getInt("no_article"),
+                        rs.getDate("date_enchere").toLocalDate(),
+                        rs.getInt("montant_enchere")
+                );
                 // ajout de l'enchere
                 encheres.add(enchere);
             }

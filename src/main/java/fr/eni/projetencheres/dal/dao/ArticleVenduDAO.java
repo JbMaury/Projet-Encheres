@@ -30,7 +30,7 @@ public interface ArticleVenduDAO {
 
 
 
-    public List<ArticleVendu> selectEncheresOuvertes(int idUtilisateur) throws DALException;
+   /* public List<ArticleVendu> selectEncheresOuvertes(int idUtilisateur) throws DALException;
 
     public List<ArticleVendu> selectMesEncheresEnCours(int idUtilisateur) throws DALException;
 
@@ -40,5 +40,5 @@ public interface ArticleVenduDAO {
 
     public List<ArticleVendu> selectVentesTerminees(Utilisateur user1) throws DALException;
 
-    public List<ArticleVendu> selectDebutToday() throws DALException;
+    public List<ArticleVendu> selectDebutToday() throws DALException;*/
 }

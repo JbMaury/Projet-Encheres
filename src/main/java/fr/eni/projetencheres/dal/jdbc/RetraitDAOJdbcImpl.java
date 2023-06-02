@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import fr.eni.projetencheres.bo.ArticleVendu;
 import fr.eni.projetencheres.bo.Retrait;
+import fr.eni.projetencheres.dal.ConnexionProvider;
 import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.dao.RetraitDAO;
 
@@ -22,7 +23,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
         try {
             cnx = ConnexionProvider.getConnection();
             stmt = cnx.prepareStatement(INSERT_RETRAIT);
-            stmt.setInt(1, retrait.getArticle().getNoArticle());
+            stmt.setInt(1, retrait.getNoArticle());
             stmt.setString(2, retrait.getRue());
             stmt.setString(3, retrait.getCodePostal());
             stmt.setString(4, retrait.getVille());
@@ -36,7 +37,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
     }
 
     @Override
-    public Retrait selectByNoArticle(ArticleVendu art) throws DALException {
+    public Retrait selectByNoArticle(int idArticle) throws DALException {
 
         Connection cnx;
         PreparedStatement stmt;
@@ -46,11 +47,16 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
         try {
             cnx = ConnexionProvider.getConnection();
             stmt = cnx.prepareStatement(SELECT_BY_NO_ARTICLE);
-            stmt.setInt(1, art.getNoArticle());
+            stmt.setInt(1, idArticle);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                retrait = new Retrait(rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), art);
+                retrait = new Retrait(
+                        rs.getInt("no_article"),
+                        rs.getString("rue"),
+                        rs.getString("code_postal"),
+                        rs.getString("ville")
+                );
             }
             rs.close();
             stmt.close();

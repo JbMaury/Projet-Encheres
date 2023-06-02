@@ -3,6 +3,7 @@ package fr.eni.projetencheres.bo;
 import java.time.LocalDate;
 
 public class Enchere {
+    private int noEnchere;
     private LocalDate dateEnchere;
     private int montantEnchere;
     private int noUtilisateur;
@@ -17,6 +18,16 @@ public class Enchere {
     }
 
     /*
+     *   CONSTRUCTOR WITHOUT noEnchere
+     */
+
+    public Enchere(int noUtilisateur, int noArticle, LocalDate dateEnchere, int montantEnchere) {
+        this.noUtilisateur= noUtilisateur;
+        this.noArticle = noArticle;
+        this.dateEnchere = dateEnchere;
+        this.montantEnchere = montantEnchere;
+    }
+    /*
      *   FULL CONSTRUCTOR
      * @param noUtilisateur int (BO Association between Enchere -> Utilisateur // DB Foreign Key -> Utilisateur)
      * @param noArticle int (BO Association between Enchere -> ArticleVendu // DB Foreign Key -> ArticleVendu)
@@ -24,7 +35,8 @@ public class Enchere {
      * @param montantEnchere int
      */
 
-    public Enchere(int noUtilisateur, int noArticle, LocalDate dateEnchere, int montantEnchere) {
+    public Enchere(int noEnchere, int noUtilisateur, int noArticle, LocalDate dateEnchere, int montantEnchere) {
+        this.noEnchere = noEnchere;
         this.noUtilisateur= noUtilisateur;
         this.noArticle = noArticle;
         this.dateEnchere = dateEnchere;

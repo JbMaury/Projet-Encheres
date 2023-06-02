@@ -10,18 +10,11 @@ import java.util.List;
 
 public class UtilisateurManager {
 
-    private static UtilisateurManager instance;
+    private static UtilisateurDAO utilisateurDAO;
 
-    private UtilisateurManager() {
-
-    }
-
-    public static UtilisateurManager getInstance() {
-        if (instance == null) {
-            instance = new UtilisateurManager();
-        }
-        return instance;
-    }
+   static {
+       utilisateurDAO = DAOFactory.getUtilisateurDAO();
+   }
 
     // methode d'authentification par identifiant et mot de passe
     public Utilisateur authentification(String identifiant, String motDePasse) throws Exception {
@@ -65,7 +58,7 @@ public class UtilisateurManager {
         utilisateur.setNom(nom);
         utilisateur.setPrenom(prenom);
         utilisateur.setEmail(email);
-        utilisateur.setTelephone(telephone);
+        utilisateur.setNumTel(telephone);
         utilisateur.setRue(rue);
         utilisateur.setCodePostal(codePostal);
         utilisateur.setVille(ville);

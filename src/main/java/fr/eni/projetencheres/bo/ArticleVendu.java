@@ -39,8 +39,8 @@ public class ArticleVendu {
                         LocalDate dateDebutEncheres,
                         LocalDate dateFinEncheres,
                         int miseAPrix,
-                        String etatVente,
                         int prixVente,
+                        String etatVente,
                         int noUtilisateur,
                         int noCategorie) {
         this.nomArticle = nomArticle;
@@ -48,8 +48,8 @@ public class ArticleVendu {
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
-        this.etatVente = etatVente;
         this.prixVente = prixVente;
+        this.etatVente = etatVente;
         this.noUtilisateur = noUtilisateur;
         this.noCategorie = noCategorie;
     }
@@ -64,8 +64,8 @@ public class ArticleVendu {
                         LocalDate dateDebutEncheres,
                         LocalDate dateFinEncheres,
                         int miseAPrix,
-                        String etatVente,
                         int prixVente,
+                        String etatVente,
                         int noUtilisateur,
                         int noCategorie) {
         this.noArticle = noArticle;
@@ -74,8 +74,8 @@ public class ArticleVendu {
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
-        this.etatVente = etatVente;
         this.prixVente = prixVente;
+        this.etatVente = etatVente;
         this.noUtilisateur = noUtilisateur;
         this.noCategorie = noCategorie;
     }

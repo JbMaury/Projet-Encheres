@@ -16,7 +16,7 @@ public interface EnchereDAO {
     // U pdate
 
     // D elete
-    void deleteEnchere(int numUtil) throws DALException;
+    void deleteEnchere(int idEnchere) throws DALException;
 
 
 
