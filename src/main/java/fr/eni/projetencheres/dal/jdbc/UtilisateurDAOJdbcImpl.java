@@ -26,6 +26,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
     public void newUtilisateur(Utilisateur utilisateur) throws DALException {
 
         try {
+
             Connection cnx = ConnexionProvider.getConnection();
             ResultSet rs = null;
             // creation du PrepareStatement la definition des points d'interogation dans la
@@ -54,7 +55,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
             cnx.close();
 
         } catch (SQLException e) {
-            throw new DALException("probl�me avec la m�thode newUtilisateur", e);
+            e.printStackTrace();
+            throw new DALException("probleme avec la methode newUtilisateur", e);
         }
     }
 

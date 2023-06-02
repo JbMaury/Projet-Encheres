@@ -24,6 +24,7 @@ public class UtilisateurManager {
     // methode pour creer un nouvel utilisateur
     public void nouvelUtilisateur(Utilisateur utilisateur)
             throws DALException {
+        System.out.println("on est dans le manager");
 
         utilisateurDAO.newUtilisateur(utilisateur);
     }

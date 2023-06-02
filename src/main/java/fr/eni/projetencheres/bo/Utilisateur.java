@@ -215,4 +215,18 @@ public class Utilisateur {
     public void setAdministrateur(boolean administrateur) {
         this.administrateur = administrateur;
     }
+
+    public String toString() {
+        return "Utilisateur [pseudo :" + pseudo + "] " +
+                "[nom : " + nom + "] " +
+                "[prenom :" + prenom + "]" +
+                "[email  :" + email + "]" +
+                "[telephone :" + numTel + "]" +
+                "[rue :" + rue + "]" +
+                "[code Postal :" + codePostal + "]" +
+                "[ville :" + ville + "]" +
+                "[mdp :" + motDePasse + "]" +
+                "[credit :" + credit + "]" +
+                "[administrateur :" + administrateur + "]";
+    }
 }

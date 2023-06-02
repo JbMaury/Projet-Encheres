@@ -12,15 +12,26 @@
 <header>
     <h1>ENI - Enchères</h1>
     <div>
-        <a href="<%=request.getContextPath()%>/Inscription">S'inscrire</a>
-        <a href="<%=request.getContextPath()%>/Connexion">Se connecter</a>
+        <c:choose>
+            <c:when test="${isConnected}">
+                <a href="<%=request.getContextPath()%>/">Enchères</a>
+                <a href="<%=request.getContextPath()%>/Vendre">Vendre un article</a>
+                <a href="<%=request.getContextPath()%>/Profil">Profil de ${pseudo}</a>
+                <a href="<%=request.getContextPath()%>/Deconnexion">Deconnexion</a>
+            </c:when>
+            <c:otherwise>
+                <a href="<%=request.getContextPath()%>/Inscription">S'inscrire</a>
+                <a href="<%=request.getContextPath()%>/Connexion">Se connecter</a>
+            </c:otherwise>
+        </c:choose>
+
     </div>
 
 
 </header>
 <main>
     <h2>Liste des enchères</h2>
-        <form class="boxflex_row" action="/ServletAccueil" method="POST">
+        <form class="boxflex_row" action="<%=request.getContextPath()%>/ServletAccueil" method="POST">
             <fieldset>
                 <legend>Filtres</legend>
                 <input class="search" type="text" name="rechercheArticle" placeholder="Le nom de l'article contient">

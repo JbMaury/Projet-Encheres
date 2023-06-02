@@ -1,13 +1,13 @@
 package fr.eni.projetencheres.dal.jdbc;
 
-import fr.eni.projetencheres.bo.ArticleVendu;
+
 import fr.eni.projetencheres.bo.Enchere;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.dal.ConnexionProvider;
 import fr.eni.projetencheres.dal.DALException;
-import fr.eni.projetencheres.dal.DAOFactory;
+
 import fr.eni.projetencheres.dal.dao.EnchereDAO;
-import fr.eni.projetencheres.dal.dao.UtilisateurDAO;
+
 
 import java.sql.*;
 import java.util.ArrayList;
