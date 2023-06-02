@@ -15,9 +15,7 @@
 <h1>ENI - Enchères</h1>
 
 </header>
-<form action="<%request.getContextPath();%>/Connexion" method="POST">
-
-
+<form action="${pageContext.request.contextPath}/Connexion" method="POST">
 <label>Identifiant</label>
 <input class="" type="text">
 <label>Mot de passe</label>
