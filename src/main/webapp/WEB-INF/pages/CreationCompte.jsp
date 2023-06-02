@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Création de compte</title>
+    <title>Creation de compte</title>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
@@ -19,7 +19,7 @@
     <a href="<%=request.getContextPath()%>/accueil" class="navbar-brand">ENI-Encheres</a>
 </nav>
 <section class="container">
-    <h1 class="mt-5 text-center">Inscription</h1>
+    <h1 class="mt-5 text-center">Mon profil</h1>
 
     <form action="<%=request.getContextPath()%>/signup"
           method="post" class="mt-5">
