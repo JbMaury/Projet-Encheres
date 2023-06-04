@@ -30,8 +30,12 @@ public class UtilisateurManager {
     }
 
     // methode pour chercher un utilisateur
-    public Utilisateur chercherUtilisateur(int idUtilisateur) throws DALException {
+    public Utilisateur chercherId(int idUtilisateur) throws DALException {
         return utilisateurDAO.selectById(idUtilisateur);
+    }
+
+    public Utilisateur chercherPseudo(String pseudo) throws DALException {
+        return utilisateurDAO.selectByPseudo(pseudo);
     }
 
     // methode pour modifier un utilisateur
