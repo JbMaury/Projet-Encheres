@@ -1,5 +1,7 @@
 package fr.eni.projetencheres.ihm;
 
+import fr.eni.projetencheres.bll.UtilisateurManager;
+import fr.eni.projetencheres.bo.Utilisateur;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -19,6 +21,26 @@ public class ServletConnexion extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Bonjour!");
+        UtilisateurManager utilisateurManager = new UtilisateurManager();
+
+        String identifiant = request.getParameter("identifiant");
+        String mdp = request.getParameter("password");
+
+        try {
+            Utilisateur user = utilisateurManager.authentification(identifiant, mdp);
+            if(user != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("isConnected", true);
+                session.setAttribute("pseudo", user.getPseudo());
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
+                rd.forward(request, response);
+            }else {
+                request.setAttribute("erreur", "identifiant ou Mot de Passe incorrect");
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/PageConnexion.jsp");
+                rd.forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

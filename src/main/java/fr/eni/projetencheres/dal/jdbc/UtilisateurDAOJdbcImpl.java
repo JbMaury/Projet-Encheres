@@ -170,7 +170,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
     @Override
     public Utilisateur selectConnexion(String identifiant, String password) throws Exception {
-
+        System.out.println("dans le manager authentification");
         // declaration de mes variables
         Connection cnx = null;
         PreparedStatement stmt = null;

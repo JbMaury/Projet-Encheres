@@ -16,10 +16,14 @@
 
 </header>
 <form action="${pageContext.request.contextPath}/Connexion" method="POST">
-<label>Identifiant</label>
-<input class="" type="text">
-<label>Mot de passe</label>
-<input class="" type="password">
+<label for="identifiant">Identifiant(Email ou Pseudo)</label>
+<input class="" type="text" id="identifiant" name="identifiant">
+<label for="mdp">Mot de passe</label>
+<input class="" id="mdp" type="password" name="password">
+    <c:if test="${not empty erreur}">
+    <p>${erreur}</p>
+    </c:if>
+
 <label>Se souvenir de moi</label>
 <input type="checkbox">
 <a href="#">Mot de passe oublié ? Cliquez ici!</a>
