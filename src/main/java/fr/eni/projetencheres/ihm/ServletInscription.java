@@ -22,7 +22,7 @@ public class ServletInscription extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        UtilisateurManager utilisateurManager = new UtilisateurManager();
         // UTF-8 de la request/response
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -44,6 +44,37 @@ public class ServletInscription extends HttpServlet {
             rd.forward(request, response);
             return;
         }
+        // Verification des doublons pseudo et email
+        try {
+            if (!utilisateurManager.verifUniquePseudo(request.getParameter("pseudo"))) {
+                request.setAttribute("pseudoValue", "Pseudo déjà existant");
+                request.setAttribute("nomValue", request.getParameter("nom"));
+                request.setAttribute("prenomValue", request.getParameter("prenom"));
+                request.setAttribute("emailValue", request.getParameter("email"));
+                request.setAttribute("telephoneValue", request.getParameter("telephone"));
+                request.setAttribute("rueValue", request.getParameter("rue"));
+                request.setAttribute("codePostalValue", request.getParameter("codePostal"));
+                request.setAttribute("villeValue", request.getParameter("ville"));
+
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/CreationCompte.jsp");
+                rd.forward(request, response);
+                return;
+            } else if (!utilisateurManager.verifUniqueMail(request.getParameter("email"))) {
+                request.setAttribute("pseudoValue", request.getParameter("pseudo"));
+                request.setAttribute("nomValue", request.getParameter("nom"));
+                request.setAttribute("prenomValue", request.getParameter("prenom"));
+                request.setAttribute("emailValue", "Email déjà existant");
+                request.setAttribute("telephoneValue", request.getParameter("telephone"));
+                request.setAttribute("rueValue", request.getParameter("rue"));
+                request.setAttribute("codePostalValue", request.getParameter("codePostal"));
+                request.setAttribute("villeValue", request.getParameter("ville"));
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/CreationCompte.jsp");
+                rd.forward(request, response);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // Hashage du mot de passe
         String motDePasseHash = null;
         try {
@@ -52,7 +83,7 @@ public class ServletInscription extends HttpServlet {
             e.printStackTrace();
         }
         // Construction nouvel utilisateur
-        UtilisateurManager utilisateurManager = new UtilisateurManager();
+
         Utilisateur user = new Utilisateur(
                 request.getParameter("pseudo"),
                 request.getParameter("nom"),
