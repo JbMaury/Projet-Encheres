@@ -7,7 +7,6 @@ import fr.eni.projetencheres.dal.DALException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.apache.catalina.Session;
 
 import java.io.IOException;
 
@@ -24,12 +23,28 @@ public class ServletInscription extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Encodage de la request/response
+        // UTF-8 de la request/response
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
-        // Encodage du mot de passe
+        // Vérification du mot de passe
         String motDePasse = request.getParameter("motDePasse");
+        String confirmMotDePasse = request.getParameter("confirmationMotDePasse");
+        if (!motDePasse.equals(confirmMotDePasse)) {
+            request.setAttribute("pseudoValue", request.getParameter("pseudo"));
+            request.setAttribute("nomValue", request.getParameter("nom"));
+            request.setAttribute("prenomValue", request.getParameter("prenom"));
+            request.setAttribute("emailValue", request.getParameter("email"));
+            request.setAttribute("telephoneValue", request.getParameter("telephone"));
+            request.setAttribute("rueValue", request.getParameter("rue"));
+            request.setAttribute("codePostalValue", request.getParameter("codePostal"));
+            request.setAttribute("villeValue", request.getParameter("ville"));
+            request.setAttribute("errorMessage", "Les mots de passe ne correspondent pas.");
+            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/CreationCompte.jsp");
+            rd.forward(request, response);
+            return;
+        }
+        // Hashage du mot de passe
         String motDePasseHash = null;
         try {
             motDePasseHash = Password.getSaltedHash(motDePasse);

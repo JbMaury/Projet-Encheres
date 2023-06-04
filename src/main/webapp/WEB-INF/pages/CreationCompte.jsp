@@ -22,42 +22,42 @@
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="pseudo" class="col-4 col-md-3 col-lg-2 col-form-label ">Pseudo :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" id="pseudo" name="pseudo" required>
+        <input class="form-control" id="pseudo" name="pseudo" value="${empty pseudoValue ? '' : pseudoValue}"required>
       </div>
       <label for="nom" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Nom :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" id="nom" name="nom" required>
+        <input class="form-control" id="nom" name="nom" value="${empty nomValue ? '' : nomValue}" required>
       </div>
     </div>
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="prenom" class="col-4 col-md-3 col-lg-2 col-form-label">Prénom :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" id="prenom" name="prenom" required>
+        <input class="form-control" id="prenom" name="prenom" value="${empty prenomValue ? '' : prenomValue}" required>
       </div>
       <label for="email" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Email :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" type="email" id="email" name="email"
+        <input class="form-control" type="email" id="email" name="email" value="${empty emailValue ? '' : emailValue}"
                required>
       </div>
     </div>
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="telephone" class="col-4 col-md-3 col-lg-2 col-form-label">Téléphone :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" type="tel" pattern="[0-9]{10}" id="telephone" name="telephone" required>
+        <input class="form-control" type="tel" pattern="[0-9]{10}" id="telephone" name="telephone" value="${empty telephoneValue ? '' : telephoneValue}" required>
       </div>
       <label for="rue" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Rue :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" id="rue" name="rue" required>
+        <input class="form-control" id="rue" name="rue" value="${empty rueValue ? '' : rueValue}"required>
       </div>
     </div>
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="codePostal" class="col-4 col-md-3 col-lg-2 col-form-label">Code postal :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" id="codePostal" name="codePostal" required>
+        <input class="form-control" id="codePostal" name="codePostal" value="${empty codePostalValue ? '' : codePostalValue}" required>
       </div>
       <label for="ville" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Ville :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" id="ville" name="ville" required>
+        <input class="form-control" id="ville" name="ville"  value="${empty villeValue ? '' : villeValue}"required>
       </div>
     </div>
     <div class="form-group row mt-md-4 justify-content-center">
@@ -68,6 +68,10 @@
       <label for="confirmationMotDePasse" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Confirmation : </label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
         <input class="form-control" type="password" id="confirmationMotDePasse" name="confirmationMotDePasse" required>
+       <%--Si confirmation du mot de passe échoue--%>
+        <c:if test="${not empty errorMessage}">
+          <p class="error">${errorMessage}</p>
+        </c:if>
       </div>
     </div>
     <div class="row justify-content-center mt-5">
