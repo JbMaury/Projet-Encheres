@@ -21,6 +21,73 @@ public class Utilisateur {
         super();
     }
     /*
+     *   CONSTRUCTEUR WITHOUT password, credit, administrateur (for Update)
+     * @param int
+     * @param pseudo String
+     * @param nom String
+     * @param prenom String
+     * @param email String
+     * @param numTel String
+     * @param rue String
+     * @param codePostal String
+     * @param ville String
+     */
+    public Utilisateur(int noUtilisateur,
+                       String pseudo,
+                       String nom,
+                       String prenom,
+                       String email,
+                       String numTel,
+                       String rue,
+                       String codePostal,
+                       String ville
+    ) {
+        this.noUtilisateur = noUtilisateur;
+        this.pseudo = pseudo;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.numTel = numTel;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+    }
+    /*
+     *   CONSTRUCTEUR WITHOUT credit, administrateur (for Update)
+     * @param int
+     * @param pseudo String
+     * @param nom String
+     * @param prenom String
+     * @param email String
+     * @param numTel String
+     * @param rue String
+     * @param codePostal String
+     * @param ville String
+     * @param motDePasse String
+     */
+    public Utilisateur(int noUtilisateur,
+                       String pseudo,
+                       String nom,
+                       String prenom,
+                       String email,
+                       String numTel,
+                       String rue,
+                       String codePostal,
+                       String ville,
+                       String motDePasse
+                        ) {
+        this.noUtilisateur = noUtilisateur;
+        this.pseudo = pseudo;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.numTel = numTel;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.motDePasse = motDePasse;
+    }
+    /*
      *   CONSTRUCTEUR WITHOUT noUtilisateur (Before DB insert)
      * @param pseudo String
      * @param nom String
