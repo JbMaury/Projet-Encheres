@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
   <%@page import=" fr.eni.projetencheres.bo.Categorie" %>
-  <%@page import="java.util.List" %>
   <%@page import="fr.eni.projetencheres.bll.CategorieManager"%>
   <%@page import="fr.eni.projetencheres.bo.Utilisateur"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
