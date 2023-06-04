@@ -18,7 +18,7 @@
       </properties>
 
   <dependencies>
-                                                                        <dependency>
+      <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
       <version>5.0.0</version>
@@ -63,10 +63,6 @@
           <artifactId>jakarta.servlet.jsp.jstl</artifactId>
           <version>2.0.0</version>
       </dependency>
-
-
-
-
   </dependencies>
 
   <build>
