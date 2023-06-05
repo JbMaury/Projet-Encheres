@@ -1,6 +1,5 @@
 package fr.eni.projetencheres.ihm;
 
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
