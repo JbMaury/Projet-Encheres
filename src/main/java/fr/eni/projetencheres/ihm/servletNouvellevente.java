@@ -27,9 +27,6 @@ import fr.eni.projetencheres.bo.Categorie;
 import fr.eni.projetencheres.bo.Retrait;
 import fr.eni.projetencheres.bo.Utilisateur;
 
-/**
- * Servlet implementation class ServletNouvelleVente
- */
 @WebServlet("/NouvelleVente")
 public class ServletNouvelleVente extends HttpServlet {
     private static final long serialVersionUID = 1L;
