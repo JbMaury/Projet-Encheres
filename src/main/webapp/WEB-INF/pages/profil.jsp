@@ -22,6 +22,7 @@
 </nav>
 <section class="container">
   <h1 class="mt-5 text-center">Mon profil</h1>
+  <c:if test="${not empty message}"><h2>${message}</h2></c:if>
   <div class="form-group row mt-md-4 justify-content-center">
     <p class="col-4 col-md-3 col-lg-2 col-form-label ">Pseudo :</p>
     <div class="col-6 col-md-3">
@@ -76,6 +77,12 @@
       <p>${userInfos.credit}</p>
     </div>
   </div>
+  <div class="row justify-content-center mt-5">
+    <form action="<%=request.getContextPath()%>/Profil" method="POST">
+    <button type="submit" class="btn btn-outline-success col-4 col-md-2 p-3">Modifier</button>
+    </form>
+  </div>
 </section>
+
 </body>
 </html>

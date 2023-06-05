@@ -19,8 +19,7 @@ public class Profil extends HttpServlet {
         UtilisateurManager utilisateurManager = new UtilisateurManager();
         try {
             Utilisateur user = utilisateurManager.chercherPseudo(pseudo);
-            System.out.println("user récupéré : " + user);
-            request.setAttribute("userInfos", user);
+            session.setAttribute("userInfos", user);
         } catch (DALException e) {
             e.printStackTrace();
         }
@@ -30,6 +29,7 @@ public class Profil extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/CreationCompte.jsp");
+        rd.forward(request, response);
     }
 }
