@@ -75,8 +75,7 @@ public class ServletNouvelleVente extends HttpServlet {
                     );
                     retraitManager.newRetrait(ret);
                     request.setAttribute("message", "Article ajouté avec succès");
-                    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/index.jsp");
-                    rd.forward(request, response);
+                    response.sendRedirect(request.getContextPath() + "/");
 
                 }catch(Exception e) {
                     e.printStackTrace();

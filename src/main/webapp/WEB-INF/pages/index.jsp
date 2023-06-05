@@ -1,16 +1,21 @@
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name= "viewport" content="width=device-width, initial-scale=1.0">
     <title>ENI-enchères</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+          crossorigin="anonymous">
 </head>
 <body>
-<header>
-    <h1>ENI - Enchères</h1>
+<nav class="navbar navbar-light bg-light">
+    <a href="<%=request.getContextPath()%>/accueil" class="navbar-brand">ENI-Encheres</a>
     <div>
         <c:choose>
             <c:when test="${isConnected}">
@@ -26,60 +31,47 @@
         </c:choose>
 
     </div>
-
-
-</header>
-<main>
+</nav>
+<section class="container">
     <h2>Liste des enchères</h2>
     <c:if test="${not empty message}">
         <h6>${message}</h6>
     </c:if>
         <form class="boxflex_row" action="<%=request.getContextPath()%>/ServletAccueil" method="POST">
-            <fieldset>
-                <legend>Filtres</legend>
+                <h3>Filtres</h3>
                 <input class="search" type="text" name="rechercheArticle" placeholder="Le nom de l'article contient">
-                <label for="Categories">Catégories : </label>
-                <select id="Categories">
-                    <option value="Tout" selected="selected">Tout</option>
-                    <option value="Informatique">Informatique</option>
-                    <option value="Ameublement">Ameublement</option>
-                    <option value="Vetements">Vêtements</option>
-                    <option value="SportsEtLoisirs">Sports & Loisirs</option>
+                <label for="categorie" class="col-sm-2 col-form-label">Catégorie :</label>
+                <select id="categorie" class="form-control col-sm-5" name="categorie">
+                    <%--Gestion des différentes catégories--%>
+                    <c:forEach items="${categories}" var="categorie">
+                        <c:choose>
+                            <c:when test="${categorie.noCategorie == errorArticle.noCategorie}">
+                                <option selected value="${categorie.noCategorie}">${categorie.libelle}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${categorie.noCategorie}">${categorie.libelle}</option>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </c:forEach>
                 </select>
-            </fieldset>
             <input class="button" type="button" value="Rechercher">
         </form>
-    <div class="encheres">
-        <article>
-            <img src="" alt="">
-            <div class="card_text">
-                <h3>PC Gamer pour travailler</h3>
-                <ul>
-                    <li>Prix : 210 points</li>
-                    <li>Fin de l'enchère : 10/06/2023</li>
-                    <li>Vendeur : Jojo72</li>
-                </ul>
-            </div>
-        </article>
-        <article>
-            <img src="" alt="">
-            <div class="card_text">
-                <h3>Rocket Stove pour riz et pâtes</h3>
-                <ul>
-                    <li>Prix : 45 points</li>
-                    <li>Fin de l'enchère : 14/06/2023</li>
-                    <li>Vendeur : Leila34</li>
-                </ul>
-            </div>
+    <div class="container">
+        <c:forEach items="${encheresActuelles}" var="articleEnVente">
+            <c:set var="formattedDateFin" value="${articleEnVente.dateFinEncheres.format(DateTimeFormatter.ofPattern('dd-MM-yyyy'))}" />
+            <div class="d-flex flex-column col-md-5 border border-dark mt-3 mb-3">
+                    <h3>${articleEnVente.nomArticle}</h3>
+                    <ul>
+                        <li>Prix : ${articleEnVente.prixVente == 0 ? articleEnVente.miseAPrix : articleEnVente.prixVente}</li>
+                        <li>Fin de l'enchère : ${formattedDateFin}</li>
+                        <li>Vendeur : ${usersPseudos[articleEnVente.noArticle]}</li>
+                    </ul>
 
-        </article>
-        <article>
+            </div>
+        </c:forEach>
 
-        </article>
     </div>
-</main>
-<footer>
-
-</footer>
+</section>
 </body>
 </html>

@@ -125,7 +125,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             stmt = cnx.prepareStatement(SELECT_ALL);
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 article = new ArticleVendu(
                         rs.getInt("no_article"),
                         rs.getString("nom_article"),

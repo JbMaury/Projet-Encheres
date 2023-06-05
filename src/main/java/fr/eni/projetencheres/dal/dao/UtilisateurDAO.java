@@ -3,6 +3,8 @@ import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.bo.Utilisateur;
 import fr.eni.projetencheres.dal.DALException;
 
+import java.util.HashMap;
+
 public interface UtilisateurDAO {
     //methode pour cr�ation d'utlisateur
     void newUtilisateur(Utilisateur utilisateur) throws DALException;
@@ -27,4 +29,5 @@ public interface UtilisateurDAO {
 
     // methode de anonymiser  d'utilisateur
     void deleteUtilisateur(int idUtilisateur) throws DALException;
+    public HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws DALException;
 }

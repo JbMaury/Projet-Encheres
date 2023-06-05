@@ -6,6 +6,7 @@ import fr.eni.projetencheres.dal.*;
 import fr.eni.projetencheres.dal.dao.ArticleVenduDAO;
 import fr.eni.projetencheres.dal.dao.UtilisateurDAO;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class UtilisateurManager {
@@ -57,6 +58,10 @@ public class UtilisateurManager {
     public void supressionUtilisateur(int idUtilisateur) throws DALException, BLLException {
         utilisateurDAO.deleteUtilisateur(idUtilisateur);
 
+    }
+
+    public HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws DALException {
+       return utilisateurDAO.selectUtilisateursWithCurrentAuction();
     }
 
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import fr.eni.projetencheres.bo.Password;
 import fr.eni.projetencheres.bo.Utilisateur;
@@ -22,6 +23,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
     private final static String UPDATE_UTILISATEUR_NOPASS = "UPDATE UTILISATEURS SET pseudo = ?, nom =?, prenom =?, email = ?, telephone = ?, rue = ?,code_postal =?,ville = ? WHERE no_utilisateur =?;";
     private final static String SELECT_BY_MAIL = "SELECT * FROM UTILISATEURS WHERE email=?;";
     private final static String ANONYMISER_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom =?, email = ?, telephone = ?, rue = ?,code_postal =?,ville = ?, credit=? WHERE no_utilisateur=?;";
+    private final static String SELECT_USERS_WITH_CURRENT_AUCTIONS = "SELECT AV.no_article, pseudo FROM UTILISATEURS INNER JOIN ARTICLES_VENDUS AV on UTILISATEURS.no_utilisateur = AV.no_utilisateur ";
 
     @Override
     public void newUtilisateur(Utilisateur utilisateur) throws DALException {
@@ -312,6 +314,27 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
         } catch (SQLException e) {
             throw new DALException("probleme de methode deleteUtilisateur", e);
         }
+    }
+
+    public HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws DALException {
+        Connection cnx;
+        PreparedStatement pstmt;
+        HashMap<Integer, String> usersPseudos = new HashMap<> ();
+        try {
+            cnx = ConnexionProvider.getConnection();
+            pstmt = cnx.prepareStatement(SELECT_USERS_WITH_CURRENT_AUCTIONS);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                usersPseudos.put(rs.getInt("no_article"), rs.getString("pseudo"));
+            }
+            cnx.close();
+            rs.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return usersPseudos;
     }
 
 }

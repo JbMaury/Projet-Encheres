@@ -9,6 +9,10 @@ CREATE TABLE CATEGORIES (
     libelle        VARCHAR(30) NOT NULL
 )
 
+INSERT INTO CATEGORIES (libelle) VALUES ('Informatique');
+INSERT INTO CATEGORIES (libelle) VALUES ('Ameublement');
+INSERT INTO CATEGORIES (libelle) VALUES ('Vêtements');
+INSERT INTO CATEGORIES (libelle) VALUES ('Sports&Loisirs');
 
 ALTER TABLE CATEGORIES ADD constraint categorie_pk PRIMARY KEY (no_categorie)
 
@@ -39,9 +43,9 @@ CREATE TABLE UTILISATEURS (
     prenom           VARCHAR(30) NOT NULL,
     email            VARCHAR(50) NOT NULL,
     telephone        VARCHAR(10),
-    rue              VARCHAR(30) NOT NULL,
+    rue              VARCHAR(100) NOT NULL,
     code_postal      VARCHAR(10) NOT NULL,
-    ville            VARCHAR(30) NOT NULL,
+    ville            VARCHAR(50) NOT NULL,
     mot_de_passe     VARCHAR(100) NOT NULL,
     credit           INTEGER NOT NULL,
     administrateur   bit NOT NULL
