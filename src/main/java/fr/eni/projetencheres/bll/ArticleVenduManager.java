@@ -10,5 +10,8 @@ public class ArticleVenduManager {
         articleVenduDAO = DAOFactory.getArticleDAO();
     }
 
+    public void newArticle(ArticleVendu article) throws Exception{
+        articleVenduDAO.insertArticle(article);
+    }
 
 }

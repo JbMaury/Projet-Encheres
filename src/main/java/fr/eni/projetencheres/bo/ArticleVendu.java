@@ -1,5 +1,8 @@
 package fr.eni.projetencheres.bo;
 
+import fr.eni.projetencheres.bll.CategorieManager;
+import fr.eni.projetencheres.dal.DALException;
+
 import java.time.LocalDate;
 
 public class ArticleVendu {
@@ -23,12 +26,39 @@ public class ArticleVendu {
         super();
     }
     /*
+     *   CONSTRUCTEUR WITHOUT noArticle (Before DB insert), prixVente & etatVente
+     * @param nomArticle String
+     * @param description String
+     * @param dateDebutEncheres LocalDate
+     * @param dateFinEncheres LocalDate
+     * @param miseAPrix int
+     * @param noUtilisateur int (BO Association between ArticleVendu -> Utilisateur // DB Foreign Key -> Utilisateur)
+     * @param noCategorie int (BO Association between ArticleVendu -> Categorie // DB Foreign Key -> Categorie)
+     */
+
+    public ArticleVendu(String nomArticle,
+                        String description,
+                        LocalDate dateDebutEncheres,
+                        LocalDate dateFinEncheres,
+                        int miseAPrix,
+                        int noUtilisateur,
+                        int noCategorie) {
+        this.nomArticle = nomArticle;
+        this.description = description;
+        this.dateDebutEncheres = dateDebutEncheres;
+        this.dateFinEncheres = dateFinEncheres;
+        this.miseAPrix = miseAPrix;
+        this.noUtilisateur = noUtilisateur;
+        this.noCategorie = noCategorie;
+    }
+    /*
     *   CONSTRUCTEUR WITHOUT noArticle (Before DB insert)
     * @param nomArticle String
     * @param description String
     * @param dateDebutEncheres LocalDate
     * @param dateFinEncheres LocalDate
     * @param miseAPrix int
+    * @param prixVente int
     * @param etatVente String
     * @param noUtilisateur int (BO Association between ArticleVendu -> Utilisateur // DB Foreign Key -> Utilisateur)
     * @param noCategorie int (BO Association between ArticleVendu -> Categorie // DB Foreign Key -> Categorie)
@@ -177,4 +207,17 @@ public class ArticleVendu {
     public void setNoCategorie(int noCategorie) {
         this.noCategorie = noCategorie;
     }
+
+    public String toString() {
+        CategorieManager categorieManager = new CategorieManager();
+        try {
+            String categorie = categorieManager.getCategorieById(noCategorie).getLibelle();
+            return "Article : [" + nomArticle + "] " + " description : [" + description + " categorie : [" + categorie +
+                    " Mise à prix : [" + miseAPrix + "€ Date de début : [" + dateDebutEncheres + "] + Date de fin : [" + dateFinEncheres + "] ";
+        } catch (DALException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

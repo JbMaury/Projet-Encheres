@@ -30,6 +30,7 @@ public class ServletConnexion extends HttpServlet {
             Utilisateur user = utilisateurManager.authentification(identifiant, mdp);
             if(user != null) {
                 HttpSession session = request.getSession();
+                session.setAttribute("userInfos", user);
                 session.setAttribute("isConnected", true);
                 session.setAttribute("pseudo", user.getPseudo());
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");

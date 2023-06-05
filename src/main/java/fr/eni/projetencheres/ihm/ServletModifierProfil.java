@@ -23,6 +23,7 @@ public class ServletModifierProfil extends HttpServlet {
         String currentMdp = request.getParameter("currentMdp");
         String identifiant = (String) session.getAttribute("pseudo");
         UtilisateurManager utilisateurManager = new UtilisateurManager();
+        System.out.println(request.getParameter("motDePasse"));
         try {
             // Tentative de modification du mot de passe
             if (!request.getParameter("motDePasse").isEmpty()) {
@@ -79,11 +80,19 @@ public class ServletModifierProfil extends HttpServlet {
                     }
                 }else {
                     // Cas ou un des champs (mot de passe actuel ou confirmation est vide)
-                    request.setAttribute("erreur", "Veuillez rentrer votre mot de passe actuel et confirmer le nouveau mot de passe");
+                    request.setAttribute("errorMessage", "Veuillez rentrer votre mot de passe actuel et confirmer le nouveau mot de passe");
                     RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/CreationCompte.jsp");
                     rd.forward(request, response);
                 }
-            } else {
+            }else if(request.getParameter("currentMdp").isEmpty() && !request.getParameter("confirmationMotDePasse").isEmpty()) {
+                request.setAttribute("errorMessage", "Veuillez entrer votre mot de passe actuel et votre nouveau mot de passe");
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/CreationCompte.jsp");
+                rd.forward(request, response);
+            }else if(!request.getParameter("currentMdp").isEmpty() && request.getParameter("confirmationMotDePasse").isEmpty()){
+                request.setAttribute("errorMessage", "Veuillez confirmer votre nouveau mot de passe");
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/CreationCompte.jsp");
+                rd.forward(request, response);
+            }else {
                 System.out.println("le champ de mot de passe est vide");
                 // Si l'utilisateur n'a rien rentré dans aucun des trois champs mot de passe
                 // On met à jour uniquement les autres infos

@@ -15,7 +15,7 @@
         <c:choose>
             <c:when test="${isConnected}">
                 <a href="<%=request.getContextPath()%>/">Enchères</a>
-                <a href="<%=request.getContextPath()%>/Vendre">Vendre un article</a>
+                <a href="<%=request.getContextPath()%>/NouvelleVente">Vendre un article</a>
                 <a href="<%=request.getContextPath()%>/Profil">Profil de ${pseudo}</a>
                 <a href="<%=request.getContextPath()%>/Deconnexion">Deconnexion</a>
             </c:when>
@@ -31,6 +31,9 @@
 </header>
 <main>
     <h2>Liste des enchères</h2>
+    <c:if test="${not empty message}">
+        <h6>${message}</h6>
+    </c:if>
         <form class="boxflex_row" action="<%=request.getContextPath()%>/ServletAccueil" method="POST">
             <fieldset>
                 <legend>Filtres</legend>

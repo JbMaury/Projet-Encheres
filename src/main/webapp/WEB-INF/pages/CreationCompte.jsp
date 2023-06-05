@@ -22,6 +22,9 @@
 </nav>
 <section class="container">
   <h1 class="mt-5 text-center">Mon profil</h1>
+  <c:if test="${not empty message}">
+    <h6 class="mt-5 text-center">(${message})</h6>
+  </c:if>
 
   <form action="<%=request.getContextPath()%>${isConnected ? '/Modifier' : '/Inscription'}"
         method="post" class="mt-5">
@@ -96,6 +99,9 @@
        <%--Si confirmation du mot de passe échoue--%>
         <c:if test="${not empty errorMessage}">
           <p class="error">${errorMessage}</p>
+        </c:if>
+        <c:if test="${not empty error}">
+          <p class="error">${error}</p>
         </c:if>
       </div>
     </div>

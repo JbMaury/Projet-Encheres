@@ -1,11 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  Created by IntelliJ IDEA.
-  User: ONS AYARI
-  Date: 04/06/2023
-  Time: 6:30 PM
-  To change this template use File | Settings | File Templates.
---%>
-  <%@page import=" fr.eni.projetencheres.bo.Categorie" %>
+<%@page import=" fr.eni.projetencheres.bo.Categorie" %>
   <%@page import="fr.eni.projetencheres.bll.CategorieManager"%>
   <%@page import="fr.eni.projetencheres.bo.Utilisateur"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,43 +16,37 @@
 </nav>
 <section class="container">
     <h1 class="mt-5 text-center">Nouvelle vente</h1>
-
-    <% Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");	%>
-
     <form action="<%=request.getContextPath()%>/NouvelleVente"
           method="post" class="form-group mt-md-4 justify-content-center">
-
         <div class="form-group row justify-content-md-center">
-
             <label for="article" class="col-sm-2 col-form-label">Article :</label>
             <div class="col-sm-5">
-                <input class="form-control" id="article" name="article" required>
+                <input class="form-control" id="article" name="article" value="${not empty errorArticle ? errorArticle.nomArticle:''}" required>
             </div>
         </div>
-
-
         <div class="form-group row justify-content-md-center">
-
             <label for="description" class="col-sm-2 col-form-label">Description :</label>
             <div class="col-sm-5">
-                <textarea class="form-control" id="description" name="description" required></textarea>
+                <textarea class="form-control" id="description" name="description"  required>${not empty errorArticle ? errorArticle.description:''}</textarea>
             </div>
         </div>
-
-
         <div class="form-group row justify-content-md-center">
-
             <label for="categorie" class="col-sm-2 col-form-label">Catégorie :</label>
-
             <select id="categorie" class="form-control col-sm-5" name="categorie">
-                <%for(Categorie categorie : CategorieManager.getAllCategories()) {%>
-                <option value="<%=categorie.getNoCategorie() %>"><%=categorie.getLibelle() %></option>
-                <%} %>
+                <%--Gestion des différentes catégories--%>
+                <c:forEach items="${categories}" var="categorie">
+                    <c:choose>
+                        <c:when test="${categorie.noCategorie == errorArticle.noCategorie}">
+                            <option selected value="${categorie.noCategorie}">${categorie.libelle}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${categorie.noCategorie}">${categorie.libelle}</option>
+                        </c:otherwise>
+                    </c:choose>
+
+                </c:forEach>
             </select>
         </div>
-
-
-
         <div class="form-group row justify-content-md-center">
 
             <label for="upload" class="col-sm-2 col-form-label">Photo de l'article :</label>
@@ -65,32 +54,30 @@
                 <input type="file" class="form-control-file col-sm" id="upload">
             </div>
         </div>
-
-
-
         <div class="form-group row justify-content-md-center">
 
-            <label class="col-sm-2 col-form-label" for="miseAPrix">Prix de vente :</label>
+            <label class="col-sm-2 col-form-label" for="miseAPrix">Mise à prix :</label>
             <div class="col-sm-5">
-                <input class="form-control" type ="number" name="miseAPrix" id="miseAPrix" step="1" max="10000" required>
+                <input class="form-control" type ="number" name="miseAPrix" id="miseAPrix" step="1" max="10000" value="${not empty errorArticle ? errorArticle.miseAPrix:1}" required>
+            </div>
+        </div>
+        <c:if test="${not empty errorMessage}">
+            <p class="text-danger text-center">${errorMessage}</p>
+        </c:if>
+        <div class="form-group row justify-content-md-center">
+
+            <label for="dateD" class="col-sm-2 col-form-label ">Début de l'enchère :</label>
+            <div class="col-sm-5">
+                <input type="date" class="form-control" id="dateD" name="dateD" required>
             </div>
         </div>
 
 
         <div class="form-group row justify-content-md-center">
 
-            <label for="dated" class="col-sm-2 col-form-label ">Début de l'enchère :</label>
+            <label for="dateF" class="col-sm-2 col-form-label ">Fin de l'enchère :</label>
             <div class="col-sm-5">
-                <input type="date" class="form-control" id="dated" name="dated" required>
-            </div>
-        </div>
-
-
-        <div class="form-group row justify-content-md-center">
-
-            <label for="datef" class="col-sm-2 col-form-label ">Fin de l'enchère :</label>
-            <div class="col-sm-5">
-                <input type="date" class="form-control" id="datef" name="datef" required>
+                <input type="date" class="form-control" id="dateF" name="dateF" required>
             </div>
         </div>
 
@@ -104,7 +91,7 @@
 
                 <label for="rue" class="col-sm-2 col-form-label ">Rue :</label>
                 <div class="col-sm-5">
-                    <input class="form-control" id="rue" name="rue" value="<%=utilisateur.getRue() %>" required>
+                    <input type="text" class="form-control" id="rue" name="rue" value="${userInfos.rue}" required>
                 </div>
             </div>
 
@@ -112,7 +99,7 @@
 
                 <label for="codePostal" class="col-sm-2 col-form-label ">Code Postal :</label>
                 <div class="col-sm-5">
-                    <input class="form-control" id="codePostal" name="codePostal" value="<%=utilisateur.getCodePostal() %>" required>
+                    <input class="form-control" id="codePostal" name="codePostal" value="${userInfos.codePostal}" required>
                 </div>
             </div>
 
@@ -120,7 +107,7 @@
 
                 <label for="ville" class="col-sm-2 col-form-label ">Ville :</label>
                 <div class="col-sm-5">
-                    <input class="form-control" id="ville" name="ville" value ="<%=utilisateur.getVille() %>" required>
+                    <input class="form-control" id="ville" name="ville" value ="${userInfos.ville}" required>
                 </div>
             </div>
 

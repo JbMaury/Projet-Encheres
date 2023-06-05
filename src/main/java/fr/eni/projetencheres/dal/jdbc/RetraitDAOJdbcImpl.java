@@ -12,7 +12,7 @@ import fr.eni.projetencheres.dal.dao.RetraitDAO;
 
 public class RetraitDAOJdbcImpl implements RetraitDAO {
 
-    private final static String INSERT_RETRAIT = "INSERT INTO RETRAITS (no_article, rue, code_posta, ville) VALUES (?, ?, ?, ?);";
+    private final static String INSERT_RETRAIT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?);";
     private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM RETRAITS WHERE no_article=?;";
 
     public void insertRetrait(Retrait retrait) throws DALException {

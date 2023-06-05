@@ -42,27 +42,40 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
     public void insertArticle(ArticleVendu article) throws DALException {
 
         try {
+            System.out.println("dans l'insertion d'article");
+            ResultSet rs = null;
             Connection cnx = ConnexionProvider.getConnection();
-            PreparedStatement stmt = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+            System.out.println("test des valeurs :");
+            System.out.print(article.getNomArticle());
+            System.out.print(" "+ article.getDescription());
+            System.out.print(" " + Date.valueOf(article.getDateDebutEncheres()));
+            System.out.print(" " + Date.valueOf(article.getDateFinEncheres()));
+            System.out.print(" " + article.getMiseAPrix());
+            System.out.print(" " + article.getNoUtilisateur());
+            System.out.print(" " + article.getNoCategorie());
 
-            stmt.setString(1, article.getNomArticle());
-            stmt.setString(2, article.getDescription());
-            stmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
-            stmt.setDate(4, Date.valueOf(article.getDateFinEncheres()));
-            stmt.setInt(5, article.getMiseAPrix());
-            stmt.setInt(6, article.getNoUtilisateur());
-            stmt.setInt(7, article.getNoCategorie());
-            stmt.executeQuery();
-            ResultSet rs = stmt.getGeneratedKeys();
-            article.setNoArticle(rs.getInt(1));
+            pstmt.setString(1, article.getNomArticle());
+            pstmt.setString(2, article.getDescription());
+            pstmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
+            pstmt.setDate(4, Date.valueOf(article.getDateFinEncheres()));
+            pstmt.setInt(5, article.getMiseAPrix());
+            pstmt.setInt(6, article.getNoUtilisateur());
+            pstmt.setInt(7, article.getNoCategorie());
+            pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                article.setNoArticle(rs.getInt(1));
+            }
 
             rs.close();
-            stmt.close();
+            pstmt.close();
             cnx.close();
 
         } catch (SQLException e) {
             throw new DALException("problème dans la méthode insertArticle", e);
         }
+
     }
 
     @Override
