@@ -24,6 +24,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
     private final static String SELECT_BY_MAIL = "SELECT * FROM UTILISATEURS WHERE email=?;";
     private final static String ANONYMISER_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom =?, email = ?, telephone = ?, rue = ?,code_postal =?,ville = ?, credit=? WHERE no_utilisateur=?;";
     private final static String SELECT_USERS_WITH_CURRENT_AUCTIONS = "SELECT AV.no_article, pseudo FROM UTILISATEURS INNER JOIN ARTICLES_VENDUS AV on UTILISATEURS.no_utilisateur = AV.no_utilisateur ";
+    private final static String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?;";
 
     @Override
     public void newUtilisateur(Utilisateur utilisateur) throws DALException {
@@ -291,6 +292,22 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
     }
 
     public void deleteUtilisateur(int idUtilisateur) throws DALException {
+        Connection cnx = null;
+        PreparedStatement pstmt = null;
+        try {
+            cnx = ConnexionProvider.getConnection();
+            pstmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+            pstmt.setInt(1, idUtilisateur);
+            pstmt.executeUpdate();
+            pstmt.close();
+            cnx.close();
+
+        } catch (SQLException e) {
+            throw new DALException("probleme de methode deleteUtilisateur", e);
+        }
+    }
+
+    public void anonymiserUtilisateur(int idUtilisateur) throws DALException {
         Connection cnx = null;
         PreparedStatement pstmt = null;
         String anonyme = "anonyme";
