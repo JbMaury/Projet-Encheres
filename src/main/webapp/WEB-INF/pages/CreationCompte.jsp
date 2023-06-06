@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
   <c:if test="${isConnected}">
@@ -25,7 +25,6 @@
   <c:if test="${not empty message}">
     <h6 class="mt-5 text-center">(${message})</h6>
   </c:if>
-
   <form action="<%=request.getContextPath()%>${isConnected ? '/Modifier' : '/Inscription'}"
         method="post" class="mt-5">
     <div class="form-group row mt-md-4 justify-content-center">
@@ -118,7 +117,7 @@
       </c:choose></button>
       <c:choose>
         <c:when test="${isConnected}">
-          <a href="<%=request.getContextPath()%>/Supprimer" class="col-4 col-md-2 offset-1 btn btn-outline-danger p-3" role="button">Supprimer compte</a>
+          <a href="<%=request.getContextPath()%>/Supprimer?origine=sup" class="col-4 col-md-2 offset-1 btn btn-outline-danger p-3" role="button">Supprimer compte</a>
         </c:when>
         <c:otherwise>
           <a href="<%=request.getContextPath()%>/" class="col-4 col-md-2 offset-1 btn btn-outline-danger p-3" role="button">Annuler</a>
