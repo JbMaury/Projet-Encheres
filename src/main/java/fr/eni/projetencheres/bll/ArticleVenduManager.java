@@ -20,4 +20,8 @@ public class ArticleVenduManager {
         return articleVenduDAO.selectAll();
     }
 
+    public ArticleVendu selectById(int idArticle) throws Exception {
+        return articleVenduDAO.selectById(idArticle);
+    }
+
 }

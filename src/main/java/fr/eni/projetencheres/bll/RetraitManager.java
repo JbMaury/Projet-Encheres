@@ -15,4 +15,8 @@ public class RetraitManager {
     public void newRetrait(Retrait retrait) throws Exception {
         retraitDAO.insertRetrait(retrait);
     }
+
+    public Retrait selectByIdArticle(int idArticle) throws Exception {
+        return retraitDAO.selectByNoArticle(idArticle);
+    }
 }

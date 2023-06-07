@@ -98,17 +98,17 @@ public class ServletInscription extends HttpServlet {
                 false
         );
         try {
-            System.out.println("Nous avons bien construit un objet utilisateur");
-            System.out.println(user);
             utilisateurManager.nouvelUtilisateur(user);
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("isConnected", true);
+            session.setAttribute("pseudo", user.getPseudo());
+            session.setAttribute("userInfos", user);
+            rd.forward(request, response);
         } catch (DALException e) {
             e.printStackTrace();
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
-        HttpSession session = request.getSession();
-        session.setAttribute("isConnected", true);
-        session.setAttribute("pseudo", request.getParameter("pseudo"));
-        rd.forward(request, response);
+
 
     }
 }

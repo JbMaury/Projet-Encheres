@@ -30,42 +30,45 @@
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="pseudo" class="col-4 col-md-3 col-lg-2 col-form-label ">Pseudo :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" id="pseudo" name="pseudo" value="${not empty pseudoValue ? pseudoValue : not empty userInfos.pseudo ? userInfos.pseudo : ''}" required>
+        <input class="form-control" id="pseudo" pattern=".{1,50}"
+               title="Le pseudo ne peut pas avoir plus de 50 caractères" name="pseudo" value="${not empty pseudoValue ? pseudoValue : not empty userInfos.pseudo ? userInfos.pseudo : ''}" required>
       </div>
       <label for="nom" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Nom :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" id="nom" name="nom" value="${not empty nomValue ? nomValue : not empty userInfos.nom ? userInfos.nom : ''}" required>
+        <input class="form-control" id="nom" pattern=".{1,50}"
+               title="Le nom ne peut pas avoir plus de 50 caractères" name="nom" value="${not empty nomValue ? nomValue : not empty userInfos.nom ? userInfos.nom : ''}" required>
       </div>
     </div>
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="prenom" class="col-4 col-md-3 col-lg-2 col-form-label">Prénom :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" id="prenom" name="prenom" value="${not empty prenomValue ? prenomValue : not empty userInfos.prenom ? userInfos.prenom : ''}" required>
+        <input class="form-control" id="prenom" pattern=".{1,50}"
+               title="Le prénom ne peut pas avoir plus de 50 caractères" name="prenom" value="${not empty prenomValue ? prenomValue : not empty userInfos.prenom ? userInfos.prenom : ''}" required>
       </div>
       <label for="email" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Email :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" type="email" id="email" name="email" value="${not empty emailValue ? emailValue : not empty userInfos.email ? userInfos.email : ''}"
+        <input class="form-control" type="email" pattern=".{1,100}" id="email" name="email" value="${not empty emailValue ? emailValue : not empty userInfos.email ? userInfos.email : ''}"
                required>
       </div>
     </div>
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="telephone" class="col-4 col-md-3 col-lg-2 col-form-label">Téléphone :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" type="tel" pattern="[0-9]{10}" id="telephone" name="telephone" value="${not empty telephoneValue ? telephoneValue : not empty userInfos.numTel ? userInfos.numTel : ''}" required>
+        <input class="form-control" type="tel" title="Le telephone doit contenir 10 caractères numeriques" pattern="[0-9]{10}" id="telephone" name="telephone" value="${not empty telephoneValue ? telephoneValue : not empty userInfos.numTel ? userInfos.numTel : ''}" required>
       </div>
       <label for="rue" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Rue :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" id="rue" name="rue" value="${not empty rueValue ? rueValue : not empty userInfos.rue ? userInfos.rue : ''}"required>
+        <input class="form-control" id="rue" title="La rue ne doit pas dépasser 100 caractères" name="rue" pattern=".{1,100}" value="${not empty rueValue ? rueValue : not empty userInfos.rue ? userInfos.rue : ''}"required>
       </div>
     </div>
     <div class="form-group row mt-md-4 justify-content-center">
       <label for="codePostal" class="col-4 col-md-3 col-lg-2 col-form-label">Code postal :</label>
       <div class="col-6 col-md-3">
-        <input class="form-control" id="codePostal" name="codePostal" value="${not empty codePostalValue ? codePostalValue : not empty userInfos.codePostal ? userInfos.codePostal : ''}" required>
+        <input class="form-control" id="codePostal" title="Le code postal ne peut contenir plus de 5 caractères" name="codePostal" pattern=".{1,5}" value="${not empty codePostalValue ? codePostalValue : not empty userInfos.codePostal ? userInfos.codePostal : ''}" required>
       </div>
       <label for="ville" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Ville :</label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" id="ville" name="ville"  value="${not empty villeValue ? villeValue : not empty userInfos.ville ? userInfos.ville : ''}"required>
+        <input class="form-control" id="ville" title="La ville ne peut pas avoir plus de 50 caractères" name="ville" pattern=".{1,50}"  value="${not empty villeValue ? villeValue : not empty userInfos.ville ? userInfos.ville : ''}"required>
       </div>
     </div>
     <c:if test="${isConnected}">
@@ -90,11 +93,11 @@
           </c:otherwise>
         </c:choose></label>
       <div class="col-6 col-md-3">
-        <input class="form-control" type="password" id="motDePasse" name="motDePasse" <c:if test="${empty isConnected}">required</c:if>>
+        <input class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$"  type="password" id="motDePasse" name="motDePasse" title="Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre et ne pas dépasser 32 caractères" <c:if test="${empty isConnected}">required</c:if>>
       </div>
       <label for="confirmationMotDePasse" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Confirmation : </label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" type="password" id="confirmationMotDePasse" name="confirmationMotDePasse" <c:if test="${empty isConnected}">required</c:if>>
+        <input class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$"  type="password" id="confirmationMotDePasse" name="confirmationMotDePasse" <c:if test="${empty isConnected}">required</c:if>>
        <%--Si confirmation du mot de passe échoue--%>
         <c:if test="${not empty errorMessage}">
           <p class="error">${errorMessage}</p>

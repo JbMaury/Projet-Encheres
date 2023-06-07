@@ -21,7 +21,7 @@
             <c:when test="${isConnected}">
                 <a href="<%=request.getContextPath()%>/">Enchères</a>
                 <a href="<%=request.getContextPath()%>/NouvelleVente">Vendre un article</a>
-                <a href="<%=request.getContextPath()%>/Profil">Profil de ${pseudo}</a>
+                <a href="<%=request.getContextPath()%>/Profil">Profil de ${userInfos.pseudo}</a>
                 <a href="<%=request.getContextPath()%>/Deconnexion">Deconnexion</a>
             </c:when>
             <c:otherwise>
@@ -55,6 +55,25 @@
 
                     </c:forEach>
                 </select>
+            <c:if test="${isConnected}">
+                <input type="radio" name="option" value="achat" id="achatRadio" required>
+                <label for="achatRadio">Achats</label>
+
+                <input type="radio" name="option" value="vente" id="venteRadio">
+                <label for="venteRadio">Mes ventes</label>
+
+                <div id="achatItems" class="disabled">
+                    <input type="checkbox" name="enchereOuverte" value="enchereOuverte"> Enchères ouvertes<br>
+                    <input type="checkbox" name="mesEncheres" value="mesEncheres"> Mes enchères en cours<br>
+                    <input type="checkbox" name="encheresEmportees" value="encheresEmportees"> Enchères remportées<br>
+                </div>
+
+                <div id="venteItems" class="disabled">
+                    <input type="checkbox" name="mesVentes" value="mesVentes"> Mes ventes en cours<br>
+                    <input type="checkbox" name="ventesNonDebutees" value="ventesNonDebutees"> Ventes non débutées<br>
+                    <input type="checkbox" name="ventesTerminees" value="ventesTerminees"> Ventes terminées<br>
+                </div>
+            </c:if>
             <input class="button" type="button" value="Rechercher">
         </form>
     <div class="container">
@@ -66,6 +85,7 @@
                         <li>Prix : ${articleEnVente.prixVente == 0 ? articleEnVente.miseAPrix : articleEnVente.prixVente}</li>
                         <li>Fin de l'enchère : ${formattedDateFin}</li>
                         <li>Vendeur : ${usersPseudos[articleEnVente.noArticle]}</li>
+                       <c:if test="${isConnected}"> <a class="text-center" href="<%=request.getContextPath()%>/Detail?id=${articleEnVente.noArticle}"><button class="btn btn-info mb-3">Détail de l'article</button></a></c:if>
                     </ul>
 
             </div>

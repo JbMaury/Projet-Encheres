@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" import="java.util.*"
          import="fr.eni.projetencheres.dal.*" import="fr.eni.projetencheres.bll.*"
@@ -21,33 +22,23 @@
 <section class="container-fluid">
   <h1 class="mt-5 text-center">Détail Vente</h1>
 
-  <%-- Vérifier si l'utilisateur est le vendeur --%>
-  <%
-    Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
-    ArticleVendu article = (ArticleVendu) request.getAttribute("article");
-
-    Enchere enchere = null;
-
-    int categorie = article.getNoCategorie();
-  %>
   <div class="form-group row mt-md-4 justify-content-center">
-    <%=article.getNomArticle()%>
+    ${currentArticle.nomArticle}
   </div>
 
   <div class="form-group row mt-md-4 justify-content-center">
-    <%=article.getDescription()%>
+    ${currentArticle.description}
   </div>
 
   <div class="form-group row mt-md-4 justify-content-center">
-    <%--@declare id="categorie"--%><label for="categorie"
-           class="col-4 col-md-3 col-lg-2 col-form-label ">Catégorie :</label>
+    Catégorie :
+    ${currentCategorie.libelle}
   </div>
 
   <div class="form-group row mt-md-4 justify-content-center">
-    <label for="miseAPrix"
-           class="col-4 col-md-3 col-lg-2 col-form-label ">Mise à prix
-      :</label>
-    <%=article.getMiseAPrix()%>
+    Mise à prix
+
+    ${currentArticle.miseAPrix}
     points
   </div>
 
@@ -55,11 +46,7 @@
     <%--@declare id="meilleureoffre"--%><label for="meilleureOffre"
            class="col-4 col-md-3 col-lg-2 col-form-label ">Meilleure
       offre :</label>
-    <%if(enchere!=null){ %>
-    <%=enchere.getMontantEnchere()%>
-    <%}else{ %>
-    <%=article.getMiseAPrix() %>
-    <%} %>
+    ${currentArticle.prixVente}
     points
   </div>
 
@@ -67,52 +54,32 @@
     <%--@declare id="finenchere"--%><label for="FinEnchere"
            class="col-4 col-md-3 col-lg-2 col-form-label ">Fin de
       l'enchère :</label>
-    <%=article.getDateFinEncheres().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))%>
+      <c:set var="formattedDateFin" value="${currentArticle.dateFinEncheres.format(DateTimeFormatter.ofPattern('dd-MM-yyyy'))}" />
+    ${formattedDateFin}
   </div>
 
   <div class="form-group row mt-md-4 justify-content-center">
     <%--@declare id="retrait"--%><label for="Retrait" class="col-4 col-md-3 col-lg-2 col-form-label ">Retrait
       :</label>
-    <%=Retrait.getRue()%> <%=Retrait.getCodePostal()%> <%=Retrait.getVille()%>
+   ${currentRetrait.rue} ${currentRetrait.codePostal} ${currentRetrait.ville}
   </div>
-  <%if (utilisateur.getNoUtilisateur() == article.getNoUtilisateur()) {
-  %>
-
-
-  <a href="<%=request.getContextPath()%>/NouvelleVente"
-     class="col-2 offset-1 btn btn-outline-secondary" role="button">Modifier</a>
-  <a href="<%=request.getContextPath()%>/accueil"
-     class="col-2 offset-1 btn btn-outline-danger" role="button">Annuler</a>
-
-
-  <%
-  } else {
-  %>
-
   <div class="form-group row mt-md-4 justify-content-center">
     <label for="Retrait" class="col-4 col-md-3 col-lg-2 col-form-label ">Vendeur
       :</label>
-    <%=article.getNoUtilisateur()%>
+    ${usersPseudos[currentArticle.noArticle]}
   </div>
 
   <form method="post" action="<%=request.getContextPath()%>/Encherir">
     <input type="hidden" name="noArticle"
-           value="<%=article.getNoArticle()%>">
+           value="${currentArticle.noArticle}">
     <p>
       Ma proposition :
-      <input class="form-control" type ="number" name="miseAPrix" id="miseAPrix" step="1" max="10000" value=<%if(enchere!=null){ %>
-        <%=enchere.getMontantEnchere()%>
-        <%}else{ %>
-        <%=article.getMiseAPrix() %>
-              <%} %>"" required>
+      <input class="form-control" type ="number" name="miseAPrix" id="miseAPrix" step="1" max="10000" value="" required>
 
       points
     </p>
     <button type="submit" class="btn btn-outline-success col-2">Enchérir</button>
   </form>
-  <%
-    }
-  %>
 </section>
 </body>
 </html>

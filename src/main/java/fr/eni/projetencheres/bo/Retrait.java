@@ -62,4 +62,8 @@ public class Retrait {
     public void setVille(String ville) {
         this.ville = ville;
     }
+
+    public String toString() {
+        return "Retrait lié à l'article n°:" + noArticle + " rue :" + rue + " code Postal :" + codePostal + "ville : " + ville;
+    }
 }
