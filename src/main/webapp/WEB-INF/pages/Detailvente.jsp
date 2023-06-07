@@ -36,6 +36,10 @@
 </nav>
 <section class="container-fluid">
   <h1 class="mt-5 text-center">Détail Vente</h1>
+  <c:if test="${not empty messageEnchere}">
+    <p>${messageEnchere}</p>
+  </c:if>
+
 
   <div class="form-group row mt-md-4 justify-content-center">
     ${currentArticle.nomArticle}
@@ -107,7 +111,7 @@
       <c:if test="${userInfos.credit > currentArticle.miseAPrix && userInfos.credit > currentArticle.prixVente}">
       <p>
         <label for="miseAPrix">Ma proposition :</label>
-        <input class="form-control" type ="number" name="offreArticle" id="miseAPrix" min="${currentArticle.prixVente == null ? (currentArticle.miseAPrix <= userInfos.credit ? currentArticle.miseAPrix : "0") : (currentArticle.prixVente+1 <= userInfos.credit ? currentArticle.prixVente+1 : "0")}" max="${userInfos.credit}" step="1" max="10000" value="${currentArticle.prixVente == null ? (currentArticle.miseAPrix <= userInfos.credit ? currentArticle.miseAPrix : "0") : (currentArticle.prixVente+1 <= userInfos.credit ? currentArticle.prixVente+1 : "0")}" required>
+        <input class="form-control" type ="number" name="offreArticle" id="miseAPrix" min="${currentArticle.prixVente == null ? (currentArticle.miseAPrix <= userInfos.credit ? currentArticle.miseAPrix : "0") : (currentArticle.prixVente+1 <= userInfos.credit ? currentArticle.prixVente+1 : "0")}" max="${userInfos.credit}" step="1" max="10000" value="${currentArticle.prixVente == null ? (currentArticle.miseAPrix <= userInfos.credit ? currentArticle.miseAPrix : '') : (currentArticle.prixVente+1 <= userInfos.credit ? currentArticle.prixVente+1 : '')}" required>
         <button type="submit" class="btn btn-outline-success col-2">Enchérir</button>
         points
       </c:if>

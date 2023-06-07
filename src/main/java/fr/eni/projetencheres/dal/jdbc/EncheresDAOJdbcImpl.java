@@ -50,26 +50,12 @@ public class EncheresDAOJdbcImpl implements EnchereDAO {
         try {
             // preparer les parametres
             cnx = ConnexionProvider.getConnection();
-            pstmt = cnx.prepareStatement(SELECT_BY_ARTICLE_USER);
-            pstmt.setInt(1, enchere.getNoArticle());
-            pstmt.setInt(2, enchere.getNoUtilisateur());
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                pstmt = cnx.prepareStatement(UPDATE_ENCHERE);
-                pstmt.setInt(1, enchere.getMontantEnchere());
-                pstmt.setDate(2, Date.valueOf(enchere.getDateEnchere()));
-                pstmt.setInt(3, enchere.getNoArticle());
-                pstmt.setInt(4, enchere.getNoUtilisateur());
-            } else {
-                pstmt = cnx.prepareStatement(INSERT_ENCHERE);
-                pstmt.setInt(1, enchere.getNoUtilisateur());
-                pstmt.setInt(2, enchere.getNoArticle());
-                pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
-                pstmt.setInt(4, enchere.getMontantEnchere());
-            }
+            pstmt = cnx.prepareStatement(INSERT_ENCHERE);
+            pstmt.setInt(1, enchere.getNoUtilisateur());
+            pstmt.setInt(2, enchere.getNoArticle());
+            pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
+            pstmt.setInt(4, enchere.getMontantEnchere());
             pstmt.executeUpdate();
-            rs.close();
             pstmt.close();
             cnx.close();
 

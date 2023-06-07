@@ -60,17 +60,31 @@ public class ServletEncheres extends HttpServlet {
                     encheresManager.createEnchere(enchere);
                     // Mise à jour des crédits de l'utilisateur
                     int newCredit = utilisateur.getCredit() - Integer.parseInt(request.getParameter("offreArticle"));
+                    System.out.println(utilisateur.getNoUtilisateur());
+                    System.out.println(newCredit);
                     utilisateurManager.updateCredit(utilisateur.getNoUtilisateur(),newCredit );
                     // Mise à jour du prix de vente de l'article
                     articleVenduManager.updateCurrentPrice(enchereArticle.getNoArticle(), Integer.parseInt(request.getParameter("offreArticle")));
                     ArticleVendu currentArticle = articleVenduManager.selectById(Integer.parseInt(request.getParameter("noArticle")));
-                    // On renvoie sur la page de l'article avec une session actualisée
+
+
                     List<Enchere> encheres = encheresManager.selectByNoArticle(currentArticle.getNoArticle());
                     Enchere bestEnchere = encheres.get(0);
+                    // On rembourse le meilleur enchérisseur précédent s'il existe
+                    if(encheres.size() > 1) {
+                        System.out.println("condition encheres size");
+                        Enchere lastEnchere = encheres.get(1);
+                        System.out.println(lastEnchere.getMontantEnchere());
+                        Utilisateur lastEnchereUser = utilisateurManager.chercherId(lastEnchere.getNoUtilisateur());
+                        int updatedCredit = lastEnchereUser.getCredit()+lastEnchere.getMontantEnchere();
+                        System.out.println(updatedCredit);
+                        utilisateurManager.updateCredit(lastEnchereUser.getNoUtilisateur(), updatedCredit);
+                    }
+
                     String bestEncherisseur = utilisateurManager.chercherId(bestEnchere.getNoUtilisateur()).getPseudo();
                     Utilisateur currentUser = utilisateurManager.chercherPseudo((String) session.getAttribute("pseudo"));
                     Categorie currentCategorie = categorieManager.getCategorieById(currentArticle.getNoCategorie());
-
+                    // On renvoie sur la page de l'article avec une session actualisée
                     session.setAttribute("userInfos", currentUser);
                     request.setAttribute("bestEncherisseurName", bestEncherisseur);
                     request.setAttribute("messageEnchere", "Votre enchère a été ajoutée avec succès" );
