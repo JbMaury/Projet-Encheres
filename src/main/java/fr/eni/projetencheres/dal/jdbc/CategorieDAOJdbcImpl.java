@@ -60,8 +60,6 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
     @Override
     public Categorie selectById(int idCategorie) throws DALException {
-        System.out.println("dans le selecteur de cat by id JDBC");
-        System.out.println("l'id de la cat a trouver :" + idCategorie);
         //declaration de mes variables
         Categorie categorie = null;
         Connection cnx;
@@ -81,7 +79,6 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
                         rs.getString("libelle")
                 );
             }
-            System.out.println("objet cat trouvé :" + categorie.getLibelle());
             // fermeture de connection...
             rs.close();
             pstmt.close();

@@ -1,6 +1,7 @@
 package fr.eni.projetencheres.bll;
 
 import fr.eni.projetencheres.bo.ArticleVendu;
+import fr.eni.projetencheres.dal.DALException;
 import fr.eni.projetencheres.dal.DAOFactory;
 import fr.eni.projetencheres.dal.dao.ArticleVenduDAO;
 
@@ -22,6 +23,10 @@ public class ArticleVenduManager {
 
     public ArticleVendu selectById(int idArticle) throws Exception {
         return articleVenduDAO.selectById(idArticle);
+    }
+
+    public void updateCurrentPrice(int noArticle, int newPrice) throws DALException {
+        articleVenduDAO.updateCurrentPrice(noArticle, newPrice);
     }
 
 }

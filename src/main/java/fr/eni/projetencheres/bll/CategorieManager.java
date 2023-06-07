@@ -25,7 +25,6 @@ public class CategorieManager {
     }
     // R ead
     public Categorie getCategorieById(int idCategorie) throws DALException {
-        System.out.println("dans le manager cat");
        return categorieDAO.selectById(idCategorie);
     }
     public List<Categorie> getAllCategories() throws DALException {

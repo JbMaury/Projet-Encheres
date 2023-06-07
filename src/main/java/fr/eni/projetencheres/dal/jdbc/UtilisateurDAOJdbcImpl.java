@@ -25,6 +25,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
     private final static String ANONYMISER_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom =?, email = ?, telephone = ?, rue = ?,code_postal =?,ville = ?, credit=? WHERE no_utilisateur=?;";
     private final static String SELECT_USERS_WITH_CURRENT_AUCTIONS = "SELECT AV.no_article, pseudo FROM UTILISATEURS INNER JOIN ARTICLES_VENDUS AV on UTILISATEURS.no_utilisateur = AV.no_utilisateur ";
     private final static String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?;";
+    private final static String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?;";
 
     @Override
     public void newUtilisateur(Utilisateur utilisateur) throws DALException {
@@ -352,6 +353,23 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
         }
         return usersPseudos;
+    }
+
+    @Override
+    public void updateCredit(int noUtilisateur, int newCredit) throws DALException {
+        Connection cnx;
+        PreparedStatement pstmt;
+        try {
+            cnx = ConnexionProvider.getConnection();
+            pstmt = cnx.prepareStatement(UPDATE_CREDIT);
+            pstmt.setInt(1, newCredit);
+            pstmt.setInt(2, noUtilisateur);
+            pstmt.executeUpdate();
+            cnx.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

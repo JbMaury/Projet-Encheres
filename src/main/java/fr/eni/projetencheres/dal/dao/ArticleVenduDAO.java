@@ -23,6 +23,7 @@ public interface ArticleVenduDAO {
 
     //U pdate
     void update(int idArticle) throws DALException;
+    void updateCurrentPrice(int noArticle, int newPrice) throws DALException;
 
     //D elete
     void deleteArticle(int idArticle) throws DALException;

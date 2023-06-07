@@ -13,6 +13,20 @@
 <body>
     <nav class="navbar navbar-light bg-light">
         <a href="<%=request.getContextPath()%>/accueil" class="navbar-brand">ENI-Encheres</a>
+        <div>
+            <c:choose>
+                <c:when test="${isConnected}">
+                    <a href="<%=request.getContextPath()%>/">Enchères</a>
+                    <a href="<%=request.getContextPath()%>/NouvelleVente">Vendre un article</a>
+                    <a href="<%=request.getContextPath()%>/Profil">Profil de ${userInfos.pseudo} Crédits : ${userInfos.credit}</a>
+                    <a href="<%=request.getContextPath()%>/Deconnexion">Deconnexion</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="<%=request.getContextPath()%>/Inscription">S'inscrire</a>
+                    <a href="<%=request.getContextPath()%>/Connexion">Se connecter</a>
+                </c:otherwise>
+            </c:choose>
+        </div>
     </nav>
     <section class="container">
         <h1 class="mt-5 text-center">Connexion</h1>

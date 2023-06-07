@@ -28,6 +28,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
     private final static String SELECT_BY_NO_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur=? AND date_fin_encheres > GETDATE() AND date_debut_encheres <= GETDATE();";
     private final static String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?;";
     private final static String SELECT_BY_MOTS_CLES = "SELECT * ARTICLES_VENDUS WHERE ' ' + nom_article + ' ' like '% ? %';";
+    private final static String UPDATE_PRICE = "UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?;";
     private final static String SELECT_ENCHERES_OUVERTES = "select * from ARTICLES_VENDUS where date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE() AND no_utilisateur != ?;";
     private final static String SELECT_ENCHERES_EN_COURS = "select * from ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article where ENCHERES.no_utilisateur = ?;";
     private final static String SELECT_ENCHERES_REMPORTEES = "select * from ARTICLES_VENDUS av\r\n"
@@ -101,8 +102,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
                         rs.getInt("prix_initial"),
                         rs.getInt("prix_vente"),
                         rs.getString("etat_vente"),
-                        rs.getInt("no_categorie"),
-                        rs.getInt("no_utilisateur"));
+                        rs.getInt("no_utilisateur"),
+                        rs.getInt("no_categorie"));
             }
             rs.close();
             stmt.close();
@@ -289,6 +290,23 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
     @Override
     public void update(int idArticle) throws DALException {
 
+    }
+    @Override
+    public void updateCurrentPrice(int noArticle, int newPrice) throws DALException {
+        Connection cnx;
+        PreparedStatement pstmt;
+        try {
+            cnx = ConnexionProvider.getConnection();
+
+            pstmt = cnx.prepareStatement(UPDATE_PRICE);
+            pstmt.setInt(1, newPrice);
+            pstmt.setInt(2, noArticle);
+            pstmt.executeUpdate();
+            cnx.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 /*
     @Override

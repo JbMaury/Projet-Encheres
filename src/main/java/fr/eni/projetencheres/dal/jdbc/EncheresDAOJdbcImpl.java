@@ -16,7 +16,7 @@ import java.util.List;
 public class EncheresDAOJdbcImpl implements EnchereDAO {
     private static final String DELETE_ENCHERE = "DELETE FROM ENCHERES where no_enchere = ?;";
     private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?);";
-    private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article=?";
+    private final static String SELECT_BY_NO_ARTICLE = "SELECT * FROM ENCHERES WHERE no_article=? ORDER BY montant_enchere DESC";
     private final static String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere=?, date_enchere=? WHERE no_article=? and no_utilisateur=?;";
     private final static String SELECT_BY_ARTICLE_USER = "SELECT * FROM ENCHERES WHERE no_article=? and no_utilisateur=?;";
 
@@ -82,11 +82,10 @@ public class EncheresDAOJdbcImpl implements EnchereDAO {
     public List<Enchere> selectByNoArticle(int idArticle) throws DALException {
 
         Enchere enchere;
-        List<Enchere> encheres = new ArrayList<Enchere>();
+        List<Enchere> encheres = new ArrayList<>();
         Connection cnx;
         PreparedStatement stmt;
         ResultSet rs;
-        Utilisateur user;
 
         try {
             cnx = ConnexionProvider.getConnection();

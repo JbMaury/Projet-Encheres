@@ -30,4 +30,6 @@ public interface UtilisateurDAO {
     // methode de anonymiser  d'utilisateur
     void deleteUtilisateur(int idUtilisateur) throws DALException;
     public HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws DALException;
+
+    public void updateCredit(int noUtilisateur, int newCredit) throws DALException;
 }

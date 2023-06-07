@@ -24,4 +24,9 @@ public class EncheresManager {
     public void createEnchere(Enchere enchere) throws DALException {
         enchereDAO.insertEncheres(enchere);
     }
+    // R ead
+
+    public List<Enchere> selectByNoArticle (int idArticle) throws DALException {
+        return enchereDAO.selectByNoArticle(idArticle);
+    }
 }

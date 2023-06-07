@@ -64,5 +64,9 @@ public class UtilisateurManager {
        return utilisateurDAO.selectUtilisateursWithCurrentAuction();
     }
 
+    public void updateCredit(int noUtilisateur, int newCredit) throws DALException {
+       utilisateurDAO.updateCredit(noUtilisateur, newCredit);
+    }
+
 
 }
