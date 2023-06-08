@@ -53,7 +53,8 @@ public class ServletAccueil extends HttpServlet {
             if(request.getParameter("categorie").equals("all")) {
                 if(request.getParameter("rechercheArticle") != null){
                     listeArticlesFiltre = articleVenduManager.selectByKeywords(request.getParameter("rechercheArticle"));
-                    if(listeArticlesFiltre == null) {
+                    if(listeArticlesFiltre.isEmpty()) {
+                        System.out.println("dans l'erreur");
                         request.setAttribute("messageError", "Aucun article trouvé");
                     }
                 }else {
@@ -65,7 +66,8 @@ public class ServletAccueil extends HttpServlet {
                 Categorie categorieFiltre = categorieManager.getCategorieById(noCategorieFiltre);
                 if(request.getParameter("rechercheArticle") != null){
                     List<ArticleVendu> listeArticlesMotsCles = articleVenduManager.selectByKeywords(request.getParameter("rechercheArticle"));
-                    if(listeArticlesMotsCles == null) {
+                    if(listeArticlesMotsCles.size() == 0) {
+                        System.out.println("dans l'erreur");
                         request.setAttribute("messageError", "Aucun article trouvé");
                     }else {
                         for(ArticleVendu article :listeArticlesMotsCles) {
