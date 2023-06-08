@@ -33,8 +33,7 @@ public class ServletConnexion extends HttpServlet {
                 session.setAttribute("userInfos", user);
                 session.setAttribute("isConnected", true);
                 session.setAttribute("pseudo", user.getPseudo());
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
-                rd.forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/");
             }else {
                 request.setAttribute("erreur", "identifiant ou Mot de Passe incorrect");
                 RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/pages/PageConnexion.jsp");

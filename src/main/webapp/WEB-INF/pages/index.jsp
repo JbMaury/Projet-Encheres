@@ -1,5 +1,5 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -37,15 +37,16 @@
     <c:if test="${not empty message}">
         <h6>${message}</h6>
     </c:if>
-        <form class="boxflex_row" action="<%=request.getContextPath()%>/ServletAccueil" method="POST">
+        <form class="boxflex_row" action="<%=request.getContextPath()%>/" method="POST">
                 <h3>Filtres</h3>
-                <input class="search" type="text" name="rechercheArticle" placeholder="Le nom de l'article contient">
+                <input class="search"  size="30" type="text" name="rechercheArticle" placeholder="Le nom de l'article contient">
                 <label for="categorie" class="col-sm-2 col-form-label">Catégorie :</label>
                 <select id="categorie" class="form-control col-sm-5" name="categorie">
+                    <option value="all">Toutes</option>
                     <%--Gestion des différentes catégories--%>
                     <c:forEach items="${categories}" var="categorie">
                         <c:choose>
-                            <c:when test="${categorie.noCategorie == errorArticle.noCategorie}">
+                            <c:when test="${categorie.noCategorie == errorArticle.noCategorie || categorie.noCategorie == categorieFiltre.noCategorie}">
                                 <option selected value="${categorie.noCategorie}">${categorie.libelle}</option>
                             </c:when>
                             <c:otherwise>
@@ -55,7 +56,8 @@
 
                     </c:forEach>
                 </select>
-            <c:if test="${isConnected}">
+        <%--  Filtre pour les achats et les ventes persos (non fonctionnel) --%>
+           <%-- <c:if test="${isConnected}">
                 <input type="radio" name="option" value="achat" id="achatRadio" required>
                 <label for="achatRadio">Achats</label>
 
@@ -73,13 +75,19 @@
                     <input type="checkbox" name="ventesNonDebutees" value="ventesNonDebutees"> Ventes non débutées<br>
                     <input type="checkbox" name="ventesTerminees" value="ventesTerminees"> Ventes terminées<br>
                 </div>
-            </c:if>
-            <input class="button" type="button" value="Rechercher">
+            </c:if>--%>
+            <input class="button" type="submit" value="Rechercher">
         </form>
-    <div class="container">
-        <c:forEach items="${encheresActuelles}" var="articleEnVente">
+    <h2 class="text text-center">Catégorie : <span class="text-info">${not empty categorieFiltre ? categorieFiltre.libelle : "Toutes"}</span></h2>
+    <c:if test="${not empty messageError}">
+        <h3 class="text-danger">${messageError}</h3>
+    </c:if>
+    <div class="container d-flex flex-row flex-wrap justify-content-around">
+
+        <c:forEach items="${not empty encheresActuelles ? encheresActuelles : articlesFiltre}" var="articleEnVente">
             <c:set var="formattedDateFin" value="${articleEnVente.dateFinEncheres.format(DateTimeFormatter.ofPattern('dd-MM-yyyy'))}" />
             <div class="d-flex flex-column col-md-5 border border-dark mt-3 mb-3">
+
                     <h3>${articleEnVente.nomArticle}</h3>
                     <ul>
                         <li>Prix : ${articleEnVente.prixVente == 0 ? articleEnVente.miseAPrix : articleEnVente.prixVente}</li>

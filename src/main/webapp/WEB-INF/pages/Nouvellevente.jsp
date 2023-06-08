@@ -35,13 +35,14 @@
         <div class="form-group row justify-content-md-center">
             <label for="article" class="col-sm-2 col-form-label">Article :</label>
             <div class="col-sm-5">
-                <input class="form-control" id="article" name="article" value="${not empty errorArticle ? errorArticle.nomArticle:''}" required>
+                <input class="form-control" id="article" pattern=".{1,50}"
+                       title="Le nom de l'article ne peut pas avoir plus de 50 caractères" name="article" value="${not empty errorArticle ? errorArticle.nomArticle:''}" required>
             </div>
         </div>
         <div class="form-group row justify-content-md-center">
             <label for="description" class="col-sm-2 col-form-label">Description :</label>
             <div class="col-sm-5">
-                <textarea class="form-control" id="description" name="description"  required>${not empty errorArticle ? errorArticle.description:''}</textarea>
+                <textarea class="form-control"  id="description" name="description"  required>${not empty errorArticle ? errorArticle.description:''}</textarea>
             </div>
         </div>
         <div class="form-group row justify-content-md-center">
@@ -105,7 +106,7 @@
 
                 <label for="rue" class="col-sm-2 col-form-label ">Rue :</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="rue" name="rue" value="${userInfos.rue}" required>
+                    <input type="text" class="form-control" id="rue"  name="rue" value="${userInfos.rue}" required>
                 </div>
             </div>
 

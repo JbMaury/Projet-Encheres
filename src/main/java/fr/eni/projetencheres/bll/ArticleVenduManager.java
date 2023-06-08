@@ -29,4 +29,11 @@ public class ArticleVenduManager {
         articleVenduDAO.updateCurrentPrice(noArticle, newPrice);
     }
 
+    public List<ArticleVendu> selectByCategorie(int noCategorie) throws DALException {
+        return articleVenduDAO.selectByCat(noCategorie);
+    }
+    public List<ArticleVendu> selectByKeywords(String motCle) throws DALException {
+        return articleVenduDAO.selectByMotsCles(motCle);
+    }
+
 }

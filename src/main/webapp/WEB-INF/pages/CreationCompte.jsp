@@ -111,7 +111,7 @@
       </div>
       <label for="confirmationMotDePasse" class="col-4 col-md-3 col-lg-2 col-form-label mt-3 mt-md-0">Confirmation : </label>
       <div class="col-6 col-md-3 mt-3 mt-md-0">
-        <input class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$"  type="password" id="confirmationMotDePasse" name="confirmationMotDePasse" <c:if test="${empty isConnected}">required</c:if>>
+        <input class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$"  type="password" id="confirmationMotDePasse" title="Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre et ne pas dépasser 32 caractères" name="confirmationMotDePasse" <c:if test="${empty isConnected}">required</c:if>>
        <%--Si confirmation du mot de passe échoue--%>
         <c:if test="${not empty errorMessage}">
           <p class="error">${errorMessage}</p>

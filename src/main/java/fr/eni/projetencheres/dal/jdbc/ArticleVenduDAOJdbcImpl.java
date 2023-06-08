@@ -27,7 +27,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
     private final static String SELECT_BY_CAT = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=? ;";
     private final static String SELECT_BY_NO_UTILISATEUR = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur=? AND date_fin_encheres > GETDATE() AND date_debut_encheres <= GETDATE();";
     private final static String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article=?;";
-    private final static String SELECT_BY_MOTS_CLES = "SELECT * ARTICLES_VENDUS WHERE ' ' + nom_article + ' ' like '% ? %';";
+    private final static String SELECT_BY_MOTS_CLES = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?;";
     private final static String UPDATE_PRICE = "UPDATE ARTICLES_VENDUS SET prix_vente = ? WHERE no_article = ?;";
     private final static String SELECT_ENCHERES_OUVERTES = "select * from ARTICLES_VENDUS where date_debut_encheres <= GETDATE() AND date_fin_encheres > GETDATE() AND no_utilisateur != ?;";
     private final static String SELECT_ENCHERES_EN_COURS = "select * from ARTICLES_VENDUS inner join ENCHERES on ARTICLES_VENDUS.no_article = ENCHERES.no_article where ENCHERES.no_utilisateur = ?;";
@@ -136,14 +136,15 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
                         rs.getInt("prix_initial"),
                         rs.getInt("prix_vente"),
                         rs.getString("etat_vente"),
-                        rs.getInt("no_categorie"),
-                        rs.getInt("no_utilisateur")
+                        rs.getInt("no_utilisateur"),
+                        rs.getInt("no_categorie")
                 );
                 listeArticle.add(article);
             }
             rs.close();
             stmt.close();
             cnx.close();
+            System.out.println("dans la dal selectALL Articles");
         } catch (SQLException e) {
             throw new DALException("probleme avec la methode selectAll d'article", e);
         }
@@ -250,21 +251,25 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
     @Override
     public List<ArticleVendu> selectByMotsCles(String motsCles) throws DALException {
-
+        System.out.println(motsCles);
         Connection cnx;
-        PreparedStatement stmt;
+        PreparedStatement pstmt;
         ResultSet rs;
         List<ArticleVendu> selection = new ArrayList<>();
         ArticleVendu art = null;
 
         try {
             cnx = ConnexionProvider.getConnection();
-            stmt = cnx.prepareStatement(SELECT_BY_MOTS_CLES);
-            stmt.setString(1, motsCles);
-            rs = stmt.executeQuery();
+            pstmt = cnx.prepareStatement(SELECT_BY_MOTS_CLES);
+            pstmt.setString(1, "%" + motsCles + "%");
+            System.out.println("juste après le set string");
+            rs = pstmt.executeQuery();
+            System.out.println("on vient de préparer la requête");
 
             while (rs.next()) {
+                System.out.println("on est dans la boucle du resultset");
                 art = new ArticleVendu(
+                        rs.getInt("no_article"),
                         rs.getString("nom_article"),
                         rs.getString("description"),
                         rs.getDate("date_debut_encheres").toLocalDate(),
@@ -275,11 +280,14 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
                         rs.getInt("no_utilisateur"),
                         rs.getInt("no_categorie")
                 );
+                System.out.println("article construit");
                 selection.add(art);
+                System.out.println("article ajouté");
             }
             rs.close();
-            stmt.close();
+            pstmt.close();
             cnx.close();
+            System.out.println("fin de la recherche par mots clés");
         } catch (SQLException e) {
             throw new DALException("probleme avec la methode select by mots-cles de articles", e);
         }

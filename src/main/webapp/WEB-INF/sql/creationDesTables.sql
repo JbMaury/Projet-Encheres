@@ -25,7 +25,8 @@ CREATE TABLE ENCHERES (
 
 )
 
-ALTER TABLE ENCHERES ADD constraint enchere_pk PRIMARY KEY (no_utilisateur, no_article)
+
+ALTER TABLE ENCHERES ADD constraint enchere_pk PRIMARY KEY (no_enchere)
 
 CREATE TABLE RETRAITS (
 	no_article         INTEGER NOT NULL,
