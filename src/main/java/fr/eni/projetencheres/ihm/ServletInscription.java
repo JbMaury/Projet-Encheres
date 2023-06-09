@@ -99,12 +99,11 @@ public class ServletInscription extends HttpServlet {
         );
         try {
             utilisateurManager.nouvelUtilisateur(user);
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/index.jsp");
             HttpSession session = request.getSession();
             session.setAttribute("isConnected", true);
             session.setAttribute("pseudo", user.getPseudo());
             session.setAttribute("userInfos", user);
-            rd.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/");
         } catch (DALException e) {
             e.printStackTrace();
         }

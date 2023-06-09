@@ -93,7 +93,7 @@
   </div>
   <div class="row justify-content-center mt-5">
     <form action="<%=request.getContextPath()%>/Profil" method="POST">
-    <button type="submit" class="btn btn-outline-success col-4 col-md-2 p-3">Modifier</button>
+    <button type="submit" class="btn btn-outline-success">Modifier</button>
     </form>
   </div>
 </section>
