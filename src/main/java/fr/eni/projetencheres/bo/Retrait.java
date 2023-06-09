@@ -64,6 +64,6 @@ public class Retrait {
     }
 
     public String toString() {
-        return "Retrait lié à l'article n°:" + noArticle + " rue :" + rue + " code Postal :" + codePostal + "ville : " + ville;
+        return "Retrait lié à l'article n° :" + noArticle + " rue :" + rue + " code Postal :" + codePostal + "ville : " + ville;
     }
 }
